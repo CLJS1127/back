@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>skill-log</title>
+        <link rel="stylesheet" href="/static/css/community/header.css">
+        <link rel="stylesheet" href="/static/css/skill-log/dashboard.css" />
+    </head>
+    <body>
+        <!-- 메인 시작 -->
+        <div id="wrap">
+            <!-- 사이드바 -->
+            <div class="sideNav">
+                <h2 class="skip">블로그 세부메뉴</h2>
+                <div class="sideNavLow">
+                    <strong class="sideNavTit"
+                        ><a href="">블로그 메뉴</a></strong
+                    >
+                    <ul class="sideNavList">
+                        <li class="sideNavListItem active">
+                            <a href="">블로그 홈</a>
+                        </li>
+                        <li class="sideNavListItem">
+                            <a href="">블로그 작성</a>
+                        </li>
+                        <li class="sideNavListItem">
+                            <a href="">직무별 검색</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="sideNavLow">
+                    <strong class="sideNavTit">실전공략</strong>
+                    <ul class="sideNavList">
+                        <li class="sideNavListItem">
+                            <a href="">자소서 꿀팁</a>
+                        </li>
+                        <li class="sideNavListItem">
+                            <a href="">회사 들여보기</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 사이드바 끝 -->
+
+            <!-- 메인 컨테이너 -->
+            <div id="container">
+                <div class="gjContainer goodjob-tip">
+                    <h2 class="gjTit">블로그 모아보기</h2>
+                    <div class="headline">
+                        <div class="headline-item">
+                            <a href="">
+                                <div class="badge attention">인기</div>
+                                <div class="title">
+                                    AI 시대 생존하기 위한 PMPO의 자세
+                                </div>
+                            </a>
+                        </div>
+                        <div class="headline-item">
+                            <a href="">
+                                <div class="badge attention">인기</div>
+                                <div class="title">
+                                    AI와 함께 디자이너 커리어 확장하는 방법
+                                </div>
+                            </a>
+                        </div>
+                        <div class="headline-item">
+                            <a href="">
+                                <div class="badge attention">인기</div>
+                                <div class="title">
+                                    낮엔 직장인, 밤엔 구직자, 이직잠행족
+                                    리얼로그.zip
+                                </div>
+                            </a>
+                        </div>
+                        <div class="headline-item">
+                            <a href="">
+                                <div class="badge attention">인기</div>
+                                <div class="title">
+                                    나에게 맞는 복지를 찾는 게 진짜 이직 전략
+                                </div>
+                            </a>
+                        </div>
+                        <div class="headline-item image">
+                            <a
+                                href=""
+                            >
+                                <div class="thumbnail">
+                                    <img
+                                        src="https://imgs.jobkorea.co.kr/img1/_thumb/208x122/GoodJob/Tip/22481-22490/22481/Image_20251230112539.png"
+                                        alt="햄버거 맛은 기본, 성장에도 진심인 맥도날드"
+                                    />
+                                </div>
+                                <div class="title">
+                                    햄버거 맛은 기본, 성장에도 진심인 맥도날드
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="pageTab">
+                        <div class="tabArea">
+                            <ul class="tabs col03">
+                                <li class="on">
+                                    <span class="tx">전체</span>
+                                </li>
+                                <li class="">
+                                    <span class="tx"> 인기 </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="gjTopWrap">
+                        <div class="stTopTitArea">
+                            <p class="total">
+                                총 <span class="num">10</span>개
+                            </p>
+                        </div>
+                        <form method="get" id="devSearchForm" action="">
+                            <fieldset>
+                                <legend>검색</legend>
+                                <div class="gjSortInp">
+                                    <div class="devTplSchPh">
+                                        <div class="inpWrap" type="div">
+                                            <span
+                                                class="tplBtn ph"
+                                                type="button"
+                                                style="display: block"
+                                                >키워드를 검색해 주세요</span
+                                            >
+                                            <input
+                                                class="ipText"
+                                                id="schTxt"
+                                                name="schTxt"
+                                                style="width: 200px"
+                                                title="검색어 입력"
+                                                type="text"
+                                                value=""
+                                            />
+                                            <input
+                                                data-val="true"
+                                                data-val-number="schCtgr 필드는 숫자여야 합니다."
+                                                data-val-required="schCtgr 필드가 필요합니다."
+                                                id="schCtgr"
+                                                name="schCtgr"
+                                                type="hidden"
+                                                value="0"
+                                            />
+                                        </div>
+                                        <button
+                                            type="image"
+                                            class="stSpImg tmpSearch"
+                                            id="btnSearch"
+                                        >
+                                            <span class="skip">검색</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="keyword">
+                        <button
+                            href=""
+                            class="keyword-item keyword-search"
+                            data-url=""
+                        >
+                            #AI
+                        </button>
+                        <button
+                            href=""
+                            class="keyword-item keyword-search"
+                            data-url=""
+                        >
+                            #RE스펙
+                        </button>
+                        <button
+                            href=""
+                            class="keyword-item keyword-search"
+                            data-url=""
+                        >
+                            #연봉
+                        </button>
+                        <button
+                            href=""
+                            class="keyword-item keyword-search"
+                            data-url=""
+                        >
+                            #이직
+                        </button>
+                        <button
+                            href=""
+                            class="keyword-item keyword-search"
+                            data-url=""
+                        >
+                            #인터뷰
+                        </button>
+                        <button
+                            href=""
+                            class="keyword-item keyword-search"
+                            data-url=""
+                        >
+                            #직무
+                        </button>
+                        <button
+                            href=""
+                            class="keyword-item keyword-search"
+                            data-url="/search?keyword=직장인"
+                        >
+                            #직장인
+                        </button>
+                        <button
+                            href=""
+                            class="keyword-item keyword-search"
+                            data-url="/search?keyword=취업"
+                        >
+                            #취업
+                        </button>
+                        <button
+                            href=""
+                            class="keyword-item keyword-search"
+                            data-url="/search?keyword=취준생"
+                        >
+                            #취준생
+                        </button>
+                        <button
+                            href=""
+                            class="keyword-item keyword-search"
+                            data-url="/search?keyword=커리어"
+                        >
+                            #커리어
+                        </button>
+                    </div>
+                    <!-- 잡리스트 시작 -->
+                    <ul class="joodJobList">
+                        <li>
+                            <a
+                                href=""
+                            >
+                                <p class="thumb">
+                                    <img
+                                        src="https://imgs.jobkorea.co.kr/img1/_thumb/198x112/GoodJob/Tip/22481-22490/22481/Image_20251230112539.png"
+                                        alt="햄버거 맛은 기본, 성장에도 진심인 맥도날드"
+                                    />
+                                </p>
+                                <dl>
+                                    <dt>
+                                        <strong>
+                                            햄버거 맛은 기본, 성장에도 진심인
+                                            맥도날드
+                                        </strong>
+                                    </dt>
+                                    <dd class="tx">
+                                        잡코리아가 듣고 온 맥도날드 매니저
+                                        인터뷰
+                                    </dd>
+                                    <dd class="listSubItem">
+                                        <span class="item">#AI</span>
+                                        <span class="item dateItem"
+                                            >2025.12.30</span
+                                        >
+                                        <span class="item viewItem"
+                                            ><span class="stSpBefore stIcnView"
+                                                ><span class="skip">조회수</span
+                                                >13,806</span
+                                            ></span
+                                        >
+                                    </dd>
+                                </dl>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <p class="thumb">
+                                    <img
+                                        src="https://imgs.jobkorea.co.kr/img1/_thumb/198x112/GoodJob/Tip/22471-22480/22473/Image_20251113164211.png"
+                                        alt="AI와 함께 디자이너 커리어 확장하는 방법"
+                                    />
+                                </p>
+                                <dl>
+                                    <dt>
+                                        <strong>
+                                            AI와 함께 디자이너 커리어 확장하는
+                                            방법
+                                        </strong>
+                                    </dt>
+                                    <dd class="tx">
+                                        퇴근 후 밋업 디자인 DAY 생생한 현장을
+                                        공개합니다
+                                    </dd>
+                                    <dd class="listSubItem">
+                                        <span class="item">#AI</span>
+                                        <span class="item dateItem"
+                                            >2025.11.19</span
+                                        >
+                                        <span class="item viewItem"
+                                            ><span class="stSpBefore stIcnView"
+                                                ><span class="skip">조회수</span
+                                                >31,573</span
+                                            ></span
+                                        >
+                                    </dd>
+                                </dl>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <p class="thumb">
+                                    <img
+                                        src="https://imgs.jobkorea.co.kr/img1/_thumb/198x112/GoodJob/Tip/22471-22480/22472/Image_20251113164003.png"
+                                        onerror="
+                                            javascript: this.src =
+                                                'https://i.jobkorea.kr/content/images/noneimg/none_143x82.png';
+                                        "
+                                        alt="AI 시대 생존하기 위한 PMPO의 자세"
+                                    />
+                                </p>
+                                <dl>
+                                    <dt>
+                                        <strong>
+                                            AI 시대 생존하기 위한 PMPO의 자세
+                                        </strong>
+                                    </dt>
+                                    <dd class="tx">
+                                        퇴근 후 밋업 PMPO DAY 생생한 현장을
+                                        공개합니다
+                                    </dd>
+                                    <dd class="listSubItem">
+                                        <span class="item">#AI</span>
+                                        <span class="item dateItem"
+                                            >2025.11.18</span
+                                        >
+                                        <span class="item viewItem"
+                                            ><span class="stSpBefore stIcnView"
+                                                ><span class="skip">조회수</span
+                                                >30,350</span
+                                            ></span
+                                        >
+                                    </dd>
+                                </dl>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <p class="thumb">
+                                    <img
+                                        src="https://imgs.jobkorea.co.kr/img1/_thumb/198x112/GoodJob/Tip/22471-22480/22471/Image_20251113163633.png"
+                                        onerror="
+                                            javascript: this.src =
+                                                'https://i.jobkorea.kr/content/images/noneimg/none_143x82.png';
+                                        "
+                                        alt="AI 때문에 사라지는 개발자? AI 덕분에 성장하는 개발자?"
+                                    />
+                                </p>
+                                <dl>
+                                    <dt>
+                                        <strong>
+                                            AI 때문에 사라지는 개발자? AI 덕분에
+                                            성장하는 개발자?
+                                        </strong>
+                                    </dt>
+                                    <dd class="tx">
+                                        퇴근 후 밋업 개발 DAY 생생한 현장을
+                                        공개합니다
+                                    </dd>
+                                    <dd class="listSubItem">
+                                        <span class="item">#AI</span>
+                                        <span class="item dateItem"
+                                            >2025.11.17</span
+                                        >
+                                        <span class="item viewItem"
+                                            ><span class="stSpBefore stIcnView"
+                                                ><span class="skip">조회수</span
+                                                >7,126</span
+                                            ></span
+                                        >
+                                    </dd>
+                                </dl>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <p class="thumb">
+                                    <img
+                                        src="https://imgs.jobkorea.co.kr/img1/_thumb/198x112/GoodJob/Tip/22461-22470/22470/Image_20251105155140.jpg"
+                                        onerror="
+                                            javascript: this.src =
+                                                'https://i.jobkorea.kr/content/images/noneimg/none_143x82.png';
+                                        "
+                                        alt="[Re:스펙 12호] 이직잠행족 편"
+                                    />
+                                </p>
+                                <dl>
+                                    <dt>
+                                        <strong>
+                                            [Re:스펙 12호] 이직잠행족 편
+                                        </strong>
+                                    </dt>
+                                    <dd class="tx">
+                                        이번 호의 주인공은 바로 직장을 다니며
+                                        다음 회사를 준비하는 분들이에요
+                                    </dd>
+                                    <dd class="listSubItem">
+                                        <span class="item">#AI</span>
+                                        <span class="item dateItem"
+                                            >2025.11.05</span
+                                        >
+                                        <span class="item viewItem"
+                                            ><span class="stSpBefore stIcnView"
+                                                ><span class="skip">조회수</span
+                                                >15,449</span
+                                            ></span
+                                        >
+                                    </dd>
+                                </dl>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <p class="thumb">
+                                    <img
+                                        src="https://imgs.jobkorea.co.kr/img1/_thumb/198x112/GoodJob/Tip/22461-22470/22470/Image_20251105155140.jpg"
+                                        onerror="
+                                            javascript: this.src =
+                                                'https://i.jobkorea.kr/content/images/noneimg/none_143x82.png';
+                                        "
+                                        alt="[Re:스펙 12호] 이직잠행족 편"
+                                    />
+                                </p>
+                                <dl>
+                                    <dt>
+                                        <strong>
+                                            [Re:스펙 12호] 이직잠행족 편
+                                        </strong>
+                                    </dt>
+                                    <dd class="tx">
+                                        이번 호의 주인공은 바로 직장을 다니며
+                                        다음 회사를 준비하는 분들이에요
+                                    </dd>
+                                    <dd class="listSubItem">
+                                        <span class="item">#AI</span>
+                                        <span class="item dateItem"
+                                            >2025.11.05</span
+                                        >
+                                        <span class="item viewItem"
+                                            ><span class="stSpBefore stIcnView"
+                                                ><span class="skip">조회수</span
+                                                >15,449</span
+                                            ></span
+                                        >
+                                    </dd>
+                                </dl>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <p class="thumb">
+                                    <img
+                                        src="https://imgs.jobkorea.co.kr/img1/_thumb/198x112/GoodJob/Tip/22461-22470/22470/Image_20251105155140.jpg"
+                                        onerror="
+                                            javascript: this.src =
+                                                'https://i.jobkorea.kr/content/images/noneimg/none_143x82.png';
+                                        "
+                                        alt="[Re:스펙 12호] 이직잠행족 편"
+                                    />
+                                </p>
+                                <dl>
+                                    <dt>
+                                        <strong>
+                                            [Re:스펙 12호] 이직잠행족 편
+                                        </strong>
+                                    </dt>
+                                    <dd class="tx">
+                                        이번 호의 주인공은 바로 직장을 다니며
+                                        다음 회사를 준비하는 분들이에요
+                                    </dd>
+                                    <dd class="listSubItem">
+                                        <span class="item">#AI</span>
+                                        <span class="item dateItem"
+                                            >2025.11.05</span
+                                        >
+                                        <span class="item viewItem"
+                                            ><span class="stSpBefore stIcnView"
+                                                ><span class="skip">조회수</span
+                                                >15,449</span
+                                            ></span
+                                        >
+                                    </dd>
+                                </dl>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <p class="thumb">
+                                    <img
+                                        src="https://imgs.jobkorea.co.kr/img1/_thumb/198x112/GoodJob/Tip/22461-22470/22466/Image_20251105153944.png"
+                                        onerror="
+                                            javascript: this.src =
+                                                'https://i.jobkorea.kr/content/images/noneimg/none_143x82.png';
+                                        "
+                                        alt="낮엔 직장인, 밤엔 구직자, 이직잠행족 리얼로그.zip"
+                                    />
+                                </p>
+                                <dl>
+                                    <dt>
+                                        <strong>
+                                            낮엔 직장인, 밤엔 구직자, 이직잠행족
+                                            리얼로그.zip
+                                        </strong>
+                                    </dt>
+                                    <dd class="tx">
+                                        낮엔 회의하고, 밤엔 이력서 씁니다..
+                                    </dd>
+                                    <dd class="listSubItem">
+                                        <span class="item">#AI</span>
+                                        <span class="item dateItem"
+                                            >2025.11.04</span
+                                        >
+                                        <span class="item viewItem"
+                                            ><span class="stSpBefore stIcnView"
+                                                ><span class="skip">조회수</span
+                                                >14,696</span
+                                            ></span
+                                        >
+                                    </dd>
+                                </dl>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <p class="thumb">
+                                    <img
+                                        src="https://imgs.jobkorea.co.kr/img1/_thumb/198x112/GoodJob/Tip/22461-22470/22467/Image_20251031100541.png"
+                                        onerror="
+                                            javascript: this.src =
+                                                'https://i.jobkorea.kr/content/images/noneimg/none_143x82.png';
+                                        "
+                                        alt="이직에 골든타임이 있을까요?"
+                                    />
+                                </p>
+                                <dl>
+                                    <dt>
+                                        <strong>
+                                            이직에 골든타임이 있을까요?
+                                        </strong>
+                                    </dt>
+                                    <dd class="tx">
+                                        이직 준비는 비밀이 국룰?!
+                                    </dd>
+                                    <dd class="listSubItem">
+                                        <span class="item">#AI</span>
+                                        <span class="item dateItem"
+                                            >2025.11.04</span
+                                        >
+                                        <span class="item viewItem"
+                                            ><span class="stSpBefore stIcnView"
+                                                ><span class="skip">조회수</span
+                                                >11,596</span
+                                            ></span
+                                        >
+                                    </dd>
+                                </dl>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <p class="thumb">
+                                    <img
+                                        src="https://imgs.jobkorea.co.kr/img1/_thumb/198x112/GoodJob/Tip/22461-22470/22468/Image_20251031101342.png"
+                                        onerror="
+                                            javascript: this.src =
+                                                'https://i.jobkorea.kr/content/images/noneimg/none_143x82.png';
+                                        "
+                                        alt="퇴사 전에 이거 안 하면 전 직장에 흑역사 남음"
+                                    />
+                                </p>
+                                <dl>
+                                    <dt>
+                                        <strong>
+                                            퇴사 전에 이거 안 하면 전 직장에
+                                            흑역사 남음
+                                        </strong>
+                                    </dt>
+                                    <dd class="tx">ㅇ ㅅ ㅇ ㄱ</dd>
+                                    <dd class="listSubItem">
+                                        <span class="item">#AI</span>
+                                        <span class="item dateItem"
+                                            >2025.11.04</span
+                                        >
+                                        <span class="item viewItem"
+                                            ><span class="stSpBefore stIcnView"
+                                                ><span class="skip">조회수</span
+                                                >4,198</span
+                                            ></span
+                                        >
+                                    </dd>
+                                </dl>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- 잡리스트 끝 -->
+                    <div class="listBtmArea">
+                        <div class="tplPagination newVer">
+                            <ul>
+                                <li><span class="now">1</span></li>
+                                <li>
+                                    <a href="" data-page="2">2</a>
+                                </li>
+                                <li>
+                                    <a href="" data-page="3">3</a>
+                                </li>
+                                <li>
+                                    <a href="" data-page="4">4</a>
+                                </li>
+                                <li>
+                                    <a href="" data-page="5">5</a>
+                                </li>
+                                <li>
+                                    <a href="" data-page="6">6</a>
+                                </li>
+                                <li>
+                                    <a href="" data-page="7">7</a>
+                                </li>
+                                <li>
+                                    <a href="" data-page="8">8</a>
+                                </li>
+                                <li>
+                                    <a href="" data-page="9">9</a>
+                                </li>
+                                <li>
+                                    <a href="" data-page="10">10</a>
+                                </li>
+                            </ul>
+                            <p>
+                                <a
+                                    href=""
+                                    class="tplBtn btnPgnNext"
+                                    data-page="11"
+                                    ><span class="blind">다음</span
+                                    ><i class="ico"></i
+                                ></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 메인컨테이너 끝 -->
+        </div>
+    </body>
+    <script src="../../static/js/skill-log/dashboard.js"></script>
+</html>
