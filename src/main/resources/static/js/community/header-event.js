@@ -1,0 +1,186 @@
+// 헤더 네비게이션에 마우스 올렸을 때 색 변경
+const serviceNav = document.querySelectorAll(".dev-serviceNav a span");
+
+serviceNav.forEach((link) => {
+    link.addEventListener("mouseenter", () => {
+        link.style.color = "hsl(154.36deg 100% 21.57%)";
+    });
+
+    link.addEventListener("mouseleave", () => {
+        link.style.color = "#222222";
+    });
+});
+
+const userMy = document.querySelector(".userNav-item.my.member");
+if (userMy) {
+    userMy.addEventListener("mouseenter", () => {
+        userMy.classList.add("open");
+    });
+    userMy.addEventListener("mouseleave", () => {
+        userMy.classList.remove("open");
+    });
+}
+const headerFooterActive = document.querySelector(".notification-item");
+const headerFooterDetailButton = document.querySelector(
+    ".notificaiton-footer .buttons a",
+);
+
+// ✅ 수정: mouseenter, mouseleave
+headerFooterDetailButton.addEventListener("mouseenter", (e) => {
+    headerFooterActive.classList.add("active");
+});
+
+headerFooterDetailButton.addEventListener("mouseleave", (e) => {
+    headerFooterActive.classList.remove("active");
+});
+
+// 기업 서비스에 마우스 올렸을 때 class open 추가 삭제
+// const userCorp = document.querySelector(".userNav .corp");
+// userCorp.addEventListener("mouseenter", (e) => {
+//     userCorp.classList.add("open");
+// });
+// userCorp.addEventListener("mouseleave", (e) => {
+//     userCorp.classList.remove("open");
+// });
+
+// 기업 서비스 안에 기업 로그인에 마우스 올렸을 때 색 변경
+// const userCorpLogin = document.querySelector(".btnRowWrap a");
+// userCorpLogin.addEventListener("mouseenter", (e) => {
+//     e.target.style.backgroundColor = "#F8F8F8";
+// });
+// userCorpLogin.addEventListener("mouseleave", (e) => {
+//     e.target.style.backgroundColor = "#fff";
+// });
+
+// 헤더 네비게이션 마우스 올렸을 때 open-active 클래스 추가 삭제
+const headNav = document.getElementById("headNavBar");
+const navMenu = document.querySelector(".lyNavArea");
+const serviceNavDrop = document.querySelector(".dev-serviceNav"); // ul 선택
+const backgroundColorChange = document.querySelector(".jkNavDimm");
+
+serviceNavDrop.addEventListener("mouseenter", (e) => {
+    headNav.classList.add("open-active");
+    backgroundColorChange.classList.add("on");
+});
+
+navMenu.addEventListener("mouseleave", () => {
+    headNav.classList.remove("open-active");
+    backgroundColorChange.classList.remove("on");
+});
+navMenu.addEventListener("mouseenter", () => {
+    headNav.classList.add("open-active");
+    backgroundColorChange.classList.add("on");
+});
+serviceNavDrop.addEventListener("mouseleave", () => {
+    headNav.classList.remove("open-active");
+    backgroundColorChange.classList.remove("on");
+});
+
+// 로그아웃 버튼 배경색(로그인)
+const logoutButton = document.querySelector(".btnRowWrap");
+logoutButton.addEventListener("mouseenter", (e) => {
+    e.target.style.backgroundColor = "#F8F8F8";
+});
+logoutButton.addEventListener("mouseleave", (e) => {
+    e.target.style.backgroundColor = "#fff";
+});
+
+// 알림 자세히보기 버튼 색변화(로그인)
+const notifyButton = document.getElementById("js-bell");
+const notifyToggleAttached = document.querySelector(".popup-notification");
+const notifyToggleOpen = document.querySelector(
+    ".userNav-item.notification.devLiNotification",
+);
+notifyButton.addEventListener("click", (e) => {
+    notifyToggleAttached.classList.toggle("attached");
+});
+
+notifyButton.addEventListener("mouseenter", (e) => {
+    notifyToggleOpen.classList.add("open");
+});
+notifyButton.addEventListener("mouseleave", (e) => {
+    notifyToggleOpen.classList.remove("open");
+});
+
+// 검색창 자동완성 관련 (로그인)
+const searchToolDiv = document.querySelector(".autoSearch");
+const searchInput = document.getElementById("stext");
+
+// 검색창 클릭시 클래스 추가(로그인)
+searchInput.addEventListener("click", (e) => {
+    searchToolDiv.classList.add("autoSearchDisabledClose");
+});
+
+// keyup 이벤트 - 자동완성 꺼진 상태면 무시(로그인)
+const searchBox = document.querySelector(
+    "#headerWrap #header .headInner .search",
+);
+searchInput.addEventListener("keyup", (e) => {
+    if (searchToolDiv.classList.contains("autoSearchDisabled")) {
+        return;
+    }
+
+    if (searchInput.value.length > 0) {
+        searchToolDiv.classList.add("autoSearchShow");
+        searchBox.classList.add("searchOpen"); // 추가
+    } else {
+        searchToolDiv.classList.remove("autoSearchShow");
+        searchBox.classList.remove("searchOpen"); // 추가
+    }
+});
+// 자동완성 끄기 버튼
+const autoCompleteOffBtn = document.getElementById("devAcOff");
+autoCompleteOffBtn.addEventListener("click", (e) => {
+    const isConfirmed = confirm(
+        "검색어 자동완성 기능을 중지합니다.\n사용을 원하실 경우 검색창 내 ▼버튼을 클릭하세요.",
+    );
+    if (isConfirmed) {
+        searchToolDiv.classList.remove("autoSearchShow");
+        searchToolDiv.classList.add("autoSearchDisabled");
+        searchToolDiv.classList.add("autoSearchDisabledClose"); // ← 이 줄 추가!
+        searchBox.classList.remove("searchOpen");
+    }
+});
+
+// 화살표 버튼 (창 열기)
+const arrowOpenBtn = document.querySelector("#btnArrow_C button");
+arrowOpenBtn.addEventListener("click", (e) => {
+    searchToolDiv.classList.remove("autoSearchDisabledClose");
+    searchBox.classList.add("searchOpen"); // 추가
+});
+
+// 화살표 버튼 (창 닫기)
+const arrowCloseBtn = document.querySelector("#btnArrow_O button");
+arrowCloseBtn.addEventListener("click", (e) => {
+    searchToolDiv.classList.add("autoSearchDisabledClose");
+    searchBox.classList.remove("searchOpen"); // 추가
+});
+
+// 자동완성 켜기 버튼
+const autoCompleteOnBtn = document.getElementById("devAcOn");
+autoCompleteOnBtn.addEventListener("click", (e) => {
+    searchToolDiv.classList.remove(
+        "autoSearchDisabled",
+        "autoSearchDisabledClose",
+    );
+
+    if (searchInput.value.length > 0) {
+        searchToolDiv.classList.add("autoSearchShow");
+        searchBox.classList.add("searchOpen"); // 추가
+    } else {
+        searchBox.classList.remove("searchOpen"); // 추가
+    }
+});
+// 닫기 버튼 (로그인, 자동완성 켜진 상태에서)
+const closeBtn = document.getElementById("devAcInfoClose2");
+closeBtn.addEventListener("click", (e) => {
+    searchToolDiv.classList.remove("autoSearchShow");
+    searchBox.classList.remove("searchOpen"); // ← 이 줄 추가!
+});
+
+// 닫기 버튼 (자동완성 꺼진 상태에서)
+const closeBtn2 = document.getElementById("devAcInfoClose");
+closeBtn2.addEventListener("click", (e) => {
+    searchToolDiv.classList.add("autoSearchDisabledClose");
+    searchBox.classList.remove("searchOpen");
+});

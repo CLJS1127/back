@@ -1,0 +1,1198 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="/static/css/community/QnA.css" />
+    </head>
+    <body>
+        <!-- 메인 시작 -->
+        <div id="wrap">
+            <div class="side-navigation">
+                <h2 class="skip">취업톡톡 세부메뉴</h2>
+                <div class="navi-top-area has-tooltip">
+                    <a
+                        href="javascript:;"
+                        class="select-tooltip btn-question qnaSpB"
+                        >질문 · 글쓰기</a
+                    >
+                    <!-- [Dev] 툴팁오픈 : tooltip-open 클래스 추가 -->
+                    <div class="create-menu">
+                        <ul class="create-menu-wrap tooltip-layer qnaSpB">
+                            <li>
+                                <a
+                                    href=""
+                                    class="create-menu-item qna qnaSpB devLoginLayer"
+                                    devalert="1"
+                                    data-wtypecode="1"
+                                    >직무/기업/동문에게 질문하기</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href=""
+                                    class="create-menu-item carrier qnaSpB devLoginLayer"
+                                    devalert="1"
+                                    data-wtypecode="2"
+                                    >QnA 목록</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="myInfoSec">
+                        <a href="" class="myInfo">
+                            <!-- [Dev] 프로필 랜덤 이미지 파일명 : random_1 ~ random_20, 이미지 없음 : random_default -->
+                            <span class="proThumb"
+                                ><img
+                            /></span>
+                            <dl class="infoBx">
+                                <dt class="qnaSpA">
+                                    <span class="nickname">mento...</span>
+                                    <span class="lvIcon">Lv.1</span>
+                                </dt>
+                                <dd>
+                                    <span>글 <b>0</b></span>
+                                    <span>질문 <b>0</b></span>
+                                    <span>답변 <b>0</b> (채택 <b>0</b>)</span>
+                                </dd>
+                            </dl>
+                        </a>
+                        <button
+                            type="button"
+                            class="myPoint devMainCouponButton"
+                        >
+                            <span class="point qnaSpB">0</span
+                            ><span class="btnCoupon qnaSpA">별 교환</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="navi-list-area">
+                    <!-- [Dev] 메뉴 on : 클래스 active 추가 -->
+                    <div class="sideNavLow">
+                        <strong class="sideNavTit has-tooltip">
+                            <a
+                                id="devLeftMenuSubscribeTag"
+                                href=""
+                                data-tab="1"
+                                class="devLoginLayer"
+                                devalert="0"
+                                >구독</a
+                            >
+                            <a class="select-tooltip qnaSpA" href=""
+                                ><span class="skip">나의 구독관리</span></a
+                            >
+                        </strong>
+                        <div class="devLeftSubscribeList">
+                            <ul id="mySubscribeList" class="sideNavList">
+                                <li
+                                    data-subscrkey="1000229_2"
+                                    class="devLeftSubscribeItem"
+                                    data-lastregdt="2026-01-14 02:31:29"
+                                >
+                                    <a href="">
+                                        백엔드개발자
+                                        <!-- 새글 new-->
+                                        <span
+                                            class="qnaSpA"
+                                            style="display: none"
+                                            >새글</span
+                                        >
+                                    </a>
+                                </li>
+                                <li
+                                    data-subscrkey="test"
+                                    class="devLeftSubscribeItem"
+                                    data-lastregdt="2025-10-15 11:28:36"
+                                >
+                                    <a href="">
+                                        try-catch
+                                        <!-- 새글 new-->
+                                        <span
+                                            class="qnaSpA"
+                                            style="display: none"
+                                            >새글</span
+                                        >
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="sideNavLow">
+                        <strong class="sideNavTit"
+                            ><a
+                                id="devLeftMenuPopularTag"
+                                href=""
+                                data-tab="2"
+                                class=""
+                                devalert="0"
+                                >인기<span class="qnaSpA icnNew">새글</span></a
+                            ></strong
+                        >
+                        <a href="" class="button-more qnaSpA" target="_blank"
+                            >더보기</a
+                        >
+                        <ul class="sideNavList">
+                            <li>
+                                <a href="" target="_blank">삼성전자㈜</a>
+                            </li>
+                            <li>
+                                <a href="" target="_blank">쿠팡(주)</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="sideNavLow">
+                        <strong class="sideNavTit"
+                            ><a
+                                id="devLeftMenuEntireTag"
+                                href=""
+                                data-tab="3"
+                                class=""
+                                >전체<span class="qnaSpA icnNew">새글</span></a
+                            ></strong
+                        >
+                    </div>
+                    <div
+                        class="sideNavLow devRecentVisitGroup"
+                        style="display: none"
+                    >
+                        <strong class="sideNavTit"
+                            ><a href="javascript:void();"
+                                >최근 본 그룹</a
+                            ></strong
+                        >
+                        <ul class="sideNavList boxList"></ul>
+                    </div>
+                </div>
+            </div>
+            <!-- 사이드 네비게이션 끝 -->
+            <!-- 본문 시작 -->
+            <!-- QnA 목록 상단(검색) 시작 -->
+            <div id="container">
+                <div
+                    id="content"
+                    class="qnaSearchWrap allQuestion devQnaMainLayer"
+                >
+                    <form id="searchAjaxForm" onsubmit="return false;">
+                        <div class="top-title-wrap">
+                            <h2 class="title">QnA</h2>
+                            <div class="header-search-form devSearchForm">
+                                <div class="jkSchInput keywordSearch devFocus">
+                                    <p class="inpWrap" id="inputKeyword">
+                                        <input
+                                            type="text"
+                                            class="schInp"
+                                            id="AJAX_TS_Search"
+                                            name="keyword"
+                                            maxlength=""
+                                            placeholder="글, 그룹을 검색해보세요"
+                                            title="검색어 입력"
+                                            autocomplete="off"
+                                        />
+                                        <button
+                                            type="button"
+                                            class="btnSch qnaSpB devsearch"
+                                        >
+                                            <span class="skip">검색</span>
+                                        </button>
+                                    </p>
+                                    <div class="searchLayer thin">
+                                        <ul class="keyword-search-area autocomplete" style="display: none;">
+                                            <li>
+                                                <button type="button" class="keyword-search-item devUrlLink" data-keyword="엘지에너지솔루션">
+                                                    <p class="companyName">test</p>
+                                                </button>
+                                            </li>
+                                        </ul>
+                                        <div class="search-title-wrap">
+                                            <span class="subject"
+                                                >최근검색어</span
+                                            >
+                                            <!-- 최근 검색기록이 있을 때 활성화 -->
+                                            <button type="button" class="btnAllDel">전체삭제</button>
+                                            <!-- 최근 검색기록이 있을 때 활성화 -->
+                                        </div>
+                                        <ul class="lately-search-list">
+                                            <!-- 검색 기록이 없을 때 -->
+                                            <!-- <div class="empty-states">
+                                                최근 검색어가 없습니다.
+                                            </div> -->
+                                            <!-- 검색 기록이 없을 때 -->
+                                             <!-- 검색 기록이 있을 때 -->
+                                            <li>
+                                                <button type="button" data-keyword="쿠팡" class="title qnaSpB devUrlLink">쿠팡</button>
+                                                <button type="button" class="remove-button qnaSpB">삭제</button>
+                                            </li>
+                                             <!-- 검색 기록이 있을 때 -->
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- QnA목록 상단 끝-->
+                    <!-- 로그인 시 나오는 배너 시작 -->
+                    <div class="recommendSwiper">
+                        <div
+                            class="swiper-container swiper-container-horizontal"
+                        >
+                            <ul
+                                class="swiper-wrapper"
+                                style="
+                                    transform: translate3d(-3876px, 0px, 0px);
+                                    transition-duration: 1200ms;
+                                "
+                            >
+                                <li
+                                    class="swiper-slide swiper-slide-duplicate"
+                                    style="width: 313px; margin-right: 10px"
+                                    data-swiper-slide-index="7"
+                                >
+                                    <a
+                                        href=""
+                                        target="_blank"
+                                    >
+                                        <span class="label">인기글</span>
+                                        <p class="slideTit">취업 관련 딜레마</p>
+                                        <div class="slideInfo">
+                                            <span class="point qnaSpB"
+                                                >5</span
+                                            >
+                                            <span class="job"
+                                                >물류·운송·배송</span
+                                            >
+                                        </div>
+                                    </a>
+                                </li>
+                                <li
+                                    class="swiper-slide swiper-slide-duplicate"
+                                    style="width: 313px; margin-right: 10px"
+                                    data-swiper-slide-index="8"
+                                >
+                                    <a
+                                        href=""
+                                        target="_blank"
+                                    >
+                                        <span class="label">인기글</span>
+                                        <p class="slideTit">test</p>
+                                        <div class="slideInfo">
+                                            <span class="point qnaSpB"
+                                                >5</span
+                                            >
+                                            <span class="alumni"
+                                                >test</span
+                                            >
+                                            <span class="job">경호·경비</span>
+                                            <span class="corporation"
+                                                >test</span
+                                            >
+                                        </div>
+                                    </a>
+                                </li>
+                                <li
+                                    class="swiper-slide swiper-slide-duplicate"
+                                    style="width: 313px; margin-right: 10px"
+                                    data-swiper-slide-index="9"
+                                >
+                                    <a
+                                        href=""
+                                        target="_blank"
+                                    >
+                                        <span class="label">인기글</span>
+                                        <p class="slideTit">
+                                           test
+                                        </p>
+                                        <div class="slideInfo">
+                                            <span class="point qnaSpB"
+                                                >5</span
+                                            >
+                                            <span class="job"
+                                                >test</span
+                                            >
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li
+                                    class="swiper-slide"
+                                    style="width: 313px; margin-right: 10px"
+                                    data-swiper-slide-index="0"
+                                >
+                                    <a
+                                        href=""
+                                        target="_blank"
+                                    >
+                                        <span class="label">추천질문</span>
+                                        <p class="slideTit">
+                                           test
+                                        </p>
+                                        <div class="slideInfo">
+                                            <span class="point qnaSpB"
+                                                >5</span
+                                            >
+                                            <span class="job">홀서버</span>
+                                            <span class="corporation"
+                                                >test</span
+                                            >
+                                        </div>
+                                    </a>
+                                </li>
+                                <li
+                                    class="swiper-slide"
+                                    style="width: 313px; margin-right: 10px"
+                                    data-swiper-slide-index="1"
+                                >
+                                    <a
+                                        href=""
+                                        target="_blank"
+                                    >
+                                        <span class="label">추천질문</span>
+                                        <p class="slideTit">test</p>
+                                        <div class="slideInfo">
+                                            <span class="point qnaSpB"
+                                                >5</span
+                                            >
+                                            <span class="job">test</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li
+                                    class="swiper-slide"
+                                    style="width: 313px; margin-right: 10px"
+                                    data-swiper-slide-index="2"
+                                >
+                                    <a
+                                        href=""
+                                        target="_blank"
+                                    >
+                                        <span class="label">추천질문</span>
+                                        <p class="slideTit">test</p>
+                                        <div class="slideInfo">
+                                            <span class="point qnaSpB"
+                                                >5</span
+                                            >
+                                            <span class="job"
+                                                >test</span
+                                            >
+                                            <span class="corporation"
+                                                >test</span
+                                            >
+                                        </div>
+                                    </a>
+                                </li>
+                                <li
+                                    class="swiper-slide"
+                                    style="width: 313px; margin-right: 10px"
+                                    data-swiper-slide-index="3"
+                                >
+                                    <a
+                                        href=""
+                                        target="_blank"
+                                    >
+                                        <span class="label">추천질문</span>
+                                        <p class="slideTit">
+                                            test
+                                        </p>
+                                        <div class="slideInfo">
+                                            <span class="point qnaSpB"
+                                                >5</span
+                                            >
+                                            <span class="job">test</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li
+                                    class="swiper-slide"
+                                    style="width: 313px; margin-right: 10px"
+                                    data-swiper-slide-index="4"
+                                >
+                                    <a
+                                        href=""
+                                        target="_blank"
+                                    >
+                                        <span class="label">추천질문</span>
+                                        <p class="slideTit">일 강도</p>
+                                        <div class="slideInfo">
+                                            <span class="point qnaSpB"
+                                                >5</span
+                                            >
+                                            <span class="job">test</span>
+                                            <span class="corporation"
+                                                >test</span
+                                            >
+                                        </div>
+                                    </a>
+                                </li>
+                                <li
+                                    class="swiper-slide"
+                                    style="width: 313px; margin-right: 10px"
+                                    data-swiper-slide-index="5"
+                                >
+                                    <a
+                                        href=""
+                                        target="_blank"
+                                    >
+                                        <span class="label">인기글</span>
+                                        <p class="slideTit">
+                                            test
+                                        </p>
+                                        <div class="slideInfo">
+                                            <span class="point qnaSpB"
+                                                >5</span
+                                            >
+                                            <span class="job">test</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li
+                                    class="swiper-slide"
+                                    style="width: 313px; margin-right: 10px"
+                                    data-swiper-slide-index="6"
+                                >
+                                    <a
+                                        href=""
+                                        target="_blank"
+                                    >
+                                        <span class="label">인기글</span>
+                                        <p class="slideTit">
+                                            test
+                                        </p>
+                                        <div class="slideInfo">
+                                            <span class="point qnaSpB"
+                                                >5</span
+                                            >
+                                            <span class="job"
+                                                >test</span
+                                            >
+                                        </div>
+                                    </a>
+                                </li>
+                                <li
+                                    class="swiper-slide"
+                                    style="width: 313px; margin-right: 10px"
+                                    data-swiper-slide-index="7"
+                                >
+                                    <a
+                                        href=""
+                                        target="_blank"
+                                    >
+                                        <span class="label">인기글</span>
+                                        <p class="slideTit">test</p>
+                                        <div class="slideInfo">
+                                            <span class="point qnaSpB"
+                                                >5</span
+                                            >
+                                            <span class="job"
+                                                >test</span
+                                            >
+                                        </div>
+                                    </a>
+                                </li>
+                                <li
+                                    class="swiper-slide swiper-slide-prev"
+                                    style="width: 313px; margin-right: 10px"
+                                    data-swiper-slide-index="8"
+                                >
+                                    <a
+                                        href=""
+                                        target="_blank"
+                                    >
+                                        <span class="label">인기글</span>
+                                        <p class="slideTit">test</p>
+                                        <div class="slideInfo">
+                                            <span class="point qnaSpB"
+                                                >5</span
+                                            >
+                                            <span class="alumni"
+                                                >test</span
+                                            >
+                                            <span class="job">test</span>
+                                            <span class="corporation"
+                                                >test</span
+                                            >
+                                        </div>
+                                    </a>
+                                </li>
+                                <li
+                                    class="swiper-slide swiper-slide-active"
+                                    style="width: 313px; margin-right: 10px"
+                                    data-swiper-slide-index="9"
+                                >
+                                    <a
+                                        href=""
+                                        target="_blank"
+                                    >
+                                        <span class="label">인기글</span>
+                                        <p class="slideTit">
+                                            test
+                                        </p>
+                                        <div class="slideInfo">
+                                            <span class="point qnaSpB"
+                                                >5</span
+                                            >
+                                            <span class="job"
+                                                >test</span
+                                            >
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li
+                                    class="swiper-slide swiper-slide-duplicate swiper-slide-next"
+                                    style="width: 313px; margin-right: 10px"
+                                    data-swiper-slide-index="0"
+                                >
+                                    <a
+                                        href=""
+                                        target="_blank"
+                                    >
+                                        <span class="label">추천질문</span>
+                                        <p class="slideTit">
+                                            test
+                                        </p>
+                                        <div class="slideInfo">
+                                            <span class="point qnaSpB"
+                                                >5</span
+                                            >
+                                            <span class="job">test</span>
+                                            <span class="corporation"
+                                                >test</span
+                                            >
+                                        </div>
+                                    </a>
+                                </li>
+                                <li
+                                    class="swiper-slide swiper-slide-duplicate"
+                                    style="width: 313px; margin-right: 10px"
+                                    data-swiper-slide-index="1"
+                                >
+                                    <a
+                                        href=""
+                                        target="_blank"
+                                    >
+                                        <span class="label">추천질문</span>
+                                        <p class="slideTit">연봉</p>
+                                        <div class="slideInfo">
+                                            <span class="point qnaSpB"
+                                                >5</span
+                                            >
+                                            <span class="job">test</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li
+                                    class="swiper-slide swiper-slide-duplicate"
+                                    style="width: 313px; margin-right: 10px"
+                                    data-swiper-slide-index="2"
+                                >
+                                    <a
+                                        href=""
+                                        target="_blank"
+                                    >
+                                        <span class="label">추천질문</span>
+                                        <p class="slideTit">test</p>
+                                        <div class="slideInfo">
+                                            <span class="point qnaSpB"
+                                                >5</span
+                                            >
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- // swiper-container -->
+                        <div class="swiper-button-wrap">
+                            <div class="swiper-button-prev qnaSpB">
+                                <span class="skip">이전</span>
+                            </div>
+                            <div class="swiper-button-next qnaSpB">
+                                <span class="skip">다음</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 로그인 시 나오는 배너 끝 -->
+                    <!-- QnA 목록 시작 -->
+                    <div class="lyListBoard devMainEntire">
+                        <div class="headerWrap">
+                            <h3 class="numBx">
+                                <span>총 <b class="num">113,300</b>건</span>
+                            </h3>
+                            <ul class="sort-list">
+                                <li class="sort-list-item">
+                                    <button
+                                        type="button"
+                                        class="sort-list-btn qnaSpB devBtnOrderType on"
+                                        data-ordertype="1"
+                                    >
+                                        최신순
+                                    </button>
+                                </li>
+                                <li class="sort-list-item">
+                                    <button
+                                        type="button"
+                                        class="sort-list-btn qnaSpB devBtnOrderType"
+                                        data-ordertype="3"
+                                    >
+                                        인기순
+                                    </button>
+                                </li>
+                                <li class="sort-list-item">
+                                    <button
+                                        type="button"
+                                        class="sort-list-btn qnaSpB devBtnOrderType"
+                                        data-ordertype="2"
+                                    >
+                                        좋아요
+                                    </button>
+                                </li>
+                                <li class="sort-list-item">
+                                    <button
+                                        type="button"
+                                        class="sort-list-btn qnaSpB devBtnOrderType"
+                                        data-ordertype="4"
+                                    >
+                                        댓글순
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="listWrap">
+                            <ul style="display: block">
+                                <li class="background-blue">
+                                    <div class="topArea recommend">
+                                        <div class="defualt-tag-item red">
+                                            추천
+                                        </div>
+                                        <div
+                                            class="labelSwiper swiper-container swiper-container-horizontal"
+                                        >
+                                            <div
+                                                class="labelBx swiper-wrapper"
+                                                style="
+                                                    transition-duration: 0ms;
+                                                    transform: translate3d(
+                                                        0px,
+                                                        0px,
+                                                        0px
+                                                    );
+                                                "
+                                            >
+                                                <!-- 링크 연결 : 클릭 시 각 그룹 홈으로 이동  -->
+                                                <a
+                                                    href=""
+                                                    class="label swiper-slide swiper-slide-active"
+                                                    target="_blank"
+                                                    >try-catch(유)</a
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- [Dev] 방문한 링크 : visited 클래스 추가 -->
+                                    <div class="contArea">
+                                        <!-- [Dev] 이미지 포함 컨텐츠 : image 클래스 추가 -->
+                                        <a href="" class="post-type">
+                                            <div class="post-title">
+                                                <span class="lineOne"
+                                                    >test</span
+                                                >
+                                            </div>
+                                            <div class="post-summary">
+                                                <span class="lineTwo"
+                                                    >test
+                                                </span>
+                                            </div>
+                                        </a>
+
+                                        <div class="post-cell-box">
+                                            <span class="cell">
+                                                <i class="qnaSpB icon-view-eye"
+                                                    >조회수</i
+                                                >
+                                                27442
+                                            </span>
+                                            <button
+                                                type="button"
+                                                class="cell devQstnListLike"
+                                                data-likecnt="14"
+                                                data-qstnno="128418"
+                                            >
+                                                <i class="qnaSpB icon-like"
+                                                    >좋아요</i
+                                                >
+                                                <em>14</em>
+                                            </button>
+                                            <!-- [Dev] 신규 답변의 경우 icnNew 클래스 추가 -->
+                                            <span class="cell">
+                                                <i
+                                                    class="qnaSpB icon-answer-bubble"
+                                                    >답변</i
+                                                ><span class="num">4</span>
+                                            </span>
+                                            <span class="cell"
+                                                >2024-07-02 수정</span
+                                            >
+                                        </div>
+                                        <!-- [Dev] 북마크 툴팁 show - class tooltip-open 추가 -->
+                                        <div class="post-util has-tooltip">
+                                            <div class="post-util-item">
+                                                <!-- [Dev] 북마크 - class on 추가/제거 -->
+                                                <button
+                                                    type="button"
+                                                    class="devQnaDetailBookmark btnBookmark qnaSpB"
+                                                    data-qstn-no="128418"
+                                                >
+                                                    북마크
+                                                </button>
+                                                <div
+                                                    class="book-mark-layer tooltip-layer qnaSpA"
+                                                >
+                                                    <p class="txt">
+                                                        내 프로필 &gt; 북마크 에
+                                                        추가되었습니다
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="post-util-item">
+                                                <button
+                                                    type="button"
+                                                    class="icon-more-button qnaSpB devQnaListPopupMenuButton"
+                                                >
+                                                    더보기
+                                                </button>
+                                                <div
+                                                    class="view-more-layer devQnaListPopupMenu"
+                                                >
+                                                    <ul>
+                                                        <li>
+                                                            <a
+                                                                href="javascript:;"
+                                                                class="view-more-item devSingo"
+                                                                data-idfno="128418"
+                                                                data-type="1"
+                                                                >신고</a
+                                                            >
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="topArea">
+                                        <div
+                                            class="labelSwiper swiper-container swiper-container-horizontal"
+                                        >
+                                            <div
+                                                class="labelBx swiper-wrapper"
+                                                style="
+                                                    transition-duration: 0ms;
+                                                    transform: translate3d(
+                                                        0px,
+                                                        0px,
+                                                        0px
+                                                    );
+                                                "
+                                            >
+                                                <a
+                                                    href=""
+                                                    class="label swiper-slide swiper-slide-active"
+                                                    target="_blank"
+                                                    >생산직종사자</a
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="contArea">
+                                        <a href="" class="post-type">
+                                            <div class="post-title">
+                                                <span class="lineOne"
+                                                    >test</span
+                                                >
+                                            </div>
+                                            <div class="post-summary">
+                                                <span class="lineTwo"
+                                                    >test
+                                                </span>
+                                            </div>
+                                        </a>
+                                        <div class="post-cell-box">
+                                            <span class="cell">
+                                                <i class="qnaSpB icon-view-eye"
+                                                    >조회수</i
+                                                >
+                                                6
+                                            </span>
+                                            <button
+                                                type="button"
+                                                class="cell devQstnListLike"
+                                                data-likecnt="0"
+                                                data-qstnno="152907"
+                                            >
+                                                <i class="qnaSpB icon-like"
+                                                    >좋아요</i
+                                                >
+                                                <em>0</em>
+                                            </button>
+                                            <!-- [Dev] 신규 답변의 경우 icnNew 클래스 추가 -->
+                                            <span class="cell">
+                                                <i
+                                                    class="qnaSpB icon-answer-bubble"
+                                                    >답변</i
+                                                ><span class="num">0</span>
+                                            </span>
+
+                                            <span class="cell"
+                                                >37분 전 작성</span
+                                            >
+                                        </div>
+                                        <!-- [Dev] 북마크 툴팁 show - class tooltip-open 추가 -->
+                                        <div class="post-util has-tooltip">
+                                            <div class="post-util-item">
+                                                <!-- [Dev] 북마크 - class on 추가/제거 -->
+                                                <button
+                                                    type="button"
+                                                    class="devQnaDetailBookmark btnBookmark qnaSpB"
+                                                    data-qstn-no="152907"
+                                                >
+                                                    북마크
+                                                </button>
+                                                <div
+                                                    class="book-mark-layer tooltip-layer qnaSpA"
+                                                >
+                                                    <p class="txt">
+                                                        내 프로필 &gt; 북마크 에
+                                                        추가되었습니다
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="post-util-item">
+                                                <button
+                                                    type="button"
+                                                    class="icon-more-button qnaSpB devQnaListPopupMenuButton"
+                                                >
+                                                    더보기
+                                                </button>
+                                                <div
+                                                    class="view-more-layer devQnaListPopupMenu"
+                                                >
+                                                    <ul>
+                                                        <li>
+                                                            <a
+                                                                href="javascript:;"
+                                                                class="view-more-item devSingo"
+                                                                data-idfno="152907"
+                                                                data-type="1"
+                                                                >신고</a
+                                                            >
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- // 리스트 영역 -->
+                                <li>
+                                    <div class="topArea">
+                                        <div
+                                            class="labelSwiper swiper-container swiper-container-horizontal"
+                                        >
+                                            <div
+                                                class="labelBx swiper-wrapper"
+                                                style="
+                                                    transition-duration: 0ms;
+                                                    transform: translate3d(
+                                                        0px,
+                                                        0px,
+                                                        0px
+                                                    );
+                                                "
+                                            >
+                                                <a
+                                                    href=""
+                                                    class="label swiper-slide swiper-slide-active"
+                                                    target="_blank"
+                                                    >포장·가공담당자</a
+                                                >
+                                            </div>
+                                        </div>
+                                        <span class="point qnaSpB">5</span>
+                                    </div>
+                                    <div class="contArea">
+                                        <a
+                                            href=""
+                                            class="post-type"
+                                        >
+                                            <div class="post-title">
+                                                <i class="icoQ_on qnaSpB">Q</i>
+                                                <span class="lineOne"
+                                                    >test
+                                                </span>
+                                            </div>
+                                            <div class="post-summary">
+                                                <span class="lineTwo"
+                                                    >test;
+                                                </span>
+                                            </div>
+                                        </a>
+                                        <div class="post-cell-box">
+                                            <span class="cell">
+                                                <i class="qnaSpB icon-view-eye"
+                                                    >조회수</i
+                                                >
+                                                24
+                                            </span>
+                                            <button
+                                                type="button"
+                                                class="cell devQstnListLike"
+                                                data-likecnt="0"
+                                                data-qstnno="152903"
+                                            >
+                                                <i class="qnaSpB icon-like"
+                                                    >좋아요</i
+                                                >
+                                                <em>0</em>
+                                            </button>
+                                            <!-- [Dev] 신규 답변의 경우 icnNew 클래스 추가 -->
+                                            <span class="cell">
+                                                <i
+                                                    class="qnaSpB icon-answer-bubble"
+                                                    >답변</i
+                                                ><span class="num">0</span>
+                                            </span>
+
+                                            <span class="cell"
+                                                >10시간 전 작성</span
+                                            >
+                                        </div>
+                                        <!-- [Dev] 북마크 툴팁 show - class tooltip-open 추가 -->
+                                        <div class="post-util has-tooltip">
+                                            <div class="post-util-item">
+                                                <!-- [Dev] 북마크 - class on 추가/제거 -->
+                                                <button
+                                                    type="button"
+                                                    class="devQnaDetailBookmark btnBookmark qnaSpB"
+                                                    data-qstn-no="152903"
+                                                >
+                                                    북마크
+                                                </button>
+                                                <div
+                                                    class="book-mark-layer tooltip-layer qnaSpA"
+                                                >
+                                                    <p class="txt">
+                                                        내 프로필 &gt; 북마크 에
+                                                        추가되었습니다
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="post-util-item">
+                                                <button
+                                                    type="button"
+                                                    class="icon-more-button qnaSpB devQnaListPopupMenuButton"
+                                                >
+                                                    더보기
+                                                </button>
+                                                <div
+                                                    class="view-more-layer devQnaListPopupMenu"
+                                                >
+                                                    <ul>
+                                                        <li>
+                                                            <a
+                                                                href="javascript:;"
+                                                                class="view-more-item devDelete"
+                                                                data-idfno="152903"
+                                                                data-type="1"
+                                                                >삭제</a
+                                                            >
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- // 리스트 영역 -->
+                            </ul>
+                            <!--?xml version="1.0" encoding="utf-16"?-->
+                            <div class="tplPagination newVer" role="navigation">
+                                <ul>
+                                    <li>
+                                        <span class="now">1</span>
+                                    </li>
+                                    <li>
+                                        <a
+                                            href=""
+                                            >2</a
+                                        >
+                                    </li>
+                                </ul>
+                                <p>
+                                    <a
+                                        href=""
+                                        class="tplBtn btnPgnNext"
+                                        >다음<i class="ico"> </i
+                                    ></a>
+                                </p>
+                            </div>
+                            <input
+                                id="devPagerInfo"
+                                type="hidden"
+                                data-main-type="3"
+                                data-page="1"
+                                data-page-size="20"
+                            />
+                        </div>
+                    </div>
+                    <div
+                        class="group-search-layer layer-box-wrap devSubscribeAddLayer devmain"
+                    ></div>
+                    <!-- // 인기그룹 -->
+                    <!-- 인기그룹 -->
+                    <div class="popular-group">
+                        <div class="section-header">
+                            <p class="section-title">인기그룹</p>
+                            <a
+                                href=""
+                                class="more-text-button qnaSpA"
+                                target="_blank"
+                                >더보기</a
+                            >
+                        </div>
+                        <div class="popular-group-wrap">
+                            <a
+                                href=""
+                                class="defualt-tag-item"
+                                target="_blank"
+                                >쿠팡(주)</a
+                            >
+                            <a
+                                href=""
+                                class="defualt-tag-item"
+                                target="_blank"
+                                >삼성전자㈜</a
+                            >
+                        </div>
+                    </div>
+                    <!-- // 인기질문 -->
+                    <div class="popularList">
+                        <div class="section-header">
+                            <p class="section-title">인기글</p>
+                            <a
+                                href=""
+                                class="more-text-button qnaSpA"
+                                >더보기</a
+                            >
+                        </div>
+                        <ul>
+                            <li>
+                                <a
+                                    href=""
+                                    target="_blank"
+                                >
+                                    <p class="nameWrap">
+                                        <span class="proThumb">
+                                            <img
+                                                src="https://cdn-assets.jobkorea.co.kr/images/jk-pc/m/ver_2/user/qna/profile_thumb/random_14.jpg"
+                                                target="_blank"
+                                            />
+                                        </span>
+                                        <span class="nickname"
+                                            >mentor6044410</span
+                                        >
+                                    </p>
+
+                                    <p class="popular-tit">
+                                        test
+                                    </p>
+                                    <div class="popular-info">
+                                        <span class="job">test</span>
+                                    </div>
+                                    <div class="popular-cell-box">
+                                        <span class="cell"
+                                            ><i
+                                                class="qnaSpB icon-answer-bubble"
+                                                >답변</i
+                                            ><span class="num">8</span></span
+                                        >
+                                        <span class="cell"
+                                            ><i class="qnaSpB icon-view-eye"
+                                                >조회수</i
+                                            >1422</span
+                                        >
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- 본문끝 -->
+        </div>
+        <!-- #wrap 끝 -->
+        <!-- 메인 끝 -->
+         <!-- 신고 팝업창 -->
+          <div class="mtuLyWrap lyQnaReport" aria-hidden="true" style="display: none;">
+    <div class="mtuPopup">
+        <h1 class="lyHd">신고사유</h1>
+        <div class="lyCnt">
+            <form action="" method="post">
+                <fieldset>
+                    <legend>신고사유 입력</legend>
+                    <ul class="reportBx radioCommWrap">
+                        <li>
+                            <input type="radio" name="queType" id="lb_reason_1" class="skip" value="1">
+                            <label for="lb_reason_1" class="qnaSpB"><span>서비스 성격에 맞지 않는 글</span></label>
+                        </li>
+                        <li>
+                            <input type="radio" name="queType" id="lb_reason_2" class="skip" value="2">
+                            <label for="lb_reason_2" class="qnaSpB"><span>비방/욕설/인신공격</span></label>
+                        </li>
+                        <li>
+                            <input type="radio" name="queType" id="lb_reason_3" class="skip" value="3">
+                            <label for="lb_reason_3" class="qnaSpB"><span>개인정보노출</span></label>
+                        </li>
+                        <li>
+                            <input type="radio" name="queType" id="lb_reason_4" class="skip" value="4">
+                            <label for="lb_reason_4" class="qnaSpB"><span>음란성</span></label>
+                        </li>
+                        <li>
+                            <input type="radio" name="queType" id="lb_reason_5" class="skip" value="5">
+                            <label for="lb_reason_5" class="qnaSpB"><span>게시글/댓글 도배</span></label>
+                        </li>
+                        <li>
+                            <input type="radio" name="queType" id="lb_reason_6" class="skip" value="6">
+                            <label for="lb_reason_6" class="qnaSpB"><span>불법성 홍보</span></label>
+                        </li>
+                        <li>
+                            <input type="radio" name="queType" id="lb_reason_7" class="skip" value="7">
+                            <label for="lb_reason_7" class="qnaSpB"><span>기타</span></label>
+                        </li>
+                    </ul>
+                    <div class="reasonBx">
+                        <div class="qnaFormBx qnaTxaBx devTplSchPh">
+                            <span class="ph">신고 사유 설명이 필요하신 경우 작성해 주세요.</span>
+                            <textarea cols="20" id="lb_reason_8" maxlength="2000" name="" rows="2" class="qnaTxaTx" title="신고 사유 설명 작성"></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <div class="btnCommWrap">
+                <button type="button" class="btnCancel bg_white devLyBtnClose">취소</button>
+                <button type="button" class="btnReport devBtnReportIns">신고하기</button>
+            </div>
+        </div>
+        <button type="button" class="butClose mtuSpImg devLyBtnClose"><span class="blind">신고사유 레이어 닫기</span></button>
+    </div>
+    <div class="dimmed"></div>
+
+    <!--히든 값-->
+    <input type="hidden" name="hdnReportNo" value="152527">
+    <input type="hidden" name="hdnReportType" value="1">
+</div>
+          <!-- 신고 팝업창 -->
+    </body>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="/static/js/community/QnA.js"></script>
+</html>
