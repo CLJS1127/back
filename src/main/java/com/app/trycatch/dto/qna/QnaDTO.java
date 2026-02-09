@@ -11,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 public class QnaDTO {
     private Long id;
-    private Long memberId;
+    private Long individualMemberId;
     private String qnaTitle;
     private String qnaContent;
     private int qnaViewCount;
@@ -27,7 +27,7 @@ public class QnaDTO {
     public QnaVO toQnaVO() {
         return QnaVO.builder()
                 .id(id)
-                .memberId(memberId)
+                .individualMemberId(individualMemberId)
                 .qnaTitle(qnaTitle)
                 .qnaContent(qnaContent)
                 .qnaViewCount(qnaViewCount)
