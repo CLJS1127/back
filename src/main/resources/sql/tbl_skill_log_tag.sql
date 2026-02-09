@@ -9,3 +9,4 @@ create table tbl_skill_log_tag
     unique key uk_skill_log_tag (skill_log_id, tag_id)
 ) comment '기술 블로그-태그 N:N';
 
+
