@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>기업정보관리 | 잡코리아</title>
+    <title>기업정보관리 | TRY-CATCH</title>
     <link rel="stylesheet" href="/static/css/corporate/profile.css">
 </head>
 <body class="mtcSubInfo mtcSubCompany">
@@ -15,32 +15,15 @@
                 <div class="nav">
                     <ul>
                         <!-- server, javascript: 해당 페이지일 때, on 클래스 추가 -->
-                        <li class="devCorpInfoDetail on">
+                        <li class="devCorpInfoDetail">
                             <a href="">기업정보관리</a>
                         </li>
-                        <li class="devCorpInfoDetail">
+                        <li class="devCorpInfoDetail on">
                             <a href="">회원정보관리</a>
                         </li>
+                        <!-- server: 담당자 로그인 시에만 보이도록 -->
                         <li class="devCorpInfoDetail">
-                            <a href="">로그인관리 </a>
-                        </li>
-                        <li class="devCorpInfoDetail">
-                            <a href="">정보 수신 설정</a>
-                        </li>
-                        <li class="devCorpInfoDetail">
-                            <a href="">2단계 인증 관리</a>
-                        </li>
-                        <li class="devCorpInfoDetail">
-                            <a href="">2단계 인증 내역</a>
-                        </li>
-                        <li class="devCorpInfoDetail">
-                            <a href="">기업인증</a>
-                        </li>
-                        <li>
-                            <a href="">전문채용관 신청</a>
-                        </li>
-                        <li>
-                            <a href="">슈퍼기업관 신청</a>
+                            <a href="">팀원관리</a>
                         </li>
                     </ul>
                 </div>
@@ -49,14 +32,14 @@
                 <div class="adLeftBx">
                     <div class="ad-container">
                         <a href="javascript:;" class="imgAdBnnr">
-                            <img src="https://ads.jobkorea.co.kr/ads/pc/images/202512/54af1f5a-b9e0-45bb-8f00-cb06f2d01441.png">
+                            <img src="/static/images/corporate/54af1f5a-b9e0-45bb-8f00-cb06f2d01441.png">
                             <!-- onerror -->
                         </a>
                     </div>
                 </div>
                 <div class="adLeftBx">
                     <a href="">
-                        <img src="https://i.jobkorea.kr/content/images/banner/lnb_certify_banner.png">
+                        <img src="/static/images/corporate/lnb_certify_banner.png">
                     </a>
                 </div>
 
@@ -66,6 +49,7 @@
             <div id="content">
                 <div class="companyContent">
                     <div class="companyMngWrap">
+                        <!-- server: form action 설정 -->
                         <form id="devInfoForm" name="form" method="post">
                             <!-- 기업정보관리 입력폼 -->
                             <fieldset>
@@ -73,10 +57,12 @@
                                     <div class="infoTbBx">
                                         <div class="tbRow">
                                             <div class="tbCell tbSum">
+                                                <!-- server: 기업명 -->
                                                 <p class="name">
                                                     <!-- server: click 시, 기업 정보 페이지로 이동 -->
                                                     <a href="" target="_blank">기업이름</a>
                                                 </p>
+                                                <!-- server: 사업자번호, 상장여부 -->
                                                 <dl class="info">
                                                     <dt>사업자번호</dt>
                                                     <dd>111-11-11111</dd>
@@ -181,6 +167,7 @@
                                                             설립일
                                                             <span class="point">*</span>
                                                         </label>
+                                                        <!-- server: 불러올 정보가 있다면 input의 value에 값 넣기 -->
                                                         <input type="text" id="devOpenDate" class="inpDefault devAnimPh" name="Open_Date" maxlength="10" value="">
                                                     </div>
                                                 </div>
@@ -241,6 +228,7 @@
                                             </div>
                                         </div>
 
+                                        <!-- javascript: 외국 기업 선택 시, display: block -->
                                         <div class="tbRow" id="devForeignCoArea" style="display:none;">
                                             <div class="tbCell">
                                                 <div class="elWrap devElWrap">
@@ -271,7 +259,6 @@
                                             <div class="tbCell"></div>
                                             <div class="tbCell"></div>
                                         </div>
-                                        <!-- javascript: 외국 기업 선택 시, display: block -->
                                         
                                         <div class="tbRow">
                                             <div class="tbCell tbPart">
@@ -622,7 +609,6 @@
                                                                 <input type="text" class="address" id="postcode" placeholder="우편번호 *" maxlength="5">
                                                                 <input type="button" class="address" id="searchPostCodeBtn" value="우편번호 찾기">
                                                                 <input type="text" class="address" id="address" placeholder="주소 *">
-                                                                <input type="text" class="address" id="extraAddress" placeholder="참고항목">
                                                                 <input type="text" class="address" id="detailAddress" placeholder="상세주소">
                                                             </div>
                                                             <p class="popFunc">
@@ -720,7 +706,7 @@
                                         <span class="ph devTxAreaExam" style="display:block">
                                             기업개요와 비젼은 기업의 특징을 요약해서 표현하면 좋습니다.
                                             <br>
-                                            (ex. 잡코리아는 1996년에 취업 메타 검색엔진으로 출발하여 성장한 리크루팅마켓플레이스입니다.)
+                                            (ex. TRY-CATCH는 2026년에 취업 메타 검색엔진으로 출발하여 성장한 리크루팅마켓플레이스입니다.)
                                         </span>
                                         <!-- javascript: textarea에 value가 있다면 display: none; -->
                                         <textarea rows="3" cols="80" name="Profile" id="lb_overview" class="txArea devTxArea"></textarea>
@@ -1050,108 +1036,7 @@
                                     <p>· &nbsp;기업정보의 복리후생 정보만 업데이트 됩니다.</p>
                                     <p>· &nbsp;공고에 노출되는 복리후생 정보는 해당 공고의 수정 페이지에서 업데이트해 주세요.</p>
                                 </div>
-
-                                <!-- 사진 업로드 -->
-                                <div class="artCompany artCoPhotoVideo" id="photoRegistration">
-                                    <div class="thumbList">
-                                        <h3 class="info_hd_3">
-                                            <span class="fl_l">
-                                                사진 업로드
-                                                <em>(사진 최대 15개까지 업로드 할 수 있습니다.)</em>
-                                            </span>
-                                        </h3>
-                                        <div class="upload-button-area">
-                                            <button type="button" class="button-photo-upload devMngPhoto">
-                                                <span class="mtcBtnB">사진 업로드</span>
-                                            </button>
-                                            <!-- javascript: 사진 업로드 모달 -->
-                                        </div>
-                                        <!-- <p class="upload-text-guide">
-                                            사진을 끌어다 순서를 변경하거나, 대표 사진으로 옮겨 놓을 수 있습니다.
-                                        </p> -->
-                                        <!-- javascirpt: 사진 업로드 시 동적으로 생성됨 -->
-                                        <ul id="devPhotoVideoList" class="sortable" style="position: static;">
-                                            <!-- <li class="thumbnail">
-                                                <div class="thumb ok">
-                                                    <img src="https://file2.jobkorea.co.kr/Company/Visual_Co/Image_Thumb_View_CoRead.asp?FN=2026\1\JK_CO_k0nFme926012215002321_150024.jpg&v=20260122150035&W=234&H=174">
-                                                    <span class="btnFunc">
-                                                        <button type="button" class="mtcBtn mtcBtnDel_1 devDeletePhoto"></button>  -->
-                                                        <!-- javascript: 버튼 클릭 시 alert으로 한 번 더 확인하고, 사진 지워짐 -->
-                                                    <!-- </span>
-                                                </div>
-                                                <div class="text-box">
-                                                    <fieldset>
-                                                        <textarea name="photoVideoText" maxlength="25" title="사진/동영상 설명 입력" placeholder="클릭하여 설명을 입력하세요."></textarea>
-                                                    </fieldset>
-                                                </div> -->
-                                                <!-- javascript: textarea focus 시 focus 추가 -->
-                                                <!-- javascript: textarea에 value가 있다면 has-value 추가 -->
-                                            <!-- </li> -->
-                                            <!-- javascript: 사진을 업로드 시 동적으로 li태그 생성 -->
-                                        </ul>
-                                    </div>
-                                    <!-- 사진 레이어 -->
-                                    <div class="lyFileMng">
-                                        <div class="fileMngWrap" id="devMngPhotoWrap">
-                                            <div id="frmPhoto">
-                                                <div class="popRecWrap popPhotoVideo photo">
-                                                    <div class="popHd">
-                                                        <h1>사진</h1>
-                                                    </div>
-                                                    <div class="popCont">
-                                                        <div class="fileContWrap">
-                                                            <div class="mtcTplTab">
-                                                                <ul class="tabItems">
-                                                                    <li class="devUploadPhotoTab on">
-                                                                        <a class="devPhotoTab" href="#">사진 파일 업로드</a>
-                                                                        <!-- 사진 파일 업로드 -->
-                                                                        <div class="fileUploadWrap">
-                                                                            <div class="uploadForm">
-                                                                                <div class="infoFileBx clear">
-                                                                                    <span class="ph" id="devFileName">파일형식 : jpg, jpeg, gif / 파일용량 : 최대 3MB</span>
-                                                                                    <span class="fileBx"></span>
-                                                                                    <label for="devSelectPhotoDelegator">
-                                                                                        <button type="button" class="btnMtcTpl" id="devSelectPhotoDelegator"><span>찾아보기</span></button>
-                                                                                    </label>
-                                                                                    <input type="file" id="devSelectPhoto" name="Attach_Data_File" accept=".jpg, .jpeg, .gif" style="display: none;">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="descWrap">
-                                                                                <h2>사진설명</h2>
-                                                                                <div class="txaBx">
-                                                                                    <textarea name="devPhotoDesc" id="devPhotoDesc_upload" class="txArea" title="내용을 입력하세요." maxlength="25" placeholder="예) 근무빌딩, 사무실, 복리시설, 직원사진, 동호회 활동 등"></textarea>
-                                                                                    <span class="byte">
-                                                                                        <em id="devPhotoDescCnt_upload">0</em>자/25자
-                                                                                    </span>
-                                                                                </div>
-                                                                            </div>
-                                                                            <ul class="ntcList">
-                                                                                <li>저작권, 초상권, 상표권 등에 위배되는 파일/링크는 등록할 수 없고, 발생하는 결과에 대한 모든 책임은 등록한 본인에게 있습니다.</li>
-                                                                                <li><em>개인정보보호를 위해 개인정보가 포함되거나 적합하지 않은 파일/링크는 사전 동의 없이 삭제될 수 있습니다.</em></li>
-                                                                            </ul>
-                                                                        </div>
-
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <p class="popFunc">
-                                                        <button type="button" class="mtcBtnBd devClosePhotoLive">
-                                                            <span>취소</span>
-                                                        </button><button type="button" class="mtcBtnBg">
-                                                            <span>확인</span>
-                                                        </button>
-                                                        <!-- javascript: 버튼 클릭 이벤트 -->
-                                                    </p>
-                                                    <button type="button" class="mtcBtn mtcBtnPopClose devClosePhotoLive"></button>
-                                                    <!-- javascript: 닫기 버튼 클릭 시 fileMngWrap에 on 제거 -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- javascript: 사진 업로드 버튼 클릭 시 on 추가 -->
-                                    </div>
-                                </div>
+                                
                                 <div class="artCoNotice">
                                     <ul>
                                         <li>수정 불가능한 항목 및 기업정보 뷰 페이지를 수정하시려면 사업자등록증 사본을 팩스로 보내주신 후 잡코리아 고객센터로 연락 주시면 감사하겠습니다.</li>

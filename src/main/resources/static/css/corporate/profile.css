@@ -142,7 +142,7 @@ address, caption, em {
     font-weight: bold;
 }
 #sideNav .nav li > a:hover, #sideNav .nav li.on > a {
-    color: #39f;
+    color: #006e3f;
 }
 #sideNav .nav li > a {
     color: #000;
@@ -269,7 +269,7 @@ address, caption, em {
 }
 .infoBtn, .infoBtnB:before, .infoBtnA:after, .infoBtnM:before, .infoBtnM:after {
     display: inline-block;
-    background: url("https://i.jobkorea.kr/content/images/ver_1/mtc/info/info_sp_btn.png") no-repeat;
+    background: url("/static/images/corporate/info_sp_btn.png") no-repeat;
     vertical-align: middle;
     box-sizing: border-box;
 }
@@ -373,7 +373,7 @@ address, caption, em {
     line-height: 1.8;
 }
 #frmLogo .popLogoUpload .ntcList li em {
-    color: #39f;
+    color: #006e3f;
     font-weight: bold;
 }
 #frmLogo .popLogoUpload .infoFileBx {
@@ -443,7 +443,7 @@ address, caption, em {
 }
 #frmLogo .infoIcn, #frmLogo .infoIcnB:before, #frmLogo .infoIcnA:after, #frmLogo .infoIcnM:before, #frmLogo .infoIcnM:after {
     display: inline-block;
-    background: url("https://i.jobkorea.kr/content/images/ver_1/mtc/info/info_sp_icn.png") no-repeat;
+    background: url("/static/images/corporate/info_sp_icn.png") no-repeat;
     line-height: normal;
     vertical-align: middle;
 }
@@ -623,7 +623,7 @@ address, caption, em {
 }
 .mtcBtn, .mtcBtnB:before, .mtcBtnA:after, .mtcBtnM:before, .mtcBtnM:After {
     display: inline-block;
-    background: url("https://i.jobkorea.kr/content/images/ver_1/mtc/common/mtc_sp_btn.png?202007220000") no-repeat;
+    background: url("/static/images/corporate/mtc_sp_btn.png") no-repeat;
     box-sizing: border-box;
 }
         /* 레이어 영역 */
@@ -693,7 +693,7 @@ address, caption, em {
 }
 /* .elWrap .keySchType a strong {
     font-weight: normal;
-    color: #3399ff;
+    color: #006e3f;
 }
 .elWrap .keySchType a:hover strong, .elWrap .keySchType .on a strong {
     font-weight: bold;
@@ -728,7 +728,7 @@ address, caption, em {
     overflow: hidden;
     max-height: 207px;
     overflow-y: auto;
-    background: url("https://i.jobkorea.kr/content/images/ver_1/mtc/info/bg_sel_list.png?2018012918") repeat-y left bottom;
+    background: url("/static/images/corporate/bg_sel_list.png") repeat-y left bottom;
 }
 .elWrap .selType .selTypeList {
     background-color: #fff;
@@ -743,7 +743,7 @@ address, caption, em {
     padding-top: 13px;
 }
 .artCoBasic .tbPart .elWrap .selType .selTypeList .on a, .artCoBasic .tbPart .elWrap .selType .selTypeList .on button {
-    color: #39f;
+    color: #006e3f;
     font-weight: bold;
 }
 .artCoBasic .tbPart .selTypeList ul + ul {
@@ -783,7 +783,7 @@ address, caption, em {
     height: 30px;
     line-height: 28px;
     padding: 0 16px;
-    background: #003cff;
+    background: #006e3f;
     text-align: center;
     box-sizing: border-box;
 }
@@ -853,7 +853,7 @@ address, caption, em {
     top: 17px;
     padding: 4px;
     font-size: 12px;
-    color: #4ba4fe;
+    color: #006e3f;
     text-decoration: underline;
 }
 .mtcSubInfo .elWrap .schInpType .byte {
@@ -865,7 +865,7 @@ address, caption, em {
 }
 .mtcSubInfo .elWrap .schInpType .byte em {
     font-weight: bold;
-    color: #39f;
+    color: #006e3f;
 }
 .mtcSubInfo .elWrap.on .schInpType .byte {
     display: block;
@@ -965,7 +965,7 @@ address, caption, em {
 }
 .artCoWelfare .btnSetFn {
     font-size: 12px;
-    color: #3399ff;
+    color: #006e3f;
     position: absolute;
     right: 31px;
     top: 42px;
@@ -1002,7 +1002,7 @@ address, caption, em {
 .artCoWelfare .WelfareType .welfare-list > li > button::after {
     content: "";
     display: inline-block;
-    background: url("https://i.jobkorea.kr/content/images/ver_1/common/icon_close.png") no-repeat;
+    background: url("/static/images/corporate/icon_close\ \(1\).png") no-repeat;
     width: 17px;
     height: 17px;
     margin-left: 10px;
@@ -1017,7 +1017,7 @@ address, caption, em {
 .artCoWelfare .btnSetFn {
     font-size: 12px;
     letter-spacing: 0px;
-    color: #3399ff;
+    color: #006e3f;
     position: absolute;
     right: 31px;
     top: 42px;
@@ -1142,7 +1142,7 @@ address, caption, em {
     line-height: 20px;
 }
 .inpChk_ui button:before, .inpChk_ui label:before, .spRegA:after, .spRegB:before {
-    background-image: url("https://i.jobkorea.kr/content/images/ver_1/mtc/register/spr.png?2024070200");
+    background-image: url("/static/images/corporate/spr.png");
     background-repeat: no-repeat;
     background-size: 300px 300px;
 }
@@ -1163,10 +1163,10 @@ address, caption, em {
     background-position: 0 -30px;
 }
 .inpChk_ui.size_small.chk label:before {
-    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='20' height='20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M15.59 6.077a.833.833 0 010 1.179l-6.667 6.666a.833.833 0 01-1.212-.035l-3.334-3.75A.833.833 0 015.623 9.03l2.746 3.09 6.042-6.043a.833.833 0 011.179 0z' fill='%23fff'/%3E%3C/svg%3E");
+    background-image: url("/static/images/corporate/size_small.chk-label.svg");
     background-size: 18px;
     border-radius: 3px;
-    background-color: #003cff;
+    background-color: #006e3f;
     background-position: 50%;
 }
 .regModal .choiceArea {
@@ -1366,11 +1366,11 @@ address, caption, em {
     min-width: 132px;
     height: 50px;
     padding-top: 1px;
-    border: 1px solid #003cff;
+    border: 1px solid #006e3f;
     font-weight: 700;
     font-size: 15px;
     color: #fff;
-    background-color: #003cff;
+    background-color: #006e3f;
     border-radius: 1px;
 }
 .regModal .btnModalClose {
@@ -1428,7 +1428,7 @@ address, caption, em {
 .artCoWelfare .plus button::before {
     content: "";
     display: inline-block;
-    background: url("https://i.jobkorea.kr/content/images/ver_1/common/icon_plus.png") no-repeat;
+    background: url("/static/images/corporate/icon_plus.png") no-repeat;
     width: 9px;
     height: 8px;
 }
@@ -1483,8 +1483,8 @@ address, caption, em {
     margin-right: 0;
 }
 .artCoPhotoVideo .thumbList .upload-button-area button:hover {
-    background-color: #39f;
-    border-color: #39f;
+    background-color: #006e3f;
+    border-color: #006e3f;
     font-weight: bold;
     color: #fff;
 }
@@ -1518,7 +1518,7 @@ address, caption, em {
     content: '';
     box-sizing: border-box;
     display: block;
-    border: 1px solid #39f;
+    border: 1px solid #7BA882;
     width: 186px;
     height: 119px;
     position: absolute;
@@ -1536,7 +1536,7 @@ address, caption, em {
     left: 17px;
     z-index: 10;
     padding: 4px 12px 6px;
-    background-color: #39f;
+    background-color: #7BA882;
 }
 .artCoPhotoVideo .thumbList .sortable li {
     float: left;
@@ -1835,7 +1835,7 @@ address, caption, em {
     color: #999;
 }
 #frmPhoto .popPhotoVideo .descWrap .byte em {
-    color: #39f;
+    color: #006e3f;
 }
 #frmPhoto .popPhotoVideo .ntcList {
     margin: 15px 0;
@@ -1924,7 +1924,7 @@ address, caption, em {
 .infoBtnBg {
     display: inline-block;
     font-size: 13px;
-    background: #39f;
+    background: #7BA882;
     box-sizing: border-box;
     text-align: center;
 }
@@ -1941,7 +1941,7 @@ address, caption, em {
     color: #fff;
 }
 .artCoBtn .infoBtnApply:hover {
-    background: #007afd;
+    background: #006e3f;
 }
 
 /* placeholder */
@@ -2025,13 +2025,13 @@ address, caption, em {
 #frmAddr .popAddr .popCont #postcode {
     width: 35%;
 }
-#frmAddr .popAddr .popCont #detailAddress, #frmAddr .popAddr .popCont #extraAddress   {
+/* #frmAddr .popAddr .popCont #detailAddress, #frmAddr .popAddr .popCont #extraAddress   {
     width: 41.8%;
-}
+} */
 #frmAddr .popAddr .popCont input[type=button] {
     width: 28%;
-    border: 1px solid #003cff;
-    background-color: #003cff;
+    border: 1px solid #006e3f;
+    background-color: #006e3f;
     color: #fff;
     cursor: pointer;
     font-size: 13px;

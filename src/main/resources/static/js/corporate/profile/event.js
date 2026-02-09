@@ -1,128 +1,72 @@
 NodeList.prototype.filter = Array.prototype.filter;
 NodeList.prototype.map = Array.prototype.map;
-NodeList.prototype.join = Array.prototype.join;
-NodeList.prototype.flat = Array.prototype.flat;
 
-// 로고 업로드 모달
-//      열기
+// 함수
+// input 값 포맷팅 (날짜, 전화번호 등)
+const formatInputValue = (value, pattern) => {
+    let index = 0;
+    const result = pattern
+        .map((len) => {
+            const result = value.slice(index, index + len);
+            index += len;
+            return result;
+        })
+        .join("-");
+    return result || value;
+};
+
+// 변수
+// 로고 관련
 const logoUploadButton = document.getElementById("devLogoUp");
-const logoUploadLayout = document.querySelector(".tbCell.tbLogo");
-
 const logoUploadModal = document.querySelector(".popLogoUpload");
 const logoDeleteModal = document.querySelector(".popLogoDel");
-
-//      닫기
 const logoUploadCloseButton = document.getElementById("devCloseLayer");
 const logoDeleteCloseButton = document.getElementById("devCloseDelLayer");
-
-// input
-const companyBasicinputs = document.querySelectorAll(".artCoBasic input");
-// .filter((input) => !input.closest(".addrMngWrap"));
-
-const textareas = document.querySelectorAll("textarea");
-
-//      로고 선택
 const selectLogoInput = document.getElementById("devSelectLogo");
 const selectLogoLabel = document.querySelector("#devSelectLogoDelegator label");
-let logoImage = "";
-
-//      로고 업로드
 const logoUploadSubmitButton = document.getElementById("devSubmit");
 const logoContainer = document.querySelector(".tbCell.tbLogo");
-
-//      로고 삭제
 const logoDeleteButton = document.getElementById("devDeleteLogo");
+const logoUploadLayout = document.querySelector(".tbCell.tbLogo");
 
-// 자본금
-const capitalInputLayer = document.querySelector(
-    ".tbCapital .elWrap .schInpType",
-);
+// 입력 필드
+const companyBasicinputs = document.querySelectorAll(".artCoBasic input");
+const textareas = document.querySelectorAll("textarea");
 
 // 기업형태
 const typeSelectButton = document.getElementById("devCoType");
 const typeSelectList = document.querySelector(".selTypeList");
-const companyTypeResultSpan = document.getElementById("Company_Name");
-
-//      외국 기업
 const companyTypeInput = document.getElementById("Company_Type");
+const companyTypeResultSpan = document.getElementById("Company_Name");
 const nationLayer = document.getElementById("devForeignCoArea");
+const nationInput = document.getElementById("devNation");
 const nationSearchList = document.getElementById("devNationSearchResult");
 const nationSearchContainer = document.getElementById(
     "devNationSearchContainer",
 );
-const nationInput = document.getElementById("devNation");
-
-//              나라
-const nations =
-    "가나,가봉,가이아나,감비아,과테말라,그레나다,그리스,그린란드,기니,기니비사우,나미비아,나우루공화국,나이지리아,남아프리카공화국,네델란드,네팔,노르웨이,뉴질랜드,니제르,니카라과,대만,덴마크,도미니카공화국,도미니카연방,독일,동티모르,라오스,라이베리아,라트비아,러시아,레바논,레소토,루마니아,룩셈부르크,르완다,리비아,리투아니아,리히텐슈타인,마다가스카르,마셜,마케도니아,말라위,말레이시아,말리,멕시코,모나코,모로코,모리셔스,모리타니아,모잠비크,몰도바,몰디브,몰타,몽골,미국,미얀마,미크로네시아,바누아투,바레인,바베이도스,바티칸 시국,바하마,방글라데시,베냉,베네수엘라,베트남,벨기에,벨라루스,벨리즈,보스니아.헤르체코비나,보츠와나,볼리비아,부룬디,부르키나파소,부탄,불가리아,브라질,브루나이,사모아,사우디아라비아,사이프러스,산마리노,상투메프린시페,세네갈,세르비아몬테네그로,세이셸,세인트루시아,세인트빈센트그레나딘,세인트키츠네비스,소말리아,솔로몬제도,수단,수리남,스리랑카,스와질란드,스웨덴,스위스,스페인,슬로바키아,슬로베니아,시리아,시에라리온,싱가포르,아랍에미리트연합국,아르메니아,아르헨티나,아이슬란드,아이티,아일랜드,아제르바이잔,아프가니스탄,안도라,알바니아,알제리,앙골라,앤티가바부다,에리트레아,에스토니아,에콰도르,에티오피아,엘살바도르,영국,예멘,오만,오스트레일리아,오스트리아,온두라스,요르단,우간다,우루과이,우즈베키스탄,우크라이나,이라크,이란,이스라엘,이집트,이탈리아,인도,인도네시아,일본,자메이카,잠비아,적도기니,조지아,중국,중앙아프리카공화국,지부티,짐바브웨,차드,체코,칠레,카메룬,카보베르데,카자흐스탄,카타르,캄보디아,캐나다,케냐,코모로,코스타리카,코트디부아르,콜롬비아,콩고,콩고민주공화국,쿠바,쿠웨이트,크로아티아,키르기즈스탄,키리바시,타지키스탄,탄자니아,태국,터키,토고,통가,투르크메니스탄,투발루,튀니지,트리니다드토바고,파나마,파라과이,파키스탄,파푸아뉴기니,팔라우,페루,포르투갈,폴란드,푸에르토리코,프랑스,피지,핀란드,필리핀,헝가리";
-const nationTags = nations
-    .split(",")
-    .map((nation) => {
-        return `<li><a class="devNationSearchItem" style="cursor:pointer">${nation}</a></li>`;
-    })
-    .join("");
-let tempTypeSelectButton = document.querySelector(".devCoTypeItem.on button");
 
 // 업종
+const industrySelectButton = document.querySelector(".tbPart .btnSelType");
 const industryCategoryList = document.querySelector(
     ".tbPart .selTypeList ul:first-child",
 );
 const industryPartLists = document.querySelectorAll(".tbPart .devPartList");
-
-const industrySelectButton = document.querySelector(".tbPart .btnSelType");
 const industryApplyButtons = document.querySelector(".tbPart .selTypeBtn");
-
 const industryInput = document.getElementById("Industry_Code");
 const industryResultSpan = document.getElementById("Industry_Name");
 
-//      temp & 기본값 설정
-// setIndustrySelectClass();
-
-let tempIndustryType = document.querySelector(".tbPart .devPartCtgr.on button");
-let tempIndustryPartList = document.querySelector(".tbPart .devPartList.devOn");
-let tempIndustryPartItem = document.querySelector(
-    ".tbPart .devPartList .devPartItem.on button",
-);
-let tempIndustryPartItemValue = tempIndustryPartItem?.textContent;
-
-//      기본값 설정
-// tempIndustryPartList && (tempIndustryPartList.style.display = "block");
-
-// tempIndustryPartItem &&
-//     (industryInput.value =
-//         tempIndustryPartItem.closest(".devPartItem").dataset.part);
-
-// industryInput.value &&
-//     (industryResultSpan.textContent = tempIndustryPartItemValue);
-
-// if (tempIndustryPartItem) {
-//     industryInput.value =
-//         tempIndustryPartItem.closest(".devPartItem").dataset.part;
-//     if (industryInput.value) {
-//         industryResultSpan.textContent = tempIndustryPartItemValue;
-//     }
-// }
-
-// 회사주소
-//      국내
+// 주소
 const addressSearchButton = document.getElementById("devSearchAddr");
 const addressSearchLayer = document.getElementById("devAddrMngWrap");
-
 const addressLayerCloseButton = document.getElementById("devCloseAddrLayer");
-const addressResultButtons = document.querySelector(".popAddr .popFunc");
 const addressSearchPostCodeButton =
     document.getElementById("searchPostCodeBtn");
 const addressResultSpan = document.getElementById("devAddr");
 const addressInputs = document.querySelectorAll(".popAddr input[type=text]");
-
-const previousAddressInputStyle = addressInputs[0].style.border;
-
 const addressLayer = document.getElementById("devAddrArea");
-
-//      외국
 const foreignAddressLayer = document.getElementById("devForeignAddrArea");
 
-// 연혁 및 실적 & 기업개요 및 비전
+// 연혁/개요
 const historyTextareaLayer = document.querySelector(
     ".artCoHistory .mtcTxaType",
 );
@@ -130,39 +74,15 @@ const overviewTextareaLayer = document.querySelector(
     ".artCoOverview .mtcTxaType",
 );
 
-// 사진 업로드
-const photoUploadButton = document.querySelector(".button-photo-upload");
-const photoUploadLayer = document.getElementById("devMngPhotoWrap");
-
-const photoUploadCloseButton = document.querySelector(
-    ".mtcBtnPopClose.devClosePhotoLive",
-);
-const photoDelegatorButton = document.getElementById("devSelectPhotoDelegator");
-const photoSelectInput = document.getElementById("devSelectPhoto");
-const fileNameSpan = document.getElementById("devFileName");
-
-const photoDescriptionTextarea = document.getElementById("devPhotoDesc_upload");
-
-const photoResultButtons = document.querySelector(".fileMngWrap .popFunc");
-const photoList = document.getElementById("devPhotoVideoList");
-
-let tempFileName = fileNameSpan.textContent;
-let photoImage = "";
-
 // 복리후생
 const moreWelfareInfoButton = document.getElementById("devWlfrInfo");
 const welfareModalLayer = document.querySelector(".giWelfareModal");
-
-const welfareModalContent = document.querySelector(
-    ".giWelfareModal .modalContent",
-);
 const welfareModalCloseButton = document.querySelector(
     ".giWelfareModal .btnModalClose",
 );
 const welfareModalResultButtons = document.querySelector(
     ".giWelfareModal .regPrefWrap .buttons",
 );
-
 const welfareModalList = document.querySelectorAll(
     ".giWelfareModal .scrlBx .fieldList ul li",
 );
@@ -172,164 +92,71 @@ const welfareDirectInputSection = document.querySelector(
 );
 const previewWelfareListResetButton =
     welfareDirectInputSection.nextElementSibling;
-
 const recommendWelfareButtons = document.querySelector(".autoWlfrRegArea");
 const welfareList = document.getElementById("devWlfrList");
 
-//      모달 input 리스트
-const welfareModalInputList = welfareModalList.map((list) =>
+// 기타
+const submitButton = document.getElementById("devBtnSubmit");
+const toTheTop = document.getElementById("btnMtcTop");
+const body = document.querySelector("body");
+
+let logoImage = ""; // 선택된 로고 이미지
+let tempTypeSelectButton = document.querySelector(".devCoTypeItem.on button"); // 선택된 기업형태
+let tempIndustryType = document.querySelector(".tbPart .devPartCtgr.on button"); // 선택된 업종 카테고리
+let tempIndustryPartList = document.querySelector(".tbPart .devPartList.devOn"); // 선택된 업종 리스트
+let tempIndustryPartItem = document.querySelector(
+    ".tbPart .devPartList .devPartItem.on button",
+); // 선택된 업종 항목
+let tempIndustryPartItemValue = tempIndustryPartItem?.textContent;
+let tempWelfareInputValues = {}; // 선택된 복리후생 (추천)
+let tempWelfareModalCodes = {}; // 선택된 복리후생 (모달)
+let tempScroll = 0; // 모달 열 때 스크롤 위치 저장
+
+// 복리후생 모달 input 리스트
+const welfareModalInputList = Array.from(welfareModalList).map((list) =>
     list.querySelector("input"),
 );
-//      기본 체크박스
+
+// 기본 체크된 복리후생 값
 const welfareModalBasicInputValueList = welfareModalInputList
     .filter((input) => input.checked)
     .map((input) => input.value);
 
-const body = document.querySelector("body");
+// 국가 목록
+const nations = "가나,가봉,가이아나,감비아..."; // 전체 국가 목록
+const nationTags = nations
+    .split(",")
+    .map(
+        (nation) =>
+            `<li><a class="devNationSearchItem" style="cursor:pointer">${nation}</a></li>`,
+    )
+    .join("");
 
-let tempWelfareInputValues = {};
-let tempWelfareModalCodes = {};
-
-// 저장하기
-const submitButton = document.getElementById("devBtnSubmit");
-
-// 맨위로
-const toTheTop = document.getElementById("btnMtcTop");
-let tempScroll = 0;
-
-// 함수
-// input formatting
-const formatInputValue = (value, pattern) => {
-    let index = 0;
-
-    const result = pattern
-        .map((len) => {
-            const result = value.slice(index, index + len);
-            index += len;
-            return result;
-        })
-        .join("-");
-
-    return result || value;
-};
-
-// 주소 api
-const executeDaumPostcode = () => {
-    new daum.Postcode({
-        oncomplete: function (data) {
-            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-            let addr = ""; // 주소 변수
-            let extraAddr = ""; // 참고항목 변수
-
-            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-            if (data.userSelectedType === "R") {
-                // 사용자가 도로명 주소를 선택했을 경우
-                addr = data.roadAddress;
-            } else {
-                // 사용자가 지번 주소를 선택했을 경우(J)
-                addr = data.jibunAddress;
-            }
-
-            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-            if (data.userSelectedType === "R") {
-                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                if (data.bname !== "" && /[동|로|가]$/g.test(data.bname)) {
-                    extraAddr += data.bname;
-                }
-                // 건물명이 있고, 공동주택일 경우 추가한다.
-                if (data.buildingName !== "" && data.apartment === "Y") {
-                    extraAddr +=
-                        extraAddr !== ""
-                            ? ", " + data.buildingName
-                            : data.buildingName;
-                }
-                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                if (extraAddr !== "") {
-                    extraAddr = " (" + extraAddr + ")";
-                }
-                // 조합된 참고항목을 해당 필드에 넣는다.
-                document.getElementById("extraAddress").value = extraAddr;
-            } else {
-                document.getElementById("extraAddress").value = "";
-            }
-
-            // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            document.getElementById("postcode").value = data.zonecode;
-            document.getElementById("address").value = addr;
-            // 커서를 상세주소 필드로 이동한다.
-            document.getElementById("detailAddress").focus();
-        },
-    }).open();
-};
-
-// 업종 기본값 설정
-// function getIndustryInputInitialValue() {
-//     let result = [];
-
-//     for (let partList of industryPartLists) {
-//         const [partItem] = partList
-//             .querySelectorAll(".devPartItem")
-//             .filter(
-//                 (partItem) => partItem.dataset.part === industryInput.value,
-//             );
-//         if (partItem) {
-//             result.push(partItem);
-//             result.push(partList);
-//             break;
-//         }
-//     }
-//     const [category] = industryCategoryList
-//         .querySelectorAll(".devPartCtgr")
-//         .filter(
-//             (ctgr) =>
-//                 ctgr.dataset.partCtgrCode === result[1].dataset.partCtgrCode,
-//         );
-//     result.push(category);
-
-//     return result;
-// }
-// function setIndustrySelectClass() {
-//     if (industryInput.value) {
-//         const initialValue = getIndustryInputInitialValue();
-
-//         initialValue.forEach((value, index) => {
-//             value.classList.add(index === 1 ? "devOn" : "on");
-//         });
-//     }
-// }
-
-// 이벤트
-// input
+// 이벤트 핸들러 - 공통 Input
 companyBasicinputs
     .filter((input) => !input.closest(".addrMngWrap"))
     .forEach((input) => {
         const wrap = input.closest(".elWrap");
 
-        // value 가 있을 때
-        if (input.value) {
-            wrap.classList.add("ok");
-        }
+        // 초기값이 있으면 ok 클래스 추가
+        if (input.value) wrap.classList.add("ok");
 
-        // focus
+        // Focus 이벤트
         input.addEventListener("focus", (e) => {
+            // 숫자만 입력 가능한 필드는 하이픈 제거
             if (input.id === "devOpenDate" || input.id === "devFax") {
                 input.value = input.value.replace(/[^0-9]/g, "");
             }
 
+            // 자본금 필드 특수 처리
             if (input.classList.contains("devCapitalText")) {
+                document.getElementById("devCapitalUnitA").textContent = "억";
+                document.getElementById("devCapitalUnitB").textContent = "만원";
+                input.closest(".inpTxItem").classList.add("ok");
+                wrap.classList.add("on");
+
                 const capitalA = document.getElementById("devCapitalUnitA");
                 const capitalB = document.getElementById("devCapitalUnitB");
-
-                capitalA.textContent = "억";
-                capitalB.textContent = "만원";
-
-                input.closest(".inpTxItem").classList.add("ok");
-
-                wrap.classList.add("on");
                 if (
                     !capitalA.previousElementSibling.value &&
                     !capitalB.previousElementSibling.value
@@ -341,57 +168,41 @@ companyBasicinputs
                 wrap.classList.add("on");
             }
 
-            // 모달/드롭다운 닫기
+            // 다른 모달/드롭다운 닫기
             logoUploadLayout.classList.remove("on");
             industrySelectButton.closest(".elWrap").classList.remove("on");
             typeSelectButton.closest(".elWrap").classList.remove("on");
             addressSearchLayer.classList.remove("on");
 
-            // error 클래스 제거
+            // 에러 클래스 제거
             wrap.classList.remove("error");
         });
 
-        // blur
+        // Blur 이벤트 - 포맷 적용
         input.addEventListener("blur", (e) => {
-            // value format
             let pattern = [];
-            if (input.id === "devOpenDate") {
-                if (input.value.length === 6) {
-                    pattern = [4, 2];
-                } else if (input.value.length >= 8) {
-                    pattern = [4, 2, 2];
-                }
-            } else if (input.id === "devFax") {
-                switch (input.value.length) {
-                    case 8:
-                        pattern = [4, 4];
-                        break;
-                    case 9:
-                        pattern = [2, 3, 4];
-                        break;
-                    case 10:
-                        pattern = [3, 3, 4];
-                        break;
-                    case 11:
-                        pattern = [3, 4, 4];
-                        break;
-                    case 12:
-                    case 13:
-                    case 14:
-                    case 15:
-                        pattern = [4, 4, 4];
-                        break;
-                    default:
-                        break;
-                }
-            }
-            input.value = formatInputValue(input.value, pattern);
 
+            // 설립일 포맷 (YYYY-MM-DD)
+            if (input.id === "devOpenDate") {
+                if (input.value.length === 6) pattern = [4, 2];
+                else if (input.value.length >= 8) pattern = [4, 2, 2];
+            }
+            // 팩스번호 포맷
+            else if (input.id === "devFax") {
+                const len = input.value.length;
+                if (len === 8) pattern = [4, 4];
+                else if (len === 9) pattern = [2, 3, 4];
+                else if (len === 10) pattern = [3, 3, 4];
+                else if (len === 11) pattern = [3, 4, 4];
+                else if (len >= 12) pattern = [4, 4, 4];
+            }
+
+            input.value = formatInputValue(input.value, pattern);
             wrap.classList.remove("on");
-            input.value && wrap.classList.add("ok");
+            if (input.value) wrap.classList.add("ok");
         });
 
-        // keyup
+        // 숫자만 입력 가능한 필드
         if (
             [
                 "devOpenDate",
@@ -406,38 +217,41 @@ companyBasicinputs
             });
         }
 
-        // input
+        // Input 이벤트 - 글자수 표시
         input.addEventListener("input", (e) => {
+            // 국가 검색
             if (input.id === "devNation") {
                 if (!e.target.value) {
-                    nationSearchList.innerHTML += nationTags;
+                    nationSearchList.innerHTML = nationTags;
                     nationSearchContainer.style.display = "block";
                 } else {
                     nationSearchContainer.style.display = "none";
                 }
-            } else if (
+            }
+            // 글자수 제한 표시
+            else if (
                 input.id === "devMainItem" ||
                 input.id === "devAddrForeign"
             ) {
-                input.maxLength < input.value.length &&
-                    (input.value = input.value.slice(0, input.maxLength));
-
+                if (input.maxLength < input.value.length) {
+                    input.value = input.value.slice(0, input.maxLength);
+                }
                 input.closest(".schInpType").querySelector("em").textContent =
                     input.value.length;
             }
         });
     });
-//      외국계 기업 리스트
+
+// 국가 선택
 nationSearchList.addEventListener("click", (e) => {
     if (e.target.tagName === "A") {
         nationInput.value = e.target.textContent;
-
         nationSearchContainer.closest(".elWrap").classList.add("ok");
         nationSearchContainer.style.display = "none";
     }
 });
 
-// textarea
+// 이벤트 핸들러 - Textarea
 textareas.forEach((textarea) => {
     textarea.addEventListener("focus", (e) => {
         // 모달/드롭다운 닫기
@@ -448,289 +262,19 @@ textareas.forEach((textarea) => {
     });
 });
 
-//      닫기
-logoUploadCloseButton.addEventListener("click", (e) => {
-    logoUploadLayout.classList.remove("on");
-});
-logoDeleteCloseButton.addEventListener("click", (e) => {
-    logoUploadLayout.classList.remove("on");
-});
-
-//      열기
-logoUploadLayout.addEventListener("click", (e) => {
-    selectLogoInput.value = "";
-
-    if (
-        e.target.closest(".infoBtnB.infoBtnUp") ||
-        e.target.classList.contains("infoBtnMod")
-    ) {
-        selectLogoLabel.textContent = "로고 선택";
-        logoImage = "";
-
-        logoDeleteModal.classList.remove("on");
-        logoUploadModal.classList.add("on");
-    } else if (e.target.classList.contains("infoBtnDel")) {
-        logoUploadModal.classList.remove("on");
-        logoDeleteModal.classList.add("on");
-    } else {
-        return;
-    }
-
-    logoUploadLayout.classList.add("on");
-
-    typeSelectButton.closest(".elWrap").classList.remove("on");
-});
-
-//      로고 선택
-selectLogoInput.addEventListener("change", (e) => {
-    const [file] = e.target.files;
-    const reader = new FileReader();
-
-    reader.readAsDataURL(file);
-
-    reader.addEventListener("load", (e) => {
-        logoImage = e.target.result;
-
-        const check = ["gif", "jpeg", "jpg", "png"].some((extension) =>
-            logoImage.includes(extension),
-        );
-
-        if (!check) {
-            logoImage = "";
-            selectLogoLabel.textContent = "";
-            selectLogoInput.value = "";
-
-            alert("파일 형식이 올바르지 않습니다.");
-            return;
-        }
-        selectLogoLabel.textContent = file.name;
-    });
-});
-
-//      로고 업로드
-logoUploadSubmitButton.addEventListener("click", (e) => {
-    if (logoImage) {
-        const logoP = document.createElement("p");
-        const buttonP = document.createElement("p");
-
-        logoP.classList.add("logo");
-        logoP.innerHTML = `<img src="${logoImage}">`;
-
-        buttonP.classList.add("btn");
-        buttonP.innerHTML = `
-        <button type="button" class="infoBtn infoBtnDel" id="devLogoDel"></button>
-        <button type="button" class="infoBtn infoBtnMod" id="devLogoModify"></button>
-        `;
-
-        logoContainer.firstElementChild.remove();
-        logoContainer.prepend(buttonP);
-        logoContainer.prepend(logoP);
-
-        logoUploadLayout.classList.remove("on");
-
-        alert("업로드 되었습니다.");
-    } else {
-        alert("로고를 선택해 주십시오.");
-    }
-});
-
-//      로고 삭제
-logoDeleteButton.addEventListener("click", (e) => {
-    const logoButton = document.createElement("button");
-    logoButton.classList.add("infoBtnB", "infoBtnUp");
-    logoButton.id = "devLogoUp";
-    logoButton.type = "button";
-    logoButton.innerHTML = "<span>로고업로드</span>";
-
-    logoContainer.querySelector(".logo").remove();
-    logoContainer.querySelector(".btn").remove();
-
-    logoContainer.prepend(logoButton);
-
-    logoUploadLayout.classList.remove("on");
-});
-
-// 기업형태
-typeSelectButton.addEventListener("click", (e) => {
-    const wrap = typeSelectButton.closest(".elWrap");
-    wrap.classList.toggle("on");
-
-    wrap.classList.remove("error");
-});
-typeSelectList.addEventListener("click", (e) => {
-    if (e.target.tagName === "BUTTON") {
-        tempTypeSelectButton &&
-            tempTypeSelectButton
-                .closest(".devCoTypeItem")
-                .classList.remove("on");
-
-        e.target.closest(".devCoTypeItem").classList.add("on");
-        typeSelectButton.closest(".elWrap").classList.add("ok");
-
-        companyTypeResultSpan.textContent = e.target.textContent;
-        companyTypeInput.value =
-            e.target.closest(".devCoTypeItem").dataset.type;
-
-        tempTypeSelectButton = e.target;
-
-        if (["6", "8", "10"].includes(companyTypeInput.value)) {
-            nationLayer.style.display = "table";
-
-            // 회사 주소
-            addressLayer.style.display = "none";
-            foreignAddressLayer.style.display = "block";
-        } else {
-            nationLayer.style.display = "none";
-
-            // 회사 주소
-            foreignAddressLayer.style.display = "none";
-            addressLayer.style.display = "block";
-        }
-        typeSelectButton.closest(".elWrap").classList.remove("on");
-    }
-});
-
-// 업종
-industrySelectButton.addEventListener("click", (e) => {
-    const wrap = industrySelectButton.closest(".elWrap");
-
-    wrap.classList.toggle("on");
-
-    wrap.classList.remove("error");
-});
-industryCategoryList.addEventListener("click", (e) => {
-    if (e.target.tagName === "BUTTON") {
-        tempIndustryType &&
-            tempIndustryType.closest(".devPartCtgr").classList.remove("on");
-
-        tempIndustryPartList && (tempIndustryPartList.style.display = "none");
-
-        const [target] = industryPartLists.filter(
-            (partList) =>
-                partList.dataset.partCtgrCode ===
-                e.target.closest(".devPartCtgr").dataset.partCtgrCode,
-        );
-
-        target.style.display = "block";
-        tempIndustryPartList = target;
-
-        e.target.closest(".devPartCtgr").classList.add("on");
-        tempIndustryType = e.target;
-    }
-});
-industryPartLists.forEach((partList) => {
-    partList.addEventListener("click", (e) => {
-        if (e.target.tagName === "BUTTON") {
-            tempIndustryPartItem &&
-                tempIndustryPartItem
-                    .closest(".devPartItem")
-                    .classList.remove("on");
-
-            e.target.closest(".devPartItem").classList.add("on");
-            industryInput.value = e.target.closest(".devPartItem").dataset.part;
-            tempIndustryPartItem = e.target;
-        }
-    });
-});
-industryApplyButtons.addEventListener("click", (e) => {
-    if (e.target.closest(".mtcBtnBd, .mtcBtnBg")) {
-        if (e.target.closest(".mtcBtnBg")) {
-            if (industryInput.value) {
-                tempIndustryPartItemValue = tempIndustryPartItem.textContent;
-                industryResultSpan.textContent = tempIndustryPartItemValue;
-            }
-
-            if (tempIndustryPartItem) {
-                industryInput.value =
-                    tempIndustryPartItem.closest(".devPartItem").dataset.part;
-                if (industryInput.value) {
-                    industryResultSpan.textContent = tempIndustryPartItemValue;
-                    industryResultSpan.closest(".elWrap").classList.add("ok");
-                }
-            }
-        }
-    } else {
-        return;
-    }
-    industrySelectButton.closest(".elWrap").classList.remove("on");
-});
-
-// 회사주소
-addressSearchButton.addEventListener("click", (e) => {
-    const wrap = addressSearchButton.closest(".elWrap");
-    wrap.classList.remove("error");
-
-    addressInputs.forEach((input, index) => {
-        if (index === 0 || index === 1) {
-            input.style.border = previousAddressInputStyle;
-        }
-        input.value = "";
-    });
-
-    addressSearchLayer.classList.add("on");
-});
-//      닫기
-addressLayerCloseButton.addEventListener("click", (e) => {
-    addressSearchLayer.classList.remove("on");
-});
-//      우편번호 찾기
-addressSearchPostCodeButton.addEventListener("click", (e) => {
-    addressInputs
-        .filter((input) => input.placeholder.includes("*"))
-        .forEach((input) => {
-            input.style.border = previousAddressInputStyle;
-        });
-    executeDaumPostcode();
-});
-//      확인/취소
-addressResultButtons.addEventListener("click", (e) => {
-    if (e.target.closest("button")) {
-        if (!e.target.closest(".devCloseAddr")) {
-            if (addressInputs[0].value && addressInputs[1].value) {
-                addressResultSpan.textContent = addressInputs
-                    .filter((input) => input.value.replace(/\s/g, "") !== "")
-                    .map((input) => input.value)
-                    .join(" ");
-                addressLayer.classList.add("ok");
-
-                addressSearchLayer.classList.remove("on");
-            } else {
-                addressInputs
-                    .filter((input) => input.placeholder.includes("*"))
-                    .forEach((input) => {
-                        input.style.border = input.value
-                            ? previousAddressInputStyle
-                            : "1px solid #ff3333";
-                    });
-                alert("주소를 입력해 주십시오.");
-            }
-        } else {
-            addressSearchLayer.classList.remove("on");
-        }
-    }
-});
-addressInputs
-    .filter((input) => input.placeholder.includes("*"))
-    .forEach((input, index) => {
-        input.addEventListener("input", (e) => {
-            index === 0 &&
-                (e.target.value = e.target.value.replace(/[^0-9]/g, ""));
-            input.style.border = input.value
-                ? previousAddressInputStyle
-                : "1px solid #ff3333";
-        });
-    });
-
-// 연혁 및 실적
+// 연혁 및 실적 placeholder 처리
 historyTextareaLayer.addEventListener("click", (e) => {
     historyTextareaLayer.lastElementChild.focus();
     historyTextareaLayer.firstElementChild.style.display = "none";
 });
-// 기업개요 및 비전
+
+// 기업개요 및 비전 placeholder 처리
 overviewTextareaLayer.addEventListener("click", (e) => {
     overviewTextareaLayer.lastElementChild.focus();
     overviewTextareaLayer.firstElementChild.style.display = "none";
 });
+
+// 전역 클릭 이벤트 - placeholder 복구
 document.addEventListener("click", (e) => {
     if (
         !e.target.closest(".artCoHistory .mtcTxaType") &&
@@ -738,7 +282,6 @@ document.addEventListener("click", (e) => {
     ) {
         historyTextareaLayer.firstElementChild.style.display = "block";
     }
-
     if (
         !e.target.closest(".artCoOverview .mtcTxaType") &&
         !overviewTextareaLayer.lastElementChild.value
@@ -747,305 +290,440 @@ document.addEventListener("click", (e) => {
     }
 });
 
-// 사진 업로드
-photoUploadButton.addEventListener("click", (e) => {
-    if (e.target.closest(".button-photo-upload")) {
-        if (photoList.children.length === 15) {
-            alert("사진은 최대 15개 까지 업로드 할 수 있습니다.");
-            return;
-        }
-        photoSelectInput.value = "";
-        photoDescriptionTextarea.value = "";
+// 이벤트 핸들러 - 로고 업로드
+// 로고 업로드 모달 열기/닫기
+logoUploadCloseButton.addEventListener("click", () =>
+    logoUploadLayout.classList.remove("on"),
+);
+logoDeleteCloseButton.addEventListener("click", () =>
+    logoUploadLayout.classList.remove("on"),
+);
 
-        photoDescriptionTextarea
-            .closest(".txaBx")
-            .querySelector("em").textContent = 0;
-
-        fileNameSpan.textContent = tempFileName;
-        photoImage = "";
-
-        photoUploadLayer.classList.add("on");
+logoUploadLayout.addEventListener("click", (e) => {
+    if (
+        e.target.closest(".infoBtnB.infoBtnUp") ||
+        e.target.classList.contains("infoBtnMod")
+    ) {
+        // 업로드 모달
+        selectLogoInput.value = "";
+        selectLogoLabel.textContent = "로고 선택";
+        logoImage = "";
+        logoDeleteModal.classList.remove("on");
+        logoUploadModal.classList.add("on");
+    } else if (e.target.classList.contains("infoBtnDel")) {
+        // 삭제 모달
+        logoUploadModal.classList.remove("on");
+        logoDeleteModal.classList.add("on");
+    } else {
+        return;
     }
+
+    logoUploadLayout.classList.add("on");
+    typeSelectButton.closest(".elWrap").classList.remove("on");
 });
 
-photoUploadCloseButton.addEventListener("click", (e) => {
-    photoUploadLayer.classList.remove("on");
-});
-photoDelegatorButton.addEventListener("click", (e) => {
-    if (e.target.closest("label")) {
-        photoSelectInput.click();
-    }
-});
-photoSelectInput.addEventListener("change", (e) => {
+// 로고 파일 선택
+selectLogoInput.addEventListener("change", (e) => {
     const [file] = e.target.files;
     const reader = new FileReader();
 
     reader.readAsDataURL(file);
-
     reader.addEventListener("load", (e) => {
-        photoImage = e.target.result;
+        logoImage = e.target.result;
 
-        const check = ["gif", "jpeg", "jpg"].some((extension) =>
-            photoImage.includes(extension),
-        );
+        // 파일 형식 검사
+        const validExtensions = ["gif", "jpeg", "jpg", "png"];
+        const isValid = validExtensions.some((ext) => logoImage.includes(ext));
 
-        if (!check) {
-            photoImage = "";
-            fileNameSpan.textContent = "";
-            photoSelectInput.value = "";
-
+        if (!isValid) {
+            logoImage = "";
+            selectLogoLabel.textContent = "";
+            selectLogoInput.value = "";
             alert("파일 형식이 올바르지 않습니다.");
             return;
         }
-        fileNameSpan.textContent = file.name;
+
+        selectLogoLabel.textContent = file.name;
     });
 });
-photoDescriptionTextarea.addEventListener("input", (e) => {
-    e.target.maxLength < e.target.value.length &&
-        (e.target.value = e.target.value.slice(0, e.target.maxLength));
 
-    e.target.closest(".txaBx").querySelector("em").textContent =
-        e.target.value.length;
+// 로고 업로드 실행
+logoUploadSubmitButton.addEventListener("click", () => {
+    if (!logoImage) {
+        alert("로고를 선택해 주십시오.");
+        return;
+    }
+
+    // 로고 이미지 및 버튼 생성
+    const logoP = document.createElement("p");
+    const buttonP = document.createElement("p");
+
+    logoP.classList.add("logo");
+    logoP.innerHTML = `<img src="${logoImage}">`;
+
+    buttonP.classList.add("btn");
+    buttonP.innerHTML = `
+        <button type="button" class="infoBtn infoBtnDel" id="devLogoDel"></button>
+        <button type="button" class="infoBtn infoBtnMod" id="devLogoModify"></button>
+    `;
+
+    logoContainer.firstElementChild.remove();
+    logoContainer.prepend(buttonP);
+    logoContainer.prepend(logoP);
+    logoUploadLayout.classList.remove("on");
+
+    alert("업로드 되었습니다.");
 });
-photoResultButtons.addEventListener("click", (e) => {
-    if (e.target.closest(".devClosePhotoLive")) {
-        photoUploadLayer.classList.remove("on");
-    } else {
-        if (photoImage) {
-            // 설명 p
-            // 사진 li
-            const photoItem = document.createElement("li");
 
-            if (photoList.previousElementSibling.tagName !== "P") {
-                const description = document.createElement("p");
-                description.classList.add("upload-text-guide");
-                description.innerHTML =
-                    "사진을 끌어다 순서를 변경하거나, 대표 사진으로 옮겨 놓을 수 있습니다.";
-                photoList.before(description);
+// 로고 삭제
+logoDeleteButton.addEventListener("click", () => {
+    const logoButton = document.createElement("button");
+    logoButton.classList.add("infoBtnB", "infoBtnUp");
+    logoButton.id = "devLogoUp";
+    logoButton.type = "button";
+    logoButton.innerHTML = "<span>로고업로드</span>";
+
+    logoContainer.querySelector(".logo").remove();
+    logoContainer.querySelector(".btn").remove();
+    logoContainer.prepend(logoButton);
+    logoUploadLayout.classList.remove("on");
+});
+
+// 이벤트 핸들러 - 기업형태
+typeSelectButton.addEventListener("click", () => {
+    const wrap = typeSelectButton.closest(".elWrap");
+    wrap.classList.toggle("on");
+    wrap.classList.remove("error");
+});
+
+typeSelectList.addEventListener("click", (e) => {
+    if (e.target.tagName !== "BUTTON") return;
+
+    // 이전 선택 해제
+    if (tempTypeSelectButton) {
+        tempTypeSelectButton.closest(".devCoTypeItem").classList.remove("on");
+    }
+
+    // 새로운 선택 적용
+    e.target.closest(".devCoTypeItem").classList.add("on");
+    typeSelectButton.closest(".elWrap").classList.add("ok");
+
+    companyTypeResultSpan.textContent = e.target.textContent;
+    companyTypeInput.value = e.target.closest(".devCoTypeItem").dataset.type;
+    tempTypeSelectButton = e.target;
+
+    // 외국계 기업 여부에 따라 입력 필드 변경
+    const isForeign = ["6", "8", "10"].includes(companyTypeInput.value);
+    nationLayer.style.display = isForeign ? "table" : "none";
+    addressLayer.style.display = isForeign ? "none" : "block";
+    foreignAddressLayer.style.display = isForeign ? "block" : "none";
+
+    typeSelectButton.closest(".elWrap").classList.remove("on");
+});
+
+// 이벤트 핸들러 - 업종
+industrySelectButton.addEventListener("click", () => {
+    const wrap = industrySelectButton.closest(".elWrap");
+    wrap.classList.toggle("on");
+    wrap.classList.remove("error");
+});
+
+// 업종 카테고리 선택
+industryCategoryList.addEventListener("click", (e) => {
+    if (e.target.tagName !== "BUTTON") return;
+
+    // 이전 선택 해제
+    if (tempIndustryType) {
+        tempIndustryType.closest(".devPartCtgr").classList.remove("on");
+    }
+    if (tempIndustryPartList) {
+        tempIndustryPartList.style.display = "none";
+    }
+
+    // 새로운 카테고리의 세부 항목 표시
+    const targetList = Array.from(industryPartLists).find(
+        (list) =>
+            list.dataset.partCtgrCode ===
+            e.target.closest(".devPartCtgr").dataset.partCtgrCode,
+    );
+
+    if (targetList) {
+        targetList.style.display = "block";
+        tempIndustryPartList = targetList;
+    }
+
+    e.target.closest(".devPartCtgr").classList.add("on");
+    tempIndustryType = e.target;
+});
+
+// 업종 세부 항목 선택
+industryPartLists.forEach((partList) => {
+    partList.addEventListener("click", (e) => {
+        if (e.target.tagName !== "BUTTON") return;
+
+        // 이전 선택 해제
+        if (tempIndustryPartItem) {
+            tempIndustryPartItem.closest(".devPartItem").classList.remove("on");
+        }
+
+        // 새로운 선택 적용
+        e.target.closest(".devPartItem").classList.add("on");
+        industryInput.value = e.target.closest(".devPartItem").dataset.part;
+        tempIndustryPartItem = e.target;
+    });
+});
+
+// 업종 선택 확인/취소
+industryApplyButtons.addEventListener("click", (e) => {
+    if (e.target.closest(".mtcBtnBg")) {
+        // 확인 버튼
+        if (tempIndustryPartItem) {
+            industryInput.value =
+                tempIndustryPartItem.closest(".devPartItem").dataset.part;
+            if (industryInput.value) {
+                tempIndustryPartItemValue = tempIndustryPartItem.textContent;
+                industryResultSpan.textContent = tempIndustryPartItemValue;
+                industryResultSpan.closest(".elWrap").classList.add("ok");
+            }
+        }
+    }
+
+    industrySelectButton.closest(".elWrap").classList.remove("on");
+});
+
+// 이벤트 핸들러 - 주소 검색
+// 주소 검색 열기
+addressSearchButton.addEventListener("click", () => {
+    addressSearchButton.closest(".elWrap").classList.remove("error");
+
+    // input 초기화
+    addressInputs.forEach((input, index) => {
+        if (index === 0 || index === 1) {
+            input.style.border = "1px solid #ddd";
+        }
+        input.value = "";
+    });
+
+    addressSearchLayer.classList.add("on");
+});
+
+// 주소 검색 닫기
+addressLayerCloseButton.addEventListener("click", () => {
+    addressSearchLayer.classList.remove("on");
+});
+
+// Daum 우편번호 API
+const executeDaumPostcode = () => {
+    new daum.Postcode({
+        oncomplete: function (data) {
+            let addr = "";
+            let extraAddr = "";
+
+            // 도로명/지번 주소 선택에 따라 분기
+            if (data.userSelectedType === "R") {
+                addr = data.roadAddress;
+
+                // 참고항목 조합
+                if (data.bname !== "" && /[동|로|가]$/g.test(data.bname)) {
+                    extraAddr += data.bname;
+                }
+                if (data.buildingName !== "" && data.apartment === "Y") {
+                    extraAddr +=
+                        (extraAddr !== "" ? ", " : "") + data.buildingName;
+                }
+                if (extraAddr !== "") {
+                    extraAddr = " (" + extraAddr + ")";
+                }
+                document.getElementById("extraAddress").value = extraAddr;
+            } else {
+                addr = data.jibunAddress;
+                document.getElementById("extraAddress").value = "";
             }
 
-            photoItem.classList.add("thumbnail");
-            photoItem.innerHTML = `
-                <div class="thumb ok">
-                    <img src="${photoImage}">
-                    <span class="btnFunc">
-                        <button type="button" class="mtcBtn mtcBtnDel_1 devDeletePhoto"></button>
-                    </span>
-                </div>
-                <div class="text-box ${photoDescriptionTextarea.value && "has-value"}">
-                    <fieldset>
-                        <textarea name="photoVideoText" maxlength="25" title="사진/동영상 설명 입력" placeholder="클릭하여 설명을 입력하세요.">${photoDescriptionTextarea.value}</textarea>
-                    </fieldset>
-                </div>
-            `;
+            // 우편번호와 주소 정보 입력
+            document.getElementById("postcode").value = data.zonecode;
+            document.getElementById("address").value = addr;
+            document.getElementById("detailAddress").focus();
+        },
+    }).open();
+};
 
-            photoList.appendChild(photoItem);
+// 우편번호 찾기 버튼
+addressSearchPostCodeButton.addEventListener("click", () => {
+    addressInputs
+        .filter((input) => input.placeholder.includes("*"))
+        .forEach((input) => {
+            input.style.border = "1px solid #ddd";
+        });
+    executeDaumPostcode();
+});
 
-            photoUploadLayer.classList.remove("on");
+// 주소 확인/취소 버튼
+document.querySelector(".popAddr .popFunc").addEventListener("click", (e) => {
+    if (!e.target.closest("button")) return;
+
+    if (!e.target.closest(".devCloseAddr")) {
+        // 확인 버튼
+        if (addressInputs[0].value && addressInputs[1].value) {
+            addressResultSpan.textContent = Array.from(addressInputs)
+                .filter((input) => input.value.trim() !== "")
+                .map((input) => input.value)
+                .join(" ");
+            addressLayer.classList.add("ok");
+            addressSearchLayer.classList.remove("on");
         } else {
-            alert("이미지 주소가 입력되지 않았습니다.");
+            addressInputs
+                .filter((input) => input.placeholder.includes("*"))
+                .forEach((input) => {
+                    input.style.border = input.value
+                        ? "1px solid #ddd"
+                        : "1px solid #ff3333";
+                });
+            alert("주소를 입력해 주십시오.");
         }
+    } else {
+        // 취소 버튼
+        addressSearchLayer.classList.remove("on");
     }
 });
 
-photoList.addEventListener("focusin", (e) => {
-    if (e.target.tagName === "TEXTAREA") {
-        e.target.closest(".text-box").classList.add("focus");
-    }
-});
-photoList.addEventListener("focusout", (e) => {
-    if (e.target.tagName === "TEXTAREA") {
-        e.target.closest(".text-box").classList.remove("focus");
-    }
-});
-photoList.addEventListener("input", (e) => {
-    if (e.target.tagName === "TEXTAREA") {
-        if (e.target.value) {
-            e.target.closest(".text-box").classList.add("has-value");
-        } else {
-            e.target.closest(".text-box").classList.remove("has-value");
-        }
-    }
-});
-photoList.addEventListener("click", (e) => {
-    if (e.target.tagName === "BUTTON") {
-        confirm("해당 사진을 삭제하시겠습니까?") &&
-            e.target.closest(".thumbnail").remove();
+// 주소 입력 시 유효성 표시
+addressInputs
+    .filter((input) => input.placeholder.includes("*"))
+    .forEach((input, index) => {
+        input.addEventListener("input", (e) => {
+            if (index === 0) {
+                e.target.value = e.target.value.replace(/[^0-9]/g, "");
+            }
+            input.style.border = input.value
+                ? "1px solid #ddd"
+                : "1px solid #ff3333";
+        });
+    });
 
-        photoList.children.length || photoList.previousElementSibling.remove();
-    }
-});
-
-// 복리후생
-//      추천버튼
+// 이벤트 핸들러 - 복리후생
+// 추천 복리후생 선택
 recommendWelfareButtons.addEventListener("click", (e) => {
-    if (e.target.tagName === "BUTTON") {
-        // welfareList button 리스트
-        const welfareButtonList = welfareList
-            .querySelectorAll("li")
-            .map((li) => li.firstElementChild);
-        // 밖에서 선언하면 리스트에 동적으로 생성된 요소는 가져올 수 없음
+    if (e.target.tagName !== "BUTTON") return;
 
-        // 이미 선택한 복리후생이 있는지 검사
-        const [duplication] = welfareButtonList.filter(
-            (button) => button.dataset.itemCode === e.target.dataset.itemCode,
-        );
+    // 중복 검사
+    const welfareButtonList = Array.from(
+        welfareList.querySelectorAll("li"),
+    ).map((li) => li.firstElementChild);
+    const isDuplicate = welfareButtonList.some(
+        (btn) => btn.dataset.itemCode === e.target.dataset.itemCode,
+    );
 
-        if (duplication) {
-            // 이미 선택했다면 alert창
-            alert("이미 선택하신 복리후생입니다.");
-        } else {
-            // 복리후생 리스트에 추가
-            const welfareItem = document.createElement("li");
-            welfareItem.innerHTML = `
-                    <button type="button" class="devItemDel" data-item-code="${e.target.dataset.itemCode}">${e.target.textContent}</button>
-                `;
-            welfareList.appendChild(welfareItem);
+    if (isDuplicate) {
+        alert("이미 선택하신 복리후생입니다.");
+        return;
+    }
 
-            // 설명글 보이지 않게
-            welfareList.previousElementSibling.style.display = "none";
+    // 복리후생 항목 추가
+    const welfareItem = document.createElement("li");
+    welfareItem.innerHTML = `
+        <button type="button" class="devItemDel" data-item-code="${e.target.dataset.itemCode}">
+            ${e.target.textContent}
+        </button>
+    `;
+    welfareList.appendChild(welfareItem);
+    welfareList.previousElementSibling.style.display = "none";
 
-            // 모달 input check로 바꾸기
-            const [targetInput] = welfareModalInputList.filter(
-                (input) => input.value === e.target.dataset.itemCode,
-            );
-
-            targetInput.closest("span").classList.add("chk");
-            targetInput.checked = true;
-            tempWelfareInputValues[targetInput.value] = e.target.textContent;
-        }
+    // 모달 input 체크 처리
+    const targetInput = welfareModalInputList.find(
+        (input) => input.value === e.target.dataset.itemCode,
+    );
+    if (targetInput) {
+        targetInput.closest("span").classList.add("chk");
+        targetInput.checked = true;
+        tempWelfareInputValues[targetInput.value] = e.target.textContent;
     }
 });
+
+// 복리후생 항목 삭제
 welfareList.addEventListener("click", (e) => {
-    if (e.target.tagName === "BUTTON") {
-        // welfareList button 리스트
-        const welfareButtonList = welfareList
-            .querySelectorAll("li")
-            .map((li) => li.firstElementChild);
+    if (e.target.tagName !== "BUTTON") return;
 
-        // 삭제 타겟
-        const [targetButton] = welfareButtonList.filter(
-            (button) => button.dataset.itemCode === e.target.dataset.itemCode,
-        );
+    // 항목 삭제
+    e.target.closest("li").remove();
 
-        // 리스트에서 삭제
-        targetButton.closest("li").remove();
+    // 모달 input 체크 해제
+    const targetInput = welfareModalInputList.find(
+        (input) => input.value === e.target.dataset.itemCode,
+    );
+    if (targetInput && e.target.dataset.itemCode.length !== 6) {
+        targetInput.closest("span").classList.remove("chk");
+        targetInput.checked = false;
+    }
+    delete tempWelfareInputValues[e.target.dataset.itemCode];
 
-        // 모달 input check를 false로 바꾸기
-        const [targetInput] = welfareModalInputList.filter(
-            (input) => input.value === e.target.dataset.itemCode,
-        );
-
-        // 클래스 제거, check 비활성화
-        if (e.target.dataset.itemCode.length !== 6) {
-            targetInput.closest("span").classList.remove("chk");
-            targetInput.checked = false;
-        }
-        delete tempWelfareInputValues[e.target.dataset.itemCode];
-
-        // 리스트에 아무것도 없다면 설명글 보여주기
-        if (!welfareList.querySelectorAll("li").length) {
-            welfareList.previousElementSibling.style.display = "block";
-        }
+    // 리스트가 비었으면 안내 문구 표시
+    if (!welfareList.querySelectorAll("li").length) {
+        welfareList.previousElementSibling.style.display = "block";
     }
 });
-//      전체보기
-moreWelfareInfoButton.addEventListener("click", (e) => {
-    tempWelfareModalCodes = { ...tempWelfareInputValues };
-    // check인 input을 previewWelfareList에 추가하기
 
-    // 추천으로 추가한 복리후생 항목이 0개라면
-    // 기존 checked input에 클래스 추가/checked를 true로
+// 복리후생 전체보기 모달 열기
+moreWelfareInfoButton.addEventListener("click", () => {
+    tempWelfareModalCodes = { ...tempWelfareInputValues };
+
+    // 기본 체크박스 처리
     const isEmpty = !Object.keys(tempWelfareInputValues).length;
 
-    welfareModalInputList
-        .filter((input) =>
-            welfareModalBasicInputValueList.includes(input.value),
-        )
-        .forEach((input) => {
-            if (isEmpty) {
-                input.checked = true;
-                input.closest("span").classList.add("chk");
-                tempWelfareModalCodes[input.value] =
-                    input.nextElementSibling.textContent;
-            } else {
-                input.checked = false;
-                input.closest("span").classList.remove("chk");
-            }
-        });
-
-    // 추가해야 할 항목 처리
-    if (!isEmpty) {
+    if (isEmpty) {
+        // 비어있으면 기본값으로 설정
         welfareModalInputList
             .filter((input) =>
-                Object.keys(tempWelfareInputValues).includes(input.value),
+                welfareModalBasicInputValueList.includes(input.value),
             )
             .forEach((input) => {
                 input.checked = true;
                 input.closest("span").classList.add("chk");
+                tempWelfareModalCodes[input.value] =
+                    input.nextElementSibling.textContent;
             });
+    } else {
+        // 선택된 항목만 체크
+        welfareModalInputList.forEach((input) => {
+            const isSelected = Object.keys(tempWelfareInputValues).includes(
+                input.value,
+            );
+            input.checked = isSelected;
+            input
+                .closest("span")
+                .classList[isSelected ? "add" : "remove"]("chk");
+        });
     }
 
-    // 모달 리스트 비우기
+    // 미리보기 리스트 생성
     previewWelfareList.innerHTML = "";
-    welfareList.innerHTML = "";
-    // 비우지 않으면 이전 값들 누적됨
-
-    // 모달 리스트에 값 넣기
-    // welfareModalInputList
-    //     .filter((input) => input.checked)
-    //     .forEach((input) => {
-    //         const previewWelfareItem = document.createElement("li");
-    //         previewWelfareItem.classList.add("subItem");
-    //         previewWelfareItem.innerHTML = `
-    //                     <span class="inr">
-    //                         <span class="devItemText">${input.nextElementSibling.textContent}</span>
-    //                         <button type="button" class="spRegA btnItemDel" data-item-code="${input.value}"></button>
-    //                     </span>
-    //                 `;
-
-    //         previewWelfareList.appendChild(previewWelfareItem);
-    //         tempWelfareModalCodes[input.value] =
-    //             input.nextElementSibling.textContent;
-    //     });
-
     Object.entries(
         isEmpty ? tempWelfareModalCodes : tempWelfareInputValues,
     ).forEach(([key, value]) => {
-        const previewWelfareItem = document.createElement("li");
-        previewWelfareItem.classList.add("subItem");
-        previewWelfareItem.innerHTML = `
-                        <span class="inr">
-                            <span class="devItemText">${value}</span>
-                            <button type="button" class="spRegA btnItemDel" data-item-code="${key}"></button>
-                        </span>
-                    `;
-
-        previewWelfareList.appendChild(previewWelfareItem);
-        tempWelfareModalCodes[key] = value;
+        const item = document.createElement("li");
+        item.classList.add("subItem");
+        item.innerHTML = `
+            <span class="inr">
+                <span class="devItemText">${value}</span>
+                <button type="button" class="spRegA btnItemDel" data-item-code="${key}"></button>
+            </span>
+        `;
+        previewWelfareList.appendChild(item);
     });
 
-    welfareList.previousElementSibling.style.display = "none";
-
-    // 모달 리스트 열기
     previewWelfareList.style.display = "block";
 
-    // 모달창 열기
+    // 모달 표시 및 스크롤 고정
     tempScroll = window.scrollY;
-    body.style.height = "100%";
-    body.style.position = "fixed";
-    body.style.top = `-${tempScroll}px`;
+    body.style.cssText = `width: 100%; height: 100%; position: fixed; top: -${tempScroll}px;`;
 
     moreWelfareInfoButton.classList.add("isCheckButton");
-    welfareModalLayer.style.display = "block";
-    welfareModalLayer.style.opacity = 1;
+    welfareModalLayer.style.cssText = "display: block; opacity: 1;";
 });
 
-welfareModalCloseButton.addEventListener("click", (e) => {
-    // 모달 리스트 비우기
-    previewWelfareList.innerHTML = "";
-    welfareList.innerHTML = "";
-
+// 복리후생 모달 닫기
+welfareModalCloseButton.addEventListener("click", () => {
+    // 변경사항 취소
     if (
         Object.keys(tempWelfareModalCodes).length !==
         Object.keys(tempWelfareInputValues).length
@@ -1059,218 +737,190 @@ welfareModalCloseButton.addEventListener("click", (e) => {
                 input.checked = false;
                 input.closest("span").classList.remove("chk");
             });
-
         tempWelfareModalCodes = { ...tempWelfareInputValues };
     }
-    // 모달창 닫기
+
+    // 리스트 재생성
+    welfareList.innerHTML = "";
     Object.entries(tempWelfareInputValues).forEach(([key, value]) => {
-        // 복리후생 리스트에 추가
-        const welfareItem = document.createElement("li");
-        welfareItem.innerHTML = `
-            <button type="button" class="devItemDel" data-item-code="${key}">${value}</button>
-            `;
-        welfareList.appendChild(welfareItem);
-
-        // const [targetInput] = welfareModalInputList.filter(
-        //     (input) => input.value === key,
-        // );
-
-        // targetInput.closest("span").classList.add("chk");
-        // targetInput.checked = true;
-        // tempWelfareInputValues[targetInput.value] = e.target.textContent;
+        const item = document.createElement("li");
+        item.innerHTML = `<button type="button" class="devItemDel" data-item-code="${key}">${value}</button>`;
+        welfareList.appendChild(item);
     });
 
-    welfareList.previousElementSibling.style.display = "none";
+    if (welfareList.querySelectorAll("li").length) {
+        welfareList.previousElementSibling.style.display = "none";
+    } else {
+        welfareList.previousElementSibling.style.display = "block";
+    }
 
-    body.style.height = "";
-    body.style.position = "";
-    body.style.top = "";
+    // 모달 닫기 및 스크롤 복원
+    body.style.cssText = "";
     window.scrollTo(0, tempScroll);
 
     moreWelfareInfoButton.classList.remove("isCheckButton");
-    welfareModalLayer.style.display = "none";
-    welfareModalLayer.style.opacity = 0;
+    welfareModalLayer.style.cssText = "display: none; opacity: 0;";
+});
 
-    if (!welfareList.querySelectorAll("li").length) {
+// 복리후생 모달 확인/취소
+welfareModalResultButtons.addEventListener("click", (e) => {
+    if (e.target.tagName !== "BUTTON") return;
+
+    // 확인 버튼이면 변경사항 적용
+    if (e.target.classList.contains("btnOk")) {
+        tempWelfareInputValues = { ...tempWelfareModalCodes };
+    } else {
+        // 취소 버튼이면 변경사항 되돌리기
+        welfareModalInputList
+            .filter(
+                (input) =>
+                    !Object.keys(tempWelfareInputValues).includes(input.value),
+            )
+            .forEach((input) => {
+                input.checked = false;
+                input.closest("span").classList.remove("chk");
+            });
+        tempWelfareModalCodes = { ...tempWelfareInputValues };
+    }
+
+    // 리스트 재생성
+    welfareList.innerHTML = "";
+    Object.entries(tempWelfareModalCodes).forEach(([key, value]) => {
+        const item = document.createElement("li");
+        item.innerHTML = `<button type="button" class="devItemDel" data-item-code="${key}">${value}</button>`;
+        welfareList.appendChild(item);
+    });
+
+    if (welfareList.querySelectorAll("li").length) {
+        welfareList.previousElementSibling.style.display = "none";
+    } else {
         welfareList.previousElementSibling.style.display = "block";
     }
+
+    // 모달 닫기
+    body.style.cssText = "";
+    window.scrollTo(0, tempScroll);
+    moreWelfareInfoButton.classList.remove("isCheckButton");
+    welfareModalLayer.style.cssText = "display: none; opacity: 0;";
 });
-welfareModalResultButtons.addEventListener("click", (e) => {
-    if (e.target.tagName === "BUTTON") {
-        // 모달 리스트 비우기
-        previewWelfareList.innerHTML = "";
-        welfareList.innerHTML = "";
 
-        if (e.target.classList.contains("btnOk")) {
-            // 모달 - 확인
-            tempWelfareInputValues = { ...tempWelfareModalCodes };
-        } else {
-            // 모달 - 취소
-
-            welfareModalInputList
-                .filter(
-                    (input) =>
-                        !Object.keys(tempWelfareInputValues).includes(
-                            input.value,
-                        ),
-                )
-                .forEach((input) => {
-                    input.checked = false;
-                    input.closest("span").classList.remove("chk");
-                });
-
-            tempWelfareModalCodes = { ...tempWelfareInputValues };
-        }
-        Object.entries(tempWelfareModalCodes).forEach(([key, value]) => {
-            // 복리후생 리스트에 추가
-            const welfareItem = document.createElement("li");
-            welfareItem.innerHTML = `
-            <button type="button" class="devItemDel" data-item-code="${key}">${value}</button>
-            `;
-            welfareList.appendChild(welfareItem);
-
-            // const [targetInput] = welfareModalInputList.filter(
-            //     (input) => input.value === key,
-            // );
-
-            // targetInput.closest("span").classList.add("chk");
-            // targetInput.checked = true;
-            // tempWelfareInputValues[targetInput.value] = e.target.textContent;
-        });
-
-        body.style.height = "";
-        body.style.position = "";
-        body.style.top = "";
-        window.scrollTo(0, tempScroll);
-
-        moreWelfareInfoButton.classList.remove("isCheckButton");
-        welfareModalLayer.style.display = "none";
-        welfareModalLayer.style.opacity = 0;
-
-        if (!welfareList.querySelectorAll("li").length) {
-            welfareList.previousElementSibling.style.display = "block";
-        }
-    }
-});
+// 복리후생 체크박스 변경
 welfareModalList.forEach((li) => {
     li.addEventListener("change", (e) => {
-        if (e.target.tagName === "INPUT") {
-            if (e.target.checked) {
-                // check 했을 때
-                // 모달 리스트 열기
-                previewWelfareList.style.display = "block";
+        if (e.target.tagName !== "INPUT") return;
 
-                // 모달 리스트에 값 넣기
-                const previewWelfareItem = document.createElement("li");
-                previewWelfareItem.classList.add("subItem");
-                previewWelfareItem.innerHTML = `
+        if (e.target.checked) {
+            // 체크 시 - 미리보기에 추가
+            const item = document.createElement("li");
+            item.classList.add("subItem");
+            item.innerHTML = `
                 <span class="inr">
-                <span class="devItemText">${e.target.nextElementSibling.textContent}</span><button type="button" class="spRegA btnItemDel" data-item-code="${e.target.value}"></button>
+                    <span class="devItemText">${e.target.nextElementSibling.textContent}</span>
+                    <button type="button" class="spRegA btnItemDel" data-item-code="${e.target.value}"></button>
                 </span>
-                `;
-                previewWelfareList.appendChild(previewWelfareItem);
+            `;
+            previewWelfareList.appendChild(item);
+            previewWelfareList.style.display = "block";
 
-                e.target.closest("span").classList.add("chk");
-                tempWelfareModalCodes[e.target.value] =
-                    e.target.nextElementSibling.textContent;
-            } else {
-                // check 해제 했을 때
+            e.target.closest("span").classList.add("chk");
+            tempWelfareModalCodes[e.target.value] =
+                e.target.nextElementSibling.textContent;
+        } else {
+            // 체크 해제 시 - 미리보기에서 제거
+            const targetButton = Array.from(
+                previewWelfareList.querySelectorAll("button"),
+            ).find((btn) => btn.dataset.itemCode === e.target.value);
 
-                // 제거 대상 찾기
-                const [targetButton] = previewWelfareList
-                    .querySelectorAll("button")
-                    .filter(
-                        (button) => button.dataset.itemCode === e.target.value,
-                    );
-
-                // 요소 제거, 클래스 제거
-                e.target.closest("span").classList.remove("chk");
+            if (targetButton) {
                 targetButton.closest(".subItem").remove();
-                delete tempWelfareModalCodes[e.target.value];
             }
+
+            e.target.closest("span").classList.remove("chk");
+            delete tempWelfareModalCodes[e.target.value];
         }
     });
 });
 
+// 복리후생 직접 입력
 welfareDirectInputSection.addEventListener("focusin", (e) => {
-    // 직접 추가
     if (e.target.tagName === "INPUT") {
         e.target.closest(".inpTxItem").classList.add("ok");
     }
 });
+
 welfareDirectInputSection.addEventListener("focusout", (e) => {
-    if (e.target.tagName === "INPUT") {
-        e.target.value || e.target.closest(".inpTxItem").classList.remove("ok");
+    if (e.target.tagName === "INPUT" && !e.target.value) {
+        e.target.closest(".inpTxItem").classList.remove("ok");
     }
 });
+
 welfareDirectInputSection.addEventListener("click", (e) => {
-    if (e.target.closest(".devDirectInputBtn")) {
-        if (!e.target.closest(".inpTxItem").firstElementChild.value) {
-            alert("복리후생을 입력해주세요.");
-            return;
-        }
+    if (!e.target.closest(".devDirectInputBtn")) return;
 
-        // 중복검사
-        Object.values(tempWelfareModalCodes).forEach((value) => {
-            if (
-                value === e.target.closest(".inpTxItem").firstElementChild.value
-            ) {
-                alert(
-                    "입력하신 복리후생은 선택항목에 있거나, 이미 선택하신 복리후생입니다.",
-                );
-                return;
-            }
-        });
-        if (
-            welfareModalInputList.some(
-                (input) => input.value === e.target.closest(".inpTxItem").value,
-            )
-        ) {
-            alert(
-                "입력하신 복리후생은 선택항목에 있거나, 이미 선택하신 복리후생입니다.",
-            );
-            return;
-        }
-        // server: db에서 중복확인 필요
-        const itemCode = Math.floor(Math.random() * 900000) + 100000;
+    const inputValue = e.target.closest(".inpTxItem").firstElementChild.value;
 
-        const previewWelfareItem = document.createElement("li");
-        previewWelfareItem.classList.add("subItem");
-        previewWelfareItem.innerHTML = `
-                    <span class="inr">
-                        <span class="devItemText">${e.target.closest(".inpTxItem").firstElementChild.value}</span><button type="button" class="spRegA btnItemDel" data-item-code="${itemCode}"></button>
-                    </span>
-                `;
-
-        previewWelfareList.appendChild(previewWelfareItem);
-
-        // 등록한 새로운 코드 추가
-        tempWelfareModalCodes[itemCode] =
-            e.target.closest(".inpTxItem").firstElementChild.value;
-
-        // 등록 후 input value 제거
-        e.target.closest(".inpTxItem").firstElementChild.value = "";
+    if (!inputValue) {
+        alert("복리후생을 입력해주세요.");
+        return;
     }
+
+    // 중복 검사
+    const isDuplicate = Object.values(tempWelfareModalCodes).some(
+        (value) => value === inputValue,
+    );
+    const isInList = welfareModalInputList.some(
+        (input) => input.nextElementSibling.textContent === inputValue,
+    );
+
+    if (isDuplicate || isInList) {
+        alert(
+            "입력하신 복리후생은 선택항목에 있거나, 이미 선택하신 복리후생입니다.",
+        );
+        return;
+    }
+
+    // 랜덤 코드 생성 (6자리 이상)
+    const itemCode = Math.floor(Math.random() * 900000) + 100000;
+
+    // 미리보기에 추가
+    const item = document.createElement("li");
+    item.classList.add("subItem");
+    item.innerHTML = `
+        <span class="inr">
+            <span class="devItemText">${inputValue}</span>
+            <button type="button" class="spRegA btnItemDel" data-item-code="${itemCode}"></button>
+        </span>
+    `;
+    previewWelfareList.appendChild(item);
+
+    tempWelfareModalCodes[itemCode] = inputValue;
+
+    // input 초기화
+    e.target.closest(".inpTxItem").firstElementChild.value = "";
 });
+
+// 복리후생 미리보기 항목 삭제
 previewWelfareList.addEventListener("click", (e) => {
-    if (e.target.tagName === "BUTTON") {
-        // 요소 제거, 클래스 제거, input check 비활성화
-        if (e.target.dataset.itemCode.length !== 6) {
-            // 직접 추가한 요소는 제거할 클래스가 없으니 if로 예방
-            // 글자 수가 6 이상이면 사용자 정의 복리후생
-            const [targetInput] = welfareModalInputList.filter(
-                (input) => input.value === e.target.dataset.itemCode,
-            );
+    if (e.target.tagName !== "BUTTON") return;
+
+    // 직접 입력이 아닌 경우 체크박스도 해제
+    if (e.target.dataset.itemCode.length !== 6) {
+        const targetInput = welfareModalInputList.find(
+            (input) => input.value === e.target.dataset.itemCode,
+        );
+        if (targetInput) {
             targetInput.checked = false;
             targetInput.closest("span").classList.remove("chk");
         }
-        e.target.closest(".subItem").remove();
-        delete tempWelfareModalCodes[e.target.dataset.itemCode];
     }
+
+    e.target.closest(".subItem").remove();
+    delete tempWelfareModalCodes[e.target.dataset.itemCode];
 });
-previewWelfareListResetButton.addEventListener("click", (e) => {
-    // 초기화 버튼
-    // 모달 input 전부 false로, 클래스도 제거
+
+// 복리후생 초기화
+previewWelfareListResetButton.addEventListener("click", () => {
+    // 모든 체크 해제
     welfareModalInputList.forEach((input) => {
         input.checked = false;
         input.closest("span").classList.remove("chk");
@@ -1278,71 +928,65 @@ previewWelfareListResetButton.addEventListener("click", (e) => {
 
     previewWelfareList.innerHTML = "";
     tempWelfareModalCodes = {};
-    // tempWelfareInputValues = {};
-
-    // 모달 리스트 닫기
     previewWelfareList.style.display = "none";
 });
 
-// 저장하기
+// 이벤트 핸들러 - 저장하기
 submitButton.addEventListener("click", (e) => {
     e.preventDefault();
 
-    if (e.target.closest("#devBtnSubmit")) {
-        const noSettings = [
-            "txtSale",
-            "devCapital_A",
-            "devCapital_B",
-            "txtHomepage",
-            "devFax",
-            "devAddrForeign",
-        ];
-        const domesticNoSettings = ["devNation"];
-        const foreignNoSettings = [
-            "postcode",
-            "address",
-            "detailAddress",
-            "extraAddress",
-        ];
-        let check = false;
+    if (!e.target.closest("#devBtnSubmit")) return;
 
-        companyBasicinputs
-            .filter((input) => !noSettings.includes(input.id))
-            .filter((input) =>
-                ["6", "8", "10"].includes(companyTypeInput.value)
-                    ? !foreignNoSettings.includes(input.id)
-                    : !domesticNoSettings.includes(input.id),
-            )
-            .forEach((input) => {
-                if (!input.value) {
-                    check = true;
-                    if (input.closest(".tbRow").querySelector("#devAddrArea")) {
-                        input
-                            .closest(".tbRow")
-                            .querySelector(".elWrap")
-                            .classList.add("error");
-                    } else {
-                        input.closest(".elWrap").classList.add("error");
-                    }
-                }
-            });
+    // 필수 입력 검사 제외 항목
+    const noSettings = [
+        "txtSale",
+        "devCapital_A",
+        "devCapital_B",
+        "txtHomepage",
+        "devFax",
+        "devAddrForeign",
+    ];
+    const domesticNoSettings = ["devNation"];
+    const foreignNoSettings = [
+        "postcode",
+        "address",
+        "detailAddress",
+        "extraAddress",
+    ];
 
-        if (check) {
-            alert("필수항목을 모두 입력해 주세요.");
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth",
-            });
-        } else {
-            form.submit();
-        }
+    let hasError = false;
+
+    // 필수 입력 검사
+    companyBasicinputs
+        .filter((input) => !noSettings.includes(input.id))
+        .filter((input) => {
+            const isForeign = ["6", "8", "10"].includes(companyTypeInput.value);
+            return isForeign
+                ? !foreignNoSettings.includes(input.id)
+                : !domesticNoSettings.includes(input.id);
+        })
+        .forEach((input) => {
+            if (!input.value) {
+                hasError = true;
+                const errorTarget = input
+                    .closest(".tbRow")
+                    .querySelector("#devAddrArea")
+                    ? input.closest(".tbRow").querySelector(".elWrap")
+                    : input.closest(".elWrap");
+                errorTarget.classList.add("error");
+            }
+        });
+
+    if (hasError) {
+        alert("필수항목을 모두 입력해 주세요.");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+        // 폼 제출
+        document.getElementById("devInfoForm").submit();
     }
 });
 
-// 맨위로
-toTheTop.addEventListener("click", (e) => {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-    });
+// 이벤트 핸들러 - 맨 위로
+toTheTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
 });

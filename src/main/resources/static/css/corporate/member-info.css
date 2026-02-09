@@ -142,7 +142,7 @@ address, caption, em {
     font-weight: bold;
 }
 #sideNav .nav li > a:hover, #sideNav .nav li.on > a {
-    color: #39f;
+    color: #006e3f;
 }
 #sideNav .nav li > a {
     color: #000;
@@ -353,7 +353,7 @@ address, caption, em {
 }
 .mtcBtn, .mtcBtnB:before, .mtcBtnA:after, .mtcBtnM:before, .mtcBtnM:After {
     display: inline-block;
-    background: url("https://i.jobkorea.kr/content/images/ver_1/mtc/common/mtc_sp_btn.png?202007220000") no-repeat;
+    background: url("/static/images/corporate/mtc_sp_btn_green.png") no-repeat;
     box-sizing: border-box;
 }
 .mtcBtnTip {
@@ -409,7 +409,7 @@ address, caption, em {
 }
 .infoIcn, .infoIcnB:before, .infoIcnA:after, .infoIcnM:before, .infoIcnM:after {
     display: inline-block;
-    background: url("https://i.jobkorea.kr/content/images/ver_1/mtc/info/info_sp_icn.png") no-repeat;
+    background: url("/static/images/corporate/info_sp_icn.png") no-repeat;
     line-height: normal;
     vertical-align: middle;
 }
@@ -452,7 +452,7 @@ address, caption, em {
     position: absolute;
     left: 10px;
     top: -11px;
-    background: url("https://i.jobkorea.kr/content/images/ver_1/mtc/common/ico_error_arr.png") no-repeat 0 0;
+    background: url("/static/images/corporate/ico_error_arr.png") no-repeat 0 0;
 }
 .errorBx p {
     font-size: 12px;
@@ -507,12 +507,12 @@ address, caption, em {
     color: #999;
     height: 20px;
     padding-left: 24px;
-    background: url("https://i.jobkorea.kr/content/images/ver_1/mtc/common/mtc_sp_form.png?201901031400") no-repeat 0 -60px;
+    background: url("/static/images/corporate/mtc_sp_form\ \(2\).png") no-repeat 0 -60px;
     vertical-align: top;
     cursor: pointer;
 }
 .mtcRdoBx .bxIpt.chk {
-    color: #39f;
+    color: #006e3f;
     background-position: 0 -110px;
     vertical-align: top;
     cursor: pointer;
@@ -567,14 +567,14 @@ address, caption, em {
     top: 0px;
     width: 20px;
     height: 20px;
-    background: #fff url("https://i.jobkorea.kr/content/images/join/sprite-icon.png") no-repeat 0 -283px;
+    background: #fff url("/static/images/corporate/sprite-icon.png") no-repeat 0 -283px;
 }
 .corp-terms .terms label a {
     position: relative;
     display: inline;
     font-size: 12px;
     letter-spacing: 0px;
-    color: #39f;
+    color: #006e3f;
     padding: 0 12px 0 15px;
     margin-left: 0;
     vertical-align: unset;
@@ -602,7 +602,7 @@ address, caption, em {
     top: 3px;
     width: 9px;
     height: 5px;
-    background: url("https://i.jobkorea.kr/content/images/join/sprite-icon.png") no-repeat -20px -15px;
+    background: url("/static/images/corporate/sprite-icon.png") no-repeat -20px -15px;
 }
 .artMemberMng .tbAgree .button-more:before {
     content: '내용보기';
@@ -623,7 +623,7 @@ address, caption, em {
     top: 3px;
     width: 9px;
     height: 5px;
-    background: url("https://i.jobkorea.kr/content/images/join/sprite-icon.png") no-repeat -20px -15px;
+    background: url("/static/images/corporate/sprite-icon.png") no-repeat -20px -15px;
 }
 .artMemberMng .tbAgree .terms .button-more.on:before {
     content: '';
@@ -672,7 +672,7 @@ address, caption, em {
     display: inline-block;
     font-size: 13px;
     letter-spacing: 0px;
-    background: #39f;
+    background: #006e3f;
     box-sizing: border-box;
     text-align: center;
 }
@@ -801,7 +801,7 @@ address, caption, em {
     color: #fff;
 }
 .common-modal.company-certify-modal .modal-btn.blue {
-    background-color: #003cff;
+    background-color: #006e3f
 }
 .common-modal.company-certify-modal .modal-btn.xl {
     height: 56px;
@@ -837,7 +837,7 @@ address, caption, em {
     top: 333px;
     width: 20px;
     height: 20px;
-    background: #fff url("https://i.jobkorea.kr/content/images/join/sprite-icon.png") no-repeat 0 -283px;
+    background: #fff url("/static/images/corporate/sprite-icon.png") no-repeat 0 -283px;
 }
 .common-modal.company-certify-modal .leaveAgreeWrap input:checked + label:before {
     background-position: 0 -253px;

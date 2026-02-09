@@ -152,7 +152,7 @@ table, th, td, input, button {
     font-weight: bold;
 }
 #sideNav .nav li > a:hover, #sideNav .nav li.on > a {
-    color: #39f;
+    color: #006e3f;
 }
 #sideNav .nav li > a {
     color: #000;
@@ -277,7 +277,7 @@ table, th, td, input, button {
     border-radius: 3px;
 
     display: inline-block;
-    background: #39f;
+    background: #006e3f;
     box-sizing: border-box;
     text-align: center;
 }
@@ -448,7 +448,7 @@ table, th, td, input, button {
     padding-left: 0;
 }
 #content .infoContent  .schListsWrap .mtcSchListTb table tbody td .no-team-member-wrap::before {
-    background: url("https://i.jobkorea.kr/content/images/ver_1/mtc/manage/sprite_ver2_img.png") 100% 100% / 100% no-repeat !important;
+    background: url("/static/images/corporate/sprite_ver2_img.png") 100% 100% / 100% no-repeat !important;
 }
 #content .infoContent  .schListsWrap .mtcSchListTb table tbody td .no-team-member-wrap:before {
     content: "";
@@ -851,7 +851,7 @@ table, th, td, input, button {
     color: #fff;
 }
 .common-modal.company-invitation-modal .modal-btn.blue {
-    background-color: #003cff;
+    background-color: #006e3f
 }
 .common-modal.company-invitation-modal .modal-btn.xl {
     height: 56px;
