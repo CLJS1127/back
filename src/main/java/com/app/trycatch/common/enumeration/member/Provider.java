@@ -1,4 +1,4 @@
-package com.app.trycatch.common.common.enumeration;
+package com.app.trycatch.common.enumeration.member;
 
 import java.util.Arrays;
 import java.util.Map;

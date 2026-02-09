@@ -1,7 +1,8 @@
-package com.app.trycatch.domain;
+package com.app.trycatch.domain.member;
 
 import com.app.trycatch.audit.Period;
-import com.app.trycatch.common.common.enumeration.Status;
+import com.app.trycatch.common.enumeration.member.Gender;
+import com.app.trycatch.common.enumeration.member.Status;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -11,10 +12,15 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class MemberVO extends Period {
     private Long id;
+    private String memberId;
+    private String memberPassword;
+    private String memberBirth;
+    private Gender memberGender;
     private String memberName;
+    private String memberEmail;
     private String memberPhone;
     private Long addressId;
     private Status memberStatus;
     private boolean memberAgreePrivacy;
-
+    private boolean memberAgreeMarketing;
 }
