@@ -1,3 +1,4 @@
+
 create table tbl_challenger
 (
     id                   bigint unsigned auto_increment primary key comment '승급 ID',
