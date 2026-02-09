@@ -6,3 +6,4 @@ create table tbl_skill_log_notification
     constraint fk_skill_log_notification foreign key (id) references tbl_main_notification (id),
     constraint fk_skill_log_notification_log foreign key (skill_log_id) references tbl_skill_log (id)
 ) comment '기술 블로그 알림 서브타입';
+

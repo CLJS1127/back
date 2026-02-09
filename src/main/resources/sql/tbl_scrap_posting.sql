@@ -1,4 +1,5 @@
 -- ============================================================
+
 create table tbl_scrap_posting
 (
     id                    bigint unsigned auto_increment primary key comment '스크랩 ID',
