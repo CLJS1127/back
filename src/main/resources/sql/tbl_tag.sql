@@ -6,3 +6,5 @@ create table tbl_tag
     created_datetime datetime default current_timestamp,
     updated_datetime datetime default current_timestamp
 ) comment '기술 블로그 태그';
+
+select * from tbl_tag;

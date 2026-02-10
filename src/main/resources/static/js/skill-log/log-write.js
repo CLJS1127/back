@@ -1,6 +1,7 @@
 // 작성하기 버튼
 const writeButtonDiv = document.querySelector(".navi-top-area.has-tooltip");
 const writeButton = document.querySelector(".navi-top-area.has-tooltip a");
+const skilLogForm = document['skil-log-write-form'];
 
 // 작성하기 버튼 눌렀을 때 띄울 툴바
 writeButton.addEventListener("click", (e) => {
@@ -232,7 +233,7 @@ NodeList.prototype.filter = Array.prototype.filter;
 const addTag = document.querySelector("#devTags");
 const inputTag = document.querySelector(".tag-input");
 const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/;
-
+const arTagName = [];
 addTag.addEventListener("keyup", (e) => {
     const tagDivs = document.querySelectorAll(".tagDiv");
     const tag = addTag.value;
@@ -267,6 +268,8 @@ addTag.addEventListener("keyup", (e) => {
 
         // 너비 재조정
         adjustInputWidth();
+
+    //     arTagName.push(tag);
     }
 });
 
@@ -290,6 +293,7 @@ function adjustInputWidth() {
 inputTag.addEventListener("click", (e) => {
     if (e.target.classList.contains("tagDiv")) {
         e.target.remove();
+    //     arTag.splice()
     }
 });
 
@@ -312,6 +316,13 @@ admitButton.addEventListener("click", (e) => {
         e.preventDefault();
     } else {
         alert("등록되었습니다.");
+        //     form태그에 input태그 생성
+        //
+        // arTagName.forEach((tagName) => {
+        //     // document.createElement("input");
+        //     // text += `<input name=tags[0].tagName value=${tag}>`
+        // })
+
         location.href = "";
     }
 });

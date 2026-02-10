@@ -21,3 +21,9 @@ create table tbl_experience_program
     constrain
         t fk_experience_program_address foreign key (address_id) references tbl_address (id)
 );
+
+
+select * from tbl_experience_program;
+insert into tbl_experience_program(
+        corp_id, experience_program_title,  experience_program_level)
+values (5, '테스트 공고', 'a');

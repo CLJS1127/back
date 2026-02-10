@@ -5,26 +5,35 @@ import com.app.trycatch.domain.member.MemberVO;
 import com.app.trycatch.domain.skilllog.SkillLogVO;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter @Setter @ToString
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class SkillLogDTO {
-//    skillLog 필드
+//    skillLog
     private Long id;
     private String skillLogTitle;
     private String skillLogContent;
-    private String skillLogCategory;
     private int skillLogViewCount;
     private SkillLogStatus skillLogStatus;
     private String createdDatetime;
     private String updatedDatetime;
 
-//    member 필드
+//    member
     private Long memberId;
     private String memberName;
 
-//    experienceProgram 필드
+//    experienceProgram
     private Long experienceProgramId;
+//    체험 공고 제목, 해당 기업, 공고 이미지 필요
+
+//    tag 목록
+    private List<TagDTO> tags = new ArrayList<>();
+
+//    file 목록
+//    private List<SkillLogFileDTO> skillLogFiles = new ArrayList<>();
 
     public SkillLogVO toSkillLogVO() {
         return SkillLogVO.builder()
@@ -33,7 +42,6 @@ public class SkillLogDTO {
                 .experienceProgramId(experienceProgramId)
                 .skillLogTitle(skillLogTitle)
                 .skillLogContent(skillLogContent)
-                .skillLogCategory(skillLogCategory)
                 .skillLogViewCount(skillLogViewCount)
                 .skillLogStatus(skillLogStatus)
                 .createdDatetime(createdDatetime)

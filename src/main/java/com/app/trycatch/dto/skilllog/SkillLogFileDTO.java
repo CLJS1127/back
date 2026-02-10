@@ -27,7 +27,6 @@ public class SkillLogFileDTO {
 //    SkillLog
     private Long skillLogId;
 
-
     public FileVO toFileVO() {
         return FileVO.builder()
                 .id(id)
