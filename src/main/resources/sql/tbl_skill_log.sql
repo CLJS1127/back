@@ -14,6 +14,7 @@ create table tbl_skill_log
     constraint fk_skill_log_program foreign key (experience_program_id) references tbl_experience_program (id)
 );
 
+
 select * from tbl_skill_log;
 set foreign_key_checks = 1;
 drop table tbl_skill_log;

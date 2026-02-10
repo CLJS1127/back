@@ -22,9 +22,10 @@ public class MemberDAO {
     public Optional<MemberVO> findByMemberEmail(String memberEmail) {
         return memberMapper.selectByMemberEmail(memberEmail);
     }
+
     // 개인회원 가입
-    public void saveIndividual(MemberVO memberVO) {
-        memberMapper.insertIndividual(memberVO);
+    public void save(MemberVO memberVO) {
+        memberMapper.insert(memberVO);
     }
 
     // 기업회원 가입

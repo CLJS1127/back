@@ -35,7 +35,7 @@ public class IndividualMemberTests {
         individualMemberDTO.setProvider(Provider.THREETIER);
 
         MemberVO memberVO = individualMemberDTO.toMemberVO();
-        memberMapper.insertIndividual(memberVO);
+        memberMapper.insert(memberVO);
 
         individualMemberDTO.setId(memberVO.getId());
         individualMemberDTO.setIndividualMemberBirth("1999-11-11");
@@ -44,4 +44,7 @@ public class IndividualMemberTests {
 
         memberMapper.insertOauth(individualMemberDTO.toOAuthVO());
     }
+
+
+
 }

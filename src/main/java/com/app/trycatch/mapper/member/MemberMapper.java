@@ -21,7 +21,7 @@ public interface MemberMapper {
     public void insertOauth(OAuthVO oAuthVO);
 
     //    개인 회원 가입
-    public void insertIndividual(MemberVO memberVO);
+    public void insert(MemberVO memberVO);
 
     //      기업 회원 가입
     public void insertCorp(MemberVO memberVO);

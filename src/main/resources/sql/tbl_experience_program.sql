@@ -18,6 +18,5 @@ create table tbl_experience_program
     created_datetime                       datetime                                            default current_timestamp,
     updated_datetime                       datetime                                            default current_timestamp,
     constraint fk_experience_program_corp foreign key (corp_id) references tbl_corp (id),
-    constrain
-        t fk_experience_program_address foreign key (address_id) references tbl_address (id)
+    constraint fk_experience_program_address foreign key (address_id) references tbl_address (id)
 );

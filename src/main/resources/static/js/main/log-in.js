@@ -35,3 +35,4 @@ companyButton.addEventListener("click", (e) => {
     keepId.style.display = "none";
     kakaoLogin.style.display = "none";
 });
+
