@@ -32,7 +32,7 @@ public class IndividualMemberTests {
         individualMemberDTO.setMemberPhone("010-2224-1222");
         individualMemberDTO.setMemberAgreePrivacy(true);
         individualMemberDTO.setMemberAgreeMarketing(true);
-        individualMemberDTO.setProvider(Provider.THREETIER);
+        individualMemberDTO.setProvider(Provider.TRYCATCH);
 
         MemberVO memberVO = individualMemberDTO.toMemberVO();
         memberMapper.insert(memberVO);
