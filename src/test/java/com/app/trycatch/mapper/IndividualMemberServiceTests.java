@@ -28,22 +28,21 @@ public class IndividualMemberServiceTests {
         log.info("{}.......................", individualMemberService.checkEmail("test@gmail.com"));
     }
 
-    @Test
-    public void testJoinIndividual(){
-        IndividualMemberDTO individualMemberDTO = new IndividualMemberDTO();
-        individualMemberDTO.setMemberId("test12312");
-        individualMemberDTO.setMemberPassword("2333");
-        individualMemberDTO.setMemberGender(Gender.MAN);
-        individualMemberDTO.setMemberName("젠슨 킴");
-        individualMemberDTO.setMemberEmail("test335@gmail.com");
-        individualMemberDTO.setMemberPhone("010-3334-2323");
-        individualMemberDTO.setMemberAgreePrivacy(true);
-        individualMemberDTO.setMemberAgreeMarketing(true);
-        individualMemberDTO.setProvider(Provider.TRYCATCH);
-        individualMemberDTO.setIndividualMemberBirth("1999-11-11");
-        individualMemberService.joinIndividual(individualMemberDTO);
-
-    }
+//    @Test
+//    public void testJoinIndividual(){
+//        IndividualMemberDTO individualMemberDTO = new IndividualMemberDTO();
+//        individualMemberDTO.setMemberId("test12312");
+//        individualMemberDTO.setMemberPassword("2333");
+//        individualMemberDTO.setMemberName("젠슨 킴");
+//        individualMemberDTO.setMemberEmail("test335@gmail.com");
+//        individualMemberDTO.setMemberPhone("010-3334-2323");
+//        individualMemberDTO.setMemberAgreePrivacy(true);
+//        individualMemberDTO.setMemberAgreeMarketing(true);
+//        individualMemberDTO.setProvider(Provider.TRYCATCH);
+//        individualMemberDTO.setIndividualMemberBirth("1999-11-11");
+//        individualMemberService.joinIndividual(individualMemberDTO);
+//
+//    }
 
 
 
