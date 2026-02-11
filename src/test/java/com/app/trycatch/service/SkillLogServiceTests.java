@@ -1,7 +1,5 @@
 package com.app.trycatch.service;
 
-import com.app.trycatch.domain.skilllog.SkillLogTagVO;
-import com.app.trycatch.domain.skilllog.SkillLogVO;
 import com.app.trycatch.dto.skilllog.SkillLogDTO;
 import com.app.trycatch.dto.skilllog.TagDTO;
 import com.app.trycatch.service.skilllog.SkillLogService;
