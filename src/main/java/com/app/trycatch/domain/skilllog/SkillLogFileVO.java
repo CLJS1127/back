@@ -9,5 +9,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SuperBuilder
 public class SkillLogFileVO {
-
+    private Long id;
+    private Long skillLogId;
 }
