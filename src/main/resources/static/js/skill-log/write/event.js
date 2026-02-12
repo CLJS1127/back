@@ -57,130 +57,129 @@ btnLayerCloses.forEach((btnLayerClose) => {
     });
 });
 
-// 링크
-
-// 링크 버튼
-const iconBtnLayerOpen = document.querySelector(
-    ".icon-link.qnaSpB.btn-layer-open",
-);
-// 링크 레이어
-const linkLayer = document.querySelector(".layer-box-wrap.link-layer");
-
-// 링크 레이어 X버튼
-btnLayerCloses.forEach((btnLayerClose) => {
-    btnLayerClose.addEventListener("click", (e) => {
-        linkLayer.classList.remove("open");
-        iconBtnLayerOpen.classList.remove("on");
-    });
-});
-
-// 링크 클릭
-iconBtnLayerOpen.addEventListener("click", (e) => {
-    linkLayer.classList.toggle("open");
-    iconBtnLayerOpen.classList.toggle("on");
-});
-
-const urlRegex = /^(http|https):\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/;
-
-const inputText = document.querySelector(
-    ".jkSchInput.keywordSearch.keywordSearchLink p input[type=text]",
-);
-const findButton = document.querySelector(".btnSch.qnaSpB.devSearchLink");
-const a = document.querySelector(".ApiOpenGraphResult");
-
-// 로딩
-const loading = document.querySelector(".loading");
-
-// url 검사 함수 (중복 코드 방지)
-function checkUrl() {
-    if (urlRegex.test(inputText.value)) {
-        loading.style.display = "block";
-        setTimeout(() => {
-            loading.style.display = "none";
-            a.innerHTML = `
-                <a href="#" class="attach-box type-link">
-                    <div class="thumb-img-area">
-                        <span>링크</span>
-                    </div>
-                    <div class="link-textarea">
-                        <textarea class="corp-name" name="" id="devAttachLinkTitle" cols="20" rows="5" maxlength="51" placeholder="링크 제목을 입력하세요."></textarea>
-                    </div>
-                </a>
-            `;
-        }, 1800);
-    } else {
-        alert("URL을 입력해주세요");
-    }
-}
-
-// 버튼 클릭
-findButton.addEventListener("click", checkUrl);
-
-// 엔터키 입력
-inputText.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-        checkUrl();
-    }
-});
-
-// 링크 첨부하기 버튼 활성화
-
-// 링크 제목 입력창
-const linkTitleInput = document.querySelector(".ApiOpenGraphResult");
-// 첨부하기 버튼
-const attachButton = document.querySelector(".apply.attachLinkBtn");
-
-// 입력할 때마다 체크
-linkTitleInput.addEventListener("input", (e) => {
-    // 링크 제목에 들어갈 변수 담기
-
-    if (e.target.value) {
-        attachButton.classList.add("on");
-    } else {
-        attachButton.classList.remove("on");
-    }
-});
-
-// 링크 추가
+// // 링크
+// // 링크 버튼
+// const iconBtnLayerOpen = document.querySelector(
+//     ".icon-link.qnaSpB.btn-layer-open",
+// );
+// // 링크 레이어
+// const linkLayer = document.querySelector(".layer-box-wrap.link-layer");
+//
+// // 링크 레이어 X버튼
+// btnLayerCloses.forEach((btnLayerClose) => {
+//     btnLayerClose.addEventListener("click", (e) => {
+//         linkLayer.classList.remove("open");
+//         iconBtnLayerOpen.classList.remove("on");
+//     });
+// });
+//
+// // 링크 클릭
+// iconBtnLayerOpen.addEventListener("click", (e) => {
+//     linkLayer.classList.toggle("open");
+//     iconBtnLayerOpen.classList.toggle("on");
+// });
+//
+// const urlRegex = /^(http|https):\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/;
+//
+// const inputText = document.querySelector(
+//     ".jkSchInput.keywordSearch.keywordSearchLink p input[type=text]",
+// );
+// const findButton = document.querySelector(".btnSch.qnaSpB.devSearchLink");
+// const a = document.querySelector(".ApiOpenGraphResult");
+//
+// // 로딩
+// const loading = document.querySelector(".loading");
+//
+// // url 검사 함수 (중복 코드 방지)
+// function checkUrl() {
+//     if (urlRegex.test(inputText.value)) {
+//         loading.style.display = "block";
+//         setTimeout(() => {
+//             loading.style.display = "none";
+//             a.innerHTML = `
+//                 <a href="#" class="attach-box type-link">
+//                     <div class="thumb-img-area">
+//                         <span>링크</span>
+//                     </div>
+//                     <div class="link-textarea">
+//                         <textarea class="corp-name" name="" id="devAttachLinkTitle" cols="20" rows="5" maxlength="51" placeholder="링크 제목을 입력하세요."></textarea>
+//                     </div>
+//                 </a>
+//             `;
+//         }, 1800);
+//     } else {
+//         alert("URL을 입력해주세요");
+//     }
+// }
+//
+// // 버튼 클릭
+// findButton.addEventListener("click", checkUrl);
+//
+// // 엔터키 입력
+// inputText.addEventListener("keydown", (e) => {
+//     if (e.key === "Enter") {
+//         checkUrl();
+//     }
+// });
+//
+// // 링크 첨부하기 버튼 활성화
+//
+// // 링크 제목 입력창
+// const linkTitleInput = document.querySelector(".ApiOpenGraphResult");
+// // 첨부하기 버튼
+// const attachButton = document.querySelector(".apply.attachLinkBtn");
+//
+// // 입력할 때마다 체크
+// linkTitleInput.addEventListener("input", (e) => {
+//     // 링크 제목에 들어갈 변수 담기
+//
+//     if (e.target.value) {
+//         attachButton.classList.add("on");
+//     } else {
+//         attachButton.classList.remove("on");
+//     }
+// });
+//
+// // 링크 추가
 const textarea = document.querySelector(".addFileAndLink");
-attachButton.addEventListener("click", (e) => {
-    const getText = document.getElementById("devAttachLinkTitle");
-    const getURL = document.querySelector(
-        ".jkSchInput.keywordSearch.keywordSearchLink p.inpWrap input.schInp",
-    );
-    if (attachButton.classList.contains("on")) {
-        linkLayer.classList.remove("open");
-        iconBtnLayerOpen.classList.remove("on");
-        attachButton.classList.remove("on");
-
-        textarea.innerHTML += `
-            <div class="attach-wrap">
-                <a href="#" class="attach-box type-link">
-                    <span class="thumb-img-area">
-                        <span>링크</span>
-                    </span>
-                <div class="corp-info-area qnaSpA">
-                    <p class="content">${getText.value}</p>
-                    <span class="content-url">${getURL.value}</span>
-                </div>
-            </a>
-            <button type="button" class="remove-button qnaSpB">삭제하기</button>
-            </div>
-        `;
-    }
-    a.innerHTML = "";
-    getText.value = "";
-    getURL.value = "";
-
-    textarea.addEventListener("click", (e) => {
-        if (e.target.classList.contains("remove-button")) {
-            e.target.closest(".attach-wrap").remove();
-        }
-    });
-});
-
-// 링크 삭제
-const removeLink = document.querySelector(".attach-box.type-link");
+// attachButton.addEventListener("click", (e) => {
+//     const getText = document.getElementById("devAttachLinkTitle");
+//     const getURL = document.querySelector(
+//         ".jkSchInput.keywordSearch.keywordSearchLink p.inpWrap input.schInp",
+//     );
+//     if (attachButton.classList.contains("on")) {
+//         linkLayer.classList.remove("open");
+//         iconBtnLayerOpen.classList.remove("on");
+//         attachButton.classList.remove("on");
+//
+//         textarea.innerHTML += `
+//             <div class="attach-wrap">
+//                 <a href="#" class="attach-box type-link">
+//                     <span class="thumb-img-area">
+//                         <span>링크</span>
+//                     </span>
+//                 <div class="corp-info-area qnaSpA">
+//                     <p class="content">${getText.value}</p>
+//                     <span class="content-url">${getURL.value}</span>
+//                 </div>
+//             </a>
+//             <button type="button" class="remove-button qnaSpB">삭제하기</button>
+//             </div>
+//         `;
+//     }
+//     a.innerHTML = "";
+//     getText.value = "";
+//     getURL.value = "";
+//
+//     textarea.addEventListener("click", (e) => {
+//         if (e.target.classList.contains("remove-button")) {
+//             e.target.closest(".attach-wrap").remove();
+//         }
+//     });
+// });
+//
+// // 링크 삭제
+// const removeLink = document.querySelector(".attach-box.type-link");
 
 // 이미지 버튼
 const addPicture = document.querySelector(".icon-photo.qnaSpB.btn-layer-open");
@@ -229,29 +228,20 @@ photoInput.addEventListener("change", (e) => {
 // 이미지 삭제 (이벤트 위임)
 textarea.addEventListener("click", (e) => {
     if (e.target.classList.contains("remove-button")) {
-        let files = photoInput.files.map((file) => file);
-        const targetIndex = Number(e.target.classList[2]);
+        console.log(e.target);
 
+        let files = photoInput.files;
+        const targetIndex = Number(e.target.classList[2]);
         const dataTransfer = new DataTransfer();
 
+        files = files.filter((_, index) => index !== targetIndex);
+        files.forEach((file) => dataTransfer.items.add(file));
         console.log(files);
 
-        files = files.filter((_, index) => {
-            // console.log(index !== targetIndex);
-            // console.log("index" + index);
-            // console.log("targetIndex" + targetIndex);
-
-            return index !== targetIndex
-        });
-        console.log("filtet" + files.length);
-
-        files.forEach((file) => dataTransfer.items.add(file));
-
         photoInput.files = dataTransfer.files;
-
         e.target.closest(".attach-wrap").remove();
 
-
+        console.log(photoInput.files)
     }
 });
 
