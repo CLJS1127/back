@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +33,20 @@ public class SkillLogServiceTests {
         });
         skillLogDTO.setTags(tags);
 
-        skillLogDTO.setMemberId(1L);
-        skillLogDTO.setSkillLogTitle("기술 블로그 테스트2");
-        skillLogDTO.setSkillLogContent("내용2");
+        skillLogDTO.setMemberId(2L);
+        skillLogDTO.setSkillLogTitle("기술 블로그 테스트1");
+        skillLogDTO.setSkillLogContent("내용1");
 
-        skillLogService.write(skillLogDTO);
+        // MockMultipartFile로 가짜 파일 생성
+        List<MultipartFile> multipartFiles = new ArrayList<>();
+        MockMultipartFile mockFile = new MockMultipartFile(
+                "file",                    // 파라미터명
+                "test.png",                // 원본 파일명
+                "image/png",               // Content-Type
+                "테스트 이미지 내용".getBytes()  // 파일 내용 (아무 바이트나 OK)
+        );
+        multipartFiles.add(mockFile);
+
+        skillLogService.write(skillLogDTO, multipartFiles);
     }
 }

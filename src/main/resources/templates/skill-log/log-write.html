@@ -132,7 +132,7 @@
                     <div class="lyWriteBoard">
                         <!-- 글쓰기 시작(제목, 내용) -->
                         <div class="writeBoxWrap">
-                            <form name="skil-log-write-form">
+                            <form action="/skill-log/write" method="post" name="skil-log-write-form" enctype="multipart/form-data">
                                 <fieldset>
                                     <legend>제목 등록하기</legend>
                                     <div class="jkTxInput">
@@ -402,6 +402,8 @@
                                                     id="photoInput"
                                                     accept="image/*"
                                                     style="display: none"
+                                                    name="file"
+                                                    multiple
                                                 />
                                             </li>
                                         </ul>

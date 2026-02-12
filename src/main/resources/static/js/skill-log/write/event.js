@@ -1,3 +1,6 @@
+FileList.prototype.forEach = Array.prototype.forEach;
+FileList.prototype.filter = Array.prototype.filter;
+FileList.prototype.map = Array.prototype.map;
 // 작성하기 버튼
 const writeButtonDiv = document.querySelector(".navi-top-area.has-tooltip");
 const writeButton = document.querySelector(".navi-top-area.has-tooltip a");
@@ -191,40 +194,64 @@ addPicture.addEventListener("click", () => {
 
 // 파일 선택 시 처리
 photoInput.addEventListener("change", (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+    const files = e.target.files
+    if (files.length <= 0) return;
+    if (files.length > 10) return alert("최대 10개의 파일만 올릴 수 있습니다.");
 
-    // 이미지 파일인지 확인
-    if (!file.type.startsWith("image/")) {
-        alert("이미지 파일만 올릴 수 있습니다.");
-        return;
-    }
+    files.forEach((file, i) => {
+        // 이미지 파일인지 확인
+        if (!file.type.startsWith("image/")) {
+            alert("이미지 파일만 올릴 수 있습니다.");
+            return;
+        }
 
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
 
-    reader.addEventListener("load", (v) => {
-        const path = v.target.result;
+        reader.addEventListener("load", (v) => {
+            const path = v.target.result;
 
-        // 이미지를 화면에 추가
-        textarea.innerHTML += `
+            // 이미지를 화면에 추가
+            textarea.innerHTML += `
             <div class="attach-wrap attach-image">
                 <div class="attach-box type-image">
                     <img src="${path}" alt="첨부 이미지">
                 </div>
-                <button type="button" class="remove-button qnaSpB">삭제하기</button>
+                <button type="button" class="remove-button qnaSpB ${i}">삭제하기</button>
             </div>
         `;
-    });
+        });
 
-    // 같은 파일 다시 선택 가능하도록 초기화
-    e.target.value = "";
+        console.log(file);
+    })
 });
 
 // 이미지 삭제 (이벤트 위임)
 textarea.addEventListener("click", (e) => {
     if (e.target.classList.contains("remove-button")) {
+        let files = photoInput.files.map((file) => file);
+        const targetIndex = Number(e.target.classList[2]);
+
+        const dataTransfer = new DataTransfer();
+
+        console.log(files);
+
+        files = files.filter((_, index) => {
+            // console.log(index !== targetIndex);
+            // console.log("index" + index);
+            // console.log("targetIndex" + targetIndex);
+
+            return index !== targetIndex
+        });
+        console.log("filtet" + files.length);
+
+        files.forEach((file) => dataTransfer.items.add(file));
+
+        photoInput.files = dataTransfer.files;
+
         e.target.closest(".attach-wrap").remove();
+
+
     }
 });
 

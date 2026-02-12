@@ -23,7 +23,7 @@ public class SkillLogController {
 
     @PostMapping("write")
     public void write(SkillLogDTO skillLogDTO) {
-        skillLogDTO.setMemberId(1L);
-        skillLogService.write(skillLogDTO);
+        skillLogDTO.setMemberId(2L);
+//        skillLogService.write(skillLogDTO);
     }
 }

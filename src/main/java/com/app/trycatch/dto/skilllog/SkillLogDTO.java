@@ -33,7 +33,7 @@ public class SkillLogDTO {
     private List<TagDTO> tags = new ArrayList<>();
 
 //    file 목록
-//    private List<SkillLogFileDTO> skillLogFiles = new ArrayList<>();
+    private List<SkillLogFileDTO> skillLogFiles = new ArrayList<>();
 
     public SkillLogVO toSkillLogVO() {
         return SkillLogVO.builder()

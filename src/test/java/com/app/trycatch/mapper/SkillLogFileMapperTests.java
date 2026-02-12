@@ -1,8 +1,11 @@
 package com.app.trycatch.mapper;
 
 import com.app.trycatch.common.enumeration.file.FileContentType;
+import com.app.trycatch.domain.skilllog.SkillLogFileVO;
 import com.app.trycatch.dto.file.FileDTO;
+import com.app.trycatch.dto.skilllog.SkillLogFileDTO;
 import com.app.trycatch.mapper.file.FileMapper;
+import com.app.trycatch.mapper.skilllog.SkillLogFileMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +13,17 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @Slf4j
-public class FileMapperTests {
+public class SkillLogFileMapperTests {
+    @Autowired
+    private SkillLogFileMapper skillLogFileMapper;
     @Autowired
     private FileMapper fileMapper;
 
     @Test
-    public void testInsert() {
+    public void testInert() {
         FileDTO fileDTO = new FileDTO();
+        SkillLogFileDTO skillLogFileDTO = new SkillLogFileDTO();
+
         fileDTO.setFileName("테스트");
         fileDTO.setFilePath("테스트");
         fileDTO.setFileOriginalName("테스트");
@@ -24,6 +31,11 @@ public class FileMapperTests {
         fileDTO.setFileContentType(FileContentType.IMAGE);
 
         fileMapper.insert(fileDTO);
-        log.info("{}", fileDTO.getId());
+
+        skillLogFileDTO.setId(fileDTO.getId());
+        skillLogFileDTO.setSkillLogId(13L);
+
+        skillLogFileMapper.insert(skillLogFileDTO.toSkillLogFileVO());
     }
+
 }
