@@ -2,19 +2,19 @@
     font-family: "Pretendard";
     font-weight: 400;
     font-display: swap;
-    src: url("/static/font/Pretendard-Regular.subset.woff2") format(woff2);
+    src: url("/font/Pretendard-Regular.subset.woff2") format(woff2);
 }
 @font-face {
     font-family: "Pretendard";
     font-weight: 600;
     font-display: swap;
-    src: url("/static/font/Pretendard-SemiBold.subset.woff2") format(woff2);
+    src: url("/font/Pretendard-SemiBold.subset.woff2") format(woff2);
 }
 @font-face {
     font-family: "Pretendard";
     font-weight: 700;
     font-display: swap;
-    src: url("/static/font/Pretendard-Bold.subset.woff2") format(woff2);
+    src: url("/font/Pretendard-Bold.subset.woff2") format(woff2);
 }
 
 * {
@@ -2525,6 +2525,11 @@ h1, h2, h3, h4, h5, h6 {
 .tplPagination.newVer .btnPgnNext i {
     background-position: -16px -149px;
     margin-left: 6px;
+}
+
+.tplPagination.newVer .btnPgnPrev i {
+    background-position: -4px -149px;
+    margin-right: 6px;
 }
 
 

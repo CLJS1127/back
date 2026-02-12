@@ -12,5 +12,9 @@ create table tbl_individual_member
 ) comment '개인회원 서브타입';
 
 
+select * from tbl_individual_member;
 set FOREIGN_KEY_CHECKS = 1;
 drop table tbl_individual_member;
+
+insert into  tbl_individual_member(id, individual_member_birth, individual_member_gender, individual_member_education)
+values (5, 20000202, 'man','고졸');

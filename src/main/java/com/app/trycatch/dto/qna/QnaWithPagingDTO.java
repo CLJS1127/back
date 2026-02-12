@@ -11,4 +11,5 @@ import java.util.List;
 public class QnaWithPagingDTO {
     private List<QnaDTO> qnas;
     private Criteria criteria;
+    private int total;
 }
