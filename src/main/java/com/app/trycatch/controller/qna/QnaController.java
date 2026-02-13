@@ -27,17 +27,21 @@ public class QnaController {
     @GetMapping("/list")
     public String list(@RequestParam(defaultValue = "1") int page, Model model) {
         model.addAttribute("qnaWithPaging", qnaService.list(page));
+        // TODO: 세션 연동 후 session.getAttribute("loginMember") 값이 채워지면 자동으로 로그인 UI 전환
+        model.addAttribute("loginMember", session.getAttribute("loginMember"));
         return "qna/QnA";
     }
 
     @GetMapping("/detail")
     public String detail(Long id, Model model) {
         model.addAttribute("qna", qnaService.detail(id));
+        model.addAttribute("loginMember", session.getAttribute("loginMember"));
         return "qna/QnA-detail";
     }
 
     @GetMapping("/write")
-    public String goToWriteForm() {
+    public String goToWriteForm(Model model) {
+        model.addAttribute("loginMember", session.getAttribute("loginMember"));
         return "qna/write";
     }
 
