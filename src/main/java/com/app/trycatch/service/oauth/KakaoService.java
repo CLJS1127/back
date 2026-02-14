@@ -156,6 +156,7 @@ public class KakaoService {
                     existingMember.setId(memberVO.getId());
                     existingMember.setMemberEmail(memberVO.getMemberEmail());
                     existingMember.setMemberName(memberVO.getMemberName());
+                    existingMember.setProfileImageUrl(profileImageUrl);
                     return existingMember;
                 }
             }

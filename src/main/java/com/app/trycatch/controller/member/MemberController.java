@@ -80,6 +80,12 @@ public class MemberController {
         return new RedirectView("/main/log-in");
     }
 
+    @GetMapping("log-out")
+    public RedirectView logout() {
+        session.invalidate();
+        return new RedirectView("/main/log-in");
+    }
+
     @GetMapping("main")
     public String goMainPage() {
         return "main/main";
