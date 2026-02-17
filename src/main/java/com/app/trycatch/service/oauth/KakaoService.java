@@ -3,6 +3,7 @@ package com.app.trycatch.service.oauth;
 
 
 
+import com.app.trycatch.common.enumeration.member.Provider;
 import com.app.trycatch.common.enumeration.member.Status;
 import com.app.trycatch.domain.member.MemberVO;
 import com.app.trycatch.dto.member.IndividualMemberDTO;
@@ -162,6 +163,7 @@ public class KakaoService {
                     existingMember.setMemberEmail(memberVO.getMemberEmail());
                     existingMember.setMemberName(memberVO.getMemberName());
                     existingMember.setProfileImageUrl(profileImageUrl);
+                    existingMember.setProvider(Provider.KAKAO);
                     return existingMember;
                 }
             }
