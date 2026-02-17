@@ -1,5 +1,6 @@
 package com.app.trycatch.service;
 
+import com.app.trycatch.common.search.Search;
 import com.app.trycatch.dto.skilllog.SkillLogDTO;
 import com.app.trycatch.dto.skilllog.TagDTO;
 import com.app.trycatch.service.skilllog.SkillLogService;
@@ -51,7 +52,13 @@ public class SkillLogServiceTests {
     }
 
     @Test
+    public void testRecentExperienceLogs() {
+        Search search = new Search();
+        log.info("{}", skillLogService.recentExperienceLogs(11L, 1, search));
+    }
+
+    @Test
     public void testAside() {
-        log.info("{}", skillLogService.aside(5L));
+        log.info("{}", skillLogService.aside(9L));
     }
 }

@@ -6,12 +6,16 @@
         values(#{memberId}, #{experienceProgramId}, #{skillLogTitle}, #{skillLogContent})
     </insert>
 
-    <select id="selectCountByMemberId" resultType="SKillLogAsideDTO">
-        select m.id, m.member_name, im.individual_member_level, count(s.id) as skill_log_count
+    <select id="selectProfileByMemberId" resultType="SkillLogAsideDTO">
+        select
+            m.id, m.member_name, im.individual_member_level, im.individual_member_point,
+            count(s.id) as skill_log_count, count(q.id) as question_count
         from tbl_member m join tbl_individual_member im
         on m.id = im.id
         left join tbl_skill_log s
         on m.id = s.member_id
+        left join tbl_qna q
+        on m.id = q.individual_member_id
         where m.id = #{id}
     </select>
 </mapper>

@@ -4,11 +4,13 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>skill-log</title>
-        <link rel="stylesheet" href="/css/qna/header.css">
+        <link rel="stylesheet" href="/css/qna/header.css"/>
+        <link rel="stylesheet" href="/css/qna/footer.css"/>
         <link rel="stylesheet" href="/css/skill-log/list.css" />
     </head>
     <body>
         <!-- 메인 시작 -->
+        <header th:replace="~{/qna/header.html::header}"></header>
         <div id="wrap">
             <!-- 사이드바 -->
             <div class="sideNav">
@@ -645,6 +647,9 @@
             </div>
             <!-- 메인컨테이너 끝 -->
         </div>
+        <footer th:replace="~{/qna/footer.html::footer}"></footer>
     </body>
-    <script src="../../static/js/skill-log/dashboard.js"></script>
+    <script src="/js/skill-log/list/event.js"></script>
+    <script src="/js/qna/header-event.js"></script>
+    <script src="/js/qna/footer.js"></script>
 </html>

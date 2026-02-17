@@ -1,6 +1,5 @@
 package com.app.trycatch.repository.skilllog;
 
-import com.app.trycatch.domain.skilllog.SkillLogVO;
 import com.app.trycatch.dto.skilllog.SkillLogAsideDTO;
 import com.app.trycatch.dto.skilllog.SkillLogDTO;
 import com.app.trycatch.mapper.skilllog.SkillLogMapper;
@@ -12,11 +11,13 @@ import org.springframework.stereotype.Repository;
 public class SkillLogDAO {
     private final SkillLogMapper skillLogMapper;
 
+//    추가
     public void save(SkillLogDTO skillLogDTO) {
         skillLogMapper.insert(skillLogDTO);
     }
 
-    public SkillLogAsideDTO findCountByMemberId(Long id) {
-        return skillLogMapper.selectCountByMemberId(id);
+//    aside
+    public SkillLogAsideDTO findProfileByMemberId(Long id) {
+        return skillLogMapper.selectProfileByMemberId(id);
     }
 }

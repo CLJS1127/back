@@ -34,8 +34,9 @@ public class SkillLogController {
     @PostMapping("write")
     public RedirectView write(SkillLogDTO skillLogDTO,
                       @RequestParam("file") ArrayList<MultipartFile> multipartFiles ) {
-        skillLogDTO.setMemberId(4L);
         skillLogService.write(skillLogDTO, multipartFiles);
+        log.info("{}", skillLogDTO);
+
         return new RedirectView("/skill-log/list");
     }
 

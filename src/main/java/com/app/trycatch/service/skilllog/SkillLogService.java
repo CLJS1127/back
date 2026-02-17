@@ -1,13 +1,14 @@
 package com.app.trycatch.service.skilllog;
 
 import com.app.trycatch.common.enumeration.file.FileContentType;
-import com.app.trycatch.domain.skilllog.SkillLogVO;
-import com.app.trycatch.domain.skilllog.TagVO;
+import com.app.trycatch.common.pagination.Criteria;
+import com.app.trycatch.common.search.Search;
+import com.app.trycatch.dto.experience.ExperienceProgramDTO;
+import com.app.trycatch.dto.experience.ExperienceProgramFileDTO;
 import com.app.trycatch.dto.file.FileDTO;
-import com.app.trycatch.dto.skilllog.SkillLogAsideDTO;
-import com.app.trycatch.dto.skilllog.SkillLogDTO;
-import com.app.trycatch.dto.skilllog.SkillLogFileDTO;
-import com.app.trycatch.dto.skilllog.TagDTO;
+import com.app.trycatch.dto.skilllog.*;
+import com.app.trycatch.repository.experience.ExperienceProgramDAO;
+import com.app.trycatch.repository.experience.ExperienceProgramFileDAO;
 import com.app.trycatch.repository.file.FileDAO;
 import com.app.trycatch.repository.skilllog.SkillLogDAO;
 import com.app.trycatch.repository.skilllog.SkillLogFileDAO;
@@ -22,7 +23,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -34,6 +34,10 @@ public class SkillLogService {
     private final SkillLogFileDAO skillLogFileDAO;
     private final FileDAO fileDAO;
 
+    private final ExperienceProgramDAO experienceProgramDAO;
+    private final ExperienceProgramFileDAO experienceProgramFileDAO;
+
+//    작성
     public void write(SkillLogDTO skillLogDTO, List<MultipartFile> multipartFiles) {
         String rootPath = "C:/file/";
         String todayPath = getTodayPath();
@@ -78,8 +82,32 @@ public class SkillLogService {
         });
     }
 
+//    - 최근 공고
+    public ExperienceProgramWithPagingDTO recentExperienceLogs(Long id, int page, Search search) {
+        ExperienceProgramWithPagingDTO experienceProgramWithPagingDTO = new ExperienceProgramWithPagingDTO();
+        Criteria criteria = new Criteria(page, experienceProgramDAO.findTotalByMemberIdOfChallenger(search, id));
+
+        List<ExperienceProgramDTO> experiencePrograms = experienceProgramDAO.findAllByMemberIdOfChallenger(criteria, search, id);
+
+        criteria.setHasMore(experiencePrograms.size() > criteria.getRowCount());
+        experienceProgramWithPagingDTO.setCriteria(criteria);
+
+        if(criteria.isHasMore()) {
+            experiencePrograms.remove(experiencePrograms.size() - 1);
+        }
+
+        experiencePrograms.forEach((experienceProgramDTO) -> {
+            List<ExperienceProgramFileDTO> experienceProgramFiles = experienceProgramFileDAO.findAllByExperienceProgramId(experienceProgramDTO.getId());
+            experienceProgramDTO.setExperienceProgramFiles(experienceProgramFiles);
+        });
+        experienceProgramWithPagingDTO.setExperienceProgramLogs(experiencePrograms);
+
+        return experienceProgramWithPagingDTO;
+    }
+
+//    aside
     public SkillLogAsideDTO aside(Long id) {
-        return skillLogDAO.findCountByMemberId(id);
+        return skillLogDAO.findProfileByMemberId(id);
     }
 
     public String getTodayPath(){

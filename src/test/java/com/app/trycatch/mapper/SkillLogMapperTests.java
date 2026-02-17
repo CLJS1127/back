@@ -31,7 +31,7 @@ public class SkillLogMapperTests {
 
     @Test
     public void testSelectCountByMemberId() {
-        SkillLogAsideDTO skillLogAsideDTO = skillLogMapper.selectCountByMemberId(5L);
+        SkillLogAsideDTO skillLogAsideDTO = skillLogMapper.selectProfileByMemberId(9L);
         log.info("{}.....................", skillLogAsideDTO);
     }
 }

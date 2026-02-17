@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface SkillLogMapper {
-    public void insert(SkillLogDTO skillLogDTO);    // 추가
-    public SkillLogAsideDTO selectCountByMemberId(Long id);  // aside 조회
+//    추가
+    public void insert(SkillLogDTO skillLogDTO);
+//    aside
+    public SkillLogAsideDTO selectProfileByMemberId(Long id);
 }

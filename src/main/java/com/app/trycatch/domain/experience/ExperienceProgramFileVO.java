@@ -1,4 +1,4 @@
-package com.app.trycatch.domain.skilllog;
+package com.app.trycatch.domain.experience;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -9,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
-public class SkillLogFileVO {
+public class ExperienceProgramFileVO {
     private Long id;
-    private Long skillLogId;
+    private Long experienceProgramId;
 }

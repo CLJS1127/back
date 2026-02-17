@@ -1,7 +1,7 @@
 // 키워드 검색
 const keywordBox = document.querySelector("div[type=div]");
 const keyword = document.querySelector("span[type=button]");
-const keywordButton = document.querySelector("button[type=image");
+const keywordButton = document.querySelector("button[type=image]");
 const input = document.getElementById("schTxt");
 
 document.addEventListener("DOMContentLoaded", function () {
