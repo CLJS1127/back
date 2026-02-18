@@ -4,6 +4,7 @@ import com.app.trycatch.dto.member.IndividualMemberDTO;
 import com.app.trycatch.dto.member.MemberDTO;
 import com.app.trycatch.dto.skilllog.SkillLogDTO;
 import com.app.trycatch.service.skilllog.SkillLogService;
+import com.app.trycatch.service.tag.TagService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 @Slf4j
 public class SkillLogController {
     private final SkillLogService skillLogService;
+    private final TagService tagService;
     private final HttpSession session;
 
     @GetMapping("write")
@@ -51,7 +53,18 @@ public class SkillLogController {
     }
 
     @GetMapping("list")
-    public String goToList() {
+    public String goToList(Model model) {
+        Object member = session.getAttribute("member");
+        Long memberId = null;
+
+        if(member instanceof IndividualMemberDTO) {
+            memberId = ((IndividualMemberDTO) member).getId();
+        } else if(member instanceof MemberDTO) {
+            memberId = ((MemberDTO) member).getId();
+        }
+
+        model.addAttribute("aside", skillLogService.aside(memberId));
+        model.addAttribute("tags", tagService.selectAll());
         return "skill-log/list";
     }
 }

@@ -3,6 +3,7 @@ package com.app.trycatch.service.skilllog;
 import com.app.trycatch.common.enumeration.file.FileContentType;
 import com.app.trycatch.common.pagination.Criteria;
 import com.app.trycatch.common.search.Search;
+import com.app.trycatch.domain.skilllog.TagVO;
 import com.app.trycatch.dto.experience.ExperienceProgramDTO;
 import com.app.trycatch.dto.experience.ExperienceProgramFileDTO;
 import com.app.trycatch.dto.file.FileDTO;
@@ -13,7 +14,9 @@ import com.app.trycatch.repository.file.FileDAO;
 import com.app.trycatch.repository.skilllog.SkillLogDAO;
 import com.app.trycatch.repository.skilllog.SkillLogFileDAO;
 import com.app.trycatch.repository.skilllog.TagDAO;
+import com.app.trycatch.util.DateUtils;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,10 +27,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Exception.class)
+@Slf4j
 public class SkillLogService {
     private final SkillLogDAO skillLogDAO;
     private final TagDAO tagDAO;
@@ -108,6 +113,43 @@ public class SkillLogService {
 //    aside
     public SkillLogAsideDTO aside(Long id) {
         return skillLogDAO.findProfileByMemberId(id);
+    }
+
+//    목록
+    public SkillLogWithPagingDTO list(int page, Search search) {
+        SkillLogWithPagingDTO skillLogWithPagingDTO = new SkillLogWithPagingDTO();
+        Criteria criteria = new Criteria(page, skillLogDAO.findTotal(search));
+
+        List<SkillLogDTO> skillLogs = skillLogDAO.findAll(criteria, search);
+
+        criteria.setHasMore(skillLogs.size() > criteria.getRowCount());
+        skillLogWithPagingDTO.setCriteria(criteria);
+
+        log.info("{}", skillLogDAO.findTotal(search));
+
+        if(criteria.isHasMore()){
+            skillLogs.remove(skillLogs.size() - 1);
+        }
+
+        skillLogs.forEach((skillLogDTO) -> {
+            skillLogDTO.setCreatedDatetime(DateUtils.toRelativeTime(skillLogDTO.getCreatedDatetime()));
+            skillLogDTO.setTags(tagDAO.findAllBySkillLogId(skillLogDTO.getId())
+                    .stream().map((tagVO) -> toTagDTO(tagVO)).collect(Collectors.toList()));
+            skillLogDTO.setSkillLogFiles(skillLogFileDAO.findAllBySkillLogId(skillLogDTO.getId()));
+        });
+        skillLogWithPagingDTO.setSkillLogs(skillLogs);
+
+        return skillLogWithPagingDTO;
+    }
+
+    public TagDTO toTagDTO(TagVO tagVO) {
+        TagDTO tagDTO = new TagDTO();
+
+        tagDTO.setId(tagVO.getId());
+        tagDTO.setSkillLogId(tagVO.getSkillLogId());
+        tagDTO.setTagName(tagVO.getTagName());
+
+        return tagDTO;
     }
 
     public String getTodayPath(){
