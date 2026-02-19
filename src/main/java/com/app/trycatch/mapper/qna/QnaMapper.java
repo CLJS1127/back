@@ -6,6 +6,7 @@ import com.app.trycatch.dto.qna.CorpNameKeywordDTO;
 import com.app.trycatch.dto.qna.QnaDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public interface QnaMapper {
     void insert(QnaVO qnaVO);
     QnaDTO selectById(Long id);
-    List<QnaDTO> selectAll(Criteria criteria);
+    List<QnaDTO> selectAll(@Param("criteria") Criteria criteria, @Param("sort") int sort);
     int selectTotal();
     void increaseViewCount(Long id);
     void delete(Long id);

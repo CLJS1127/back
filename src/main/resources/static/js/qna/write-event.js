@@ -204,14 +204,14 @@ corpInput.addEventListener("keyup", (e) => {
                 return;
             }
             data.forEach(corp => {
-                const rest = corp.corpName.replace(keyword, "");
+                const idx = corp.corpName.indexOf(keyword);
+                const before = idx !== -1 ? corp.corpName.substring(0, idx) : "";
+                const matched = idx !== -1 ? corp.corpName.substring(idx, idx + keyword.length) : corp.corpName;
+                const after = idx !== -1 ? corp.corpName.substring(idx + keyword.length) : "";
                 const li = document.createElement("li");
                 li.classList.add("devQnaWriteCompanyRecentItem");
                 li.dataset.bizName = corp.corpName;
-                li.innerHTML = `
-                    <button type="button" class="qnaSpB">
-                        <span class="point">${keyword}</span><span>${rest}</span>
-                    </button>`;
+                li.innerHTML = `<button type="button" class="qnaSpB"><span>${before}</span><span style="color:#006e3f">${matched}</span><span>${after}</span></button>`;
                 li.querySelector("button").addEventListener("click", () => {
                     selectCorpItem(corp.corpName);
                 });
@@ -230,6 +230,8 @@ function selectCorpItem(corpName) {
     corpSearchDiv.style.display = "none";
     corpSearchUl.innerHTML = "";
     corpInput.value = "";
+    // 최근검색 저장 및 UI 반영
+    addCorpToRecentSearch(corpName);
 }
 // X 버튼(공용)
 const btnLayerCloses = document.querySelectorAll(".btn-layer-close.qnaSpB");
@@ -463,10 +465,9 @@ jobApplyButton.addEventListener("click", (e) => {
         document.getElementById("hiddenJobCategorySmallId").value = jobCode;
         document.getElementById("hiddenJobCategoryName").value = jobName;
 
-        // 최근검색에 추가하는 코드 (서버 연동 시 주석 해제)
-        // addToRecentSearch(jobName, jobCode);
+        // 최근검색에 저장 및 UI 반영
+        addJobToRecentSearch(jobName, jobCode);
 
-        // 나머지 기존 코드...
         if (jobCheckboxForApply) {
             jobCheckboxForApply.checked = true;
         }
@@ -478,41 +479,72 @@ jobApplyButton.addEventListener("click", (e) => {
     }
 });
 
-// 최근검색 추가 함수(서버쪽 코드)
-// function addToRecentSearch(jobName, jobCode) {
-//     const layerContJob = document.querySelector(
-//         ".layer-cont.devRecentSearchBizJobtype",
-//     );
-//     const recentSearchList = layerContJob.querySelector(".searchList");
-//     const emptySearchResult = document.querySelector(
-//         ".layer-cont.devRecentSearchBizJobtypeEmpty",
-//     );
+// ── 직무선배 최근검색 localStorage 관리 ──────────────────────────────
+const JOB_RECENT_KEY = "qna_recent_job";
 
-//     console.log("recentSearchList:", recentSearchList);
-//     console.log("jobName:", jobName, "jobCode:", jobCode);
+function getJobRecentList() {
+    try {
+        return JSON.parse(localStorage.getItem(JOB_RECENT_KEY)) || [];
+    } catch (e) {
+        return [];
+    }
+}
 
-//     // 중복 체크
-//     const existing = recentSearchList.querySelector(
-//         `[data-bizjobtype-code="${jobCode}"]`,
-//     );
-//     if (existing) return;
+function saveJobRecentList(list) {
+    localStorage.setItem(JOB_RECENT_KEY, JSON.stringify(list));
+}
 
-//     // 새 li 생성
-//     const newLi = document.createElement("li");
-//     newLi.className = "devBizJobtypeMyItem";
-//     newLi.dataset.bizjobtypeName = jobName;
-//     newLi.dataset.bizjobtypeCode = jobCode;
-//     newLi.innerHTML = `<button type="button" class="qnaSpB">${jobName}</button>`;
+function addJobToRecentSearch(jobName, jobCode) {
+    let list = getJobRecentList();
+    // 중복 제거 (같은 code 항목 제거 후 맨 앞에 추가)
+    list = list.filter(item => item.code !== String(jobCode));
+    list.unshift({ name: jobName, code: String(jobCode) });
+    // 최대 4개
+    if (list.length > 4) list = list.slice(0, 4);
+    saveJobRecentList(list);
+    renderJobRecentSearch(list);
+}
 
-//     // 목록 맨 앞에 추가
-//     recentSearchList.prepend(newLi);
+function renderJobRecentSearch(list) {
+    const layerContJob = document.querySelector(".layer-cont.devRecentSearchBizJobtype");
+    const emptyDiv = document.querySelector(".layer-cont.devRecentSearchBizJobtypeEmpty");
+    const searchList = layerContJob ? layerContJob.querySelector(".searchList") : null;
 
-//     // "없을 때" → "있을 때"로 전환
-//     if (layerContJob.style.display === "none") {
-//         layerContJob.style.display = "block";
-//         emptySearchResult.style.display = "none";
-//     }
-// }
+    if (!layerContJob || !emptyDiv || !searchList) return;
+
+    if (list.length === 0) {
+        layerContJob.style.display = "none";
+        emptyDiv.style.display = "block";
+        return;
+    }
+
+    layerContJob.style.display = "block";
+    emptyDiv.style.display = "none";
+
+    searchList.innerHTML = "";
+    // 4개 초과 시 스크롤 (4개 기준 높이: 약 44px * 4)
+    searchList.style.maxHeight = "176px";
+    searchList.style.overflowY = list.length > 4 ? "auto" : "";
+
+    list.forEach(item => {
+        const li = document.createElement("li");
+        li.className = "devBizJobtypeMyItem";
+        li.dataset.bizjobtypeName = item.name;
+        li.dataset.bizjobtypeCode = item.code;
+        li.innerHTML = `<button type="button" class="qnaSpB">${item.name}</button>`;
+        searchList.appendChild(li);
+    });
+}
+
+// 페이지 진입 시 직무선배 최근검색 렌더링
+renderJobRecentSearch(getJobRecentList());
+
+// 직무선배 전체삭제 → localStorage도 클리어
+document.querySelector(".btnAllDel.devQnaWriteBizJobtypeAllDeleteButton")
+    ?.addEventListener("click", () => {
+        saveJobRecentList([]);
+        // UI는 기존 전체삭제 핸들러(document.addEventListener)가 처리
+    });
 // 탭 메뉴 (직무/산업)
 const tabMenuButtons = document.querySelectorAll(
     ".tab-box-wrap > .tab-menu > li.tab",
@@ -690,32 +722,13 @@ const corpTriggerBtn = document.querySelector(
 // 기업선배 체크박스
 const corpCheckboxForQuick = document.getElementById("lb_targetCheck3");
 
-corpQuickSelectButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-        const item = btn.closest(".devQnaWriteCompanyRecentItem");
-        const corpName = item ? item.dataset.bizName : btn.textContent.trim();
-
-        // 드롭다운 버튼 텍스트 변경
-        if (corpTriggerBtn) {
-            corpTriggerBtn.textContent = corpName;
-        }
-
-        // hidden input 세팅
-        document.getElementById("hiddenCompanyName").value = corpName;
-
-        // 모달 닫기
-        if (layerBoxCorp) {
-            layerBoxCorp.classList.remove("open");
-        }
-
-        // 기업선배 체크박스 체크 + 드롭다운 활성화
-        if (corpCheckboxForQuick) {
-            corpCheckboxForQuick.checked = true;
-        }
-        if (corpTriggerBtn) {
-            corpTriggerBtn.classList.add("on");
-        }
-    });
+// 기업선배 최근검색: 이벤트 위임 방식으로 동적 항목도 처리
+layerBoxCorp.addEventListener("click", (e) => {
+    const btn = e.target.closest(".devRecentSearchCompany .searchList .devQnaWriteCompanyRecentItem button.qnaSpB");
+    if (!btn) return;
+    const item = btn.closest(".devQnaWriteCompanyRecentItem");
+    const corpName = item ? item.dataset.bizName : btn.textContent.trim();
+    selectCorpItem(corpName);
 });
 
 // 등록하기 버튼
@@ -759,3 +772,69 @@ cancelButton.addEventListener("click", (e) => {
     }
     location.href = "";
 });
+
+// ── 기업선배 최근검색 localStorage 관리 ──────────────────────────────
+const CORP_RECENT_KEY = "qna_recent_corp";
+
+function getCorpRecentList() {
+    try {
+        return JSON.parse(localStorage.getItem(CORP_RECENT_KEY)) || [];
+    } catch (e) {
+        return [];
+    }
+}
+
+function saveCorpRecentList(list) {
+    localStorage.setItem(CORP_RECENT_KEY, JSON.stringify(list));
+}
+
+function addCorpToRecentSearch(corpName) {
+    let list = getCorpRecentList();
+    // 중복 제거 (같은 이름 제거 후 맨 앞에 추가)
+    list = list.filter(item => item.name !== corpName);
+    list.unshift({ name: corpName });
+    // 최대 4개
+    if (list.length > 4) list = list.slice(0, 4);
+    saveCorpRecentList(list);
+    renderCorpRecentSearch(list);
+}
+
+function renderCorpRecentSearch(list) {
+    const layerContCorp = document.querySelector(".layer-cont.devRecentSearchCompany");
+    const emptyDiv = document.querySelector(".layer-cont.devRecentSearchCompanyEmpty");
+    const searchList = layerContCorp ? layerContCorp.querySelector(".searchList") : null;
+
+    if (!layerContCorp || !emptyDiv || !searchList) return;
+
+    if (list.length === 0) {
+        layerContCorp.style.display = "none";
+        emptyDiv.style.display = "block";
+        return;
+    }
+
+    layerContCorp.style.display = "block";
+    emptyDiv.style.display = "none";
+
+    searchList.innerHTML = "";
+    // 4개 초과 시 스크롤 (4개 기준 높이: 약 44px * 4)
+    searchList.style.maxHeight = "176px";
+    searchList.style.overflowY = list.length > 4 ? "auto" : "";
+
+    list.forEach(item => {
+        const li = document.createElement("li");
+        li.className = "devQnaWriteCompanyRecentItem";
+        li.dataset.bizName = item.name;
+        li.innerHTML = `<button type="button" class="qnaSpB">${item.name}</button>`;
+        searchList.appendChild(li);
+    });
+}
+
+// 페이지 진입 시 기업선배 최근검색 렌더링
+renderCorpRecentSearch(getCorpRecentList());
+
+// 기업선배 전체삭제
+document.querySelector(".btnAllDel.devQnaWriteCompanyAllDeleteButton")
+    ?.addEventListener("click", () => {
+        saveCorpRecentList([]);
+        renderCorpRecentSearch([]);
+    });

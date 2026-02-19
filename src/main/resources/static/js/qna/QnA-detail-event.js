@@ -135,10 +135,52 @@ addLike.addEventListener("click", (e) => {
 // 좋아요 버튼
 const qstnLikeButton = document.querySelector(".devQstnLike");
 
-// 버튼 눌렀을 때 클래스 "on" 토글
 if (qstnLikeButton) {
     qstnLikeButton.addEventListener("click", (e) => {
-        qstnLikeButton.classList.toggle("on");
+        if (qstnLikeButton.dataset.loggedIn === "false") {
+            alert("로그인이 필요합니다.");
+            return;
+        }
+        const qnaId = qstnLikeButton.dataset.qstnNo;
+        fetch("/qna/like", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: "qnaId=" + qnaId
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                qstnLikeButton.classList.toggle("on");
+                qstnLikeButton.querySelector("em").textContent = data.likeCount;
+            } else {
+                alert(data.message || "로그인이 필요합니다.");
+            }
+        })
+        .catch(() => {
+            alert("로그인이 필요합니다.");
+        });
+    });
+}
+
+// 게시글 삭제
+const qstnDeleteButton = document.querySelector(".devQstnDeleteButton");
+if (qstnDeleteButton) {
+    qstnDeleteButton.addEventListener("click", (e) => {
+        if (!confirm("정말로 삭제하시겠습니까?")) return;
+        const qnaId = qstnDeleteButton.dataset.qstnNo;
+        fetch("/qna/delete", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: "qnaId=" + qnaId
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                location.href = "/qna/list";
+            } else {
+                alert(data.message || "삭제에 실패했습니다.");
+            }
+        });
     });
 }
 
@@ -661,4 +703,25 @@ comtModifySubmitButtons.forEach((comtModifySubmitButton) => {
         alert("댓글 등록이 완료되었습니다.");
         location.href = "/QnA-detail.html";
     });
+});
+
+// 게시 시간 상대 표시
+function formatRelativeTime(datetimeStr) {
+    if (!datetimeStr) return "";
+    const created = new Date(datetimeStr.replace(" ", "T"));
+    const now = new Date();
+    const diffSec = Math.floor((now - created) / 1000);
+
+    if (diffSec < 60) return diffSec + "초 전";
+    const diffMin = Math.floor(diffSec / 60);
+    if (diffMin < 60) return diffMin + "분 전";
+    const diffHour = Math.floor(diffMin / 60);
+    if (diffHour < 24) return diffHour + "시간 전";
+    const diffDay = Math.floor(diffHour / 24);
+    if (diffDay < 7) return diffDay + "일 전";
+    return datetimeStr;
+}
+
+document.querySelectorAll(".devQnaCreatedTime").forEach(el => {
+    el.textContent = formatRelativeTime(el.dataset.created);
 });

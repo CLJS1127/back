@@ -2,7 +2,8 @@ package com.app.trycatch.mapper.mypage;
 
 import com.app.trycatch.dto.mypage.MyPageNotificationDTO;
 import com.app.trycatch.dto.mypage.MyPageProfileDTO;
-import com.app.trycatch.dto.mypage.MyPageUpdateDTO;
+import com.app.trycatch.domain.member.MemberVO;
+import com.app.trycatch.domain.member.IndividualMemberVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,9 +14,9 @@ import java.util.Optional;
 public interface MyPageMapper {
     Optional<MyPageProfileDTO> selectProfileByMemberId(Long memberId);
 
-    void updateMember(MyPageUpdateDTO myPageUpdateDTO);
+    void updateMember(MemberVO memberVO);
 
-    void updateIndividualMember(MyPageUpdateDTO myPageUpdateDTO);
+    void updateIndividualMember(IndividualMemberVO individualMemberVO);
 
     List<MyPageNotificationDTO> selectNotificationsByMemberId(Long memberId);
 

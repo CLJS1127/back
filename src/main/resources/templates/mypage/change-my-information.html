@@ -1180,6 +1180,23 @@
 
                                             <tr>
                                                 <th scope="row">
+                                                    <span class="blank"></span>학력
+                                                </th>
+                                                <td>
+                                                    <div class="mbrHelpWrap">
+                                                        <select id="M_Education" class="ipSelect" style="width: 200px;">
+                                                            <option value="">학력 선택</option>
+                                                            <option value="high-school">고등학교 졸업</option>
+                                                            <option value="associate">대학(2,3년) 졸업</option>
+                                                            <option value="bachelor">대학교(4년) 졸업</option>
+                                                            <option value="graduate">대학원 졸업</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th scope="row">
                                                     <span class="blank"></span
                                                     >휴대폰
                                                     <img
@@ -1808,6 +1825,7 @@
                                             <input type="hidden" id="profileBirth" th:value="*{individualMemberBirth}">
                         <input type="hidden" id="profileGender" th:value="*{individualMemberGender != null ? individualMemberGender.value : ''}">
                         <input type="hidden" id="profilePhone" th:value="*{memberPhone}">
+                        <input type="hidden" id="profileEducation" th:value="*{individualMemberEducation != null ? individualMemberEducation : ''}">
                     </form>
                 </div>
             </div>
@@ -1818,8 +1836,11 @@
         const inputStatus = [[${input}]];
         if(inputStatus === 'fail'){
             alert("필수항목을 모두 입력하세요.");
-        }
-    </script>
-    <script src="/js/mypage/event.js"></script>
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-</html>
+                }
+            </script>
+            <script src="/js/mypage/info/service.js"></script>
+            <script src="/js/mypage/info/layout.js"></script>
+            <script src="/js/mypage/info/event.js"></script>
+            <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        </html>
+        

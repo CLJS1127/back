@@ -1,28 +1,23 @@
-﻿const lnbGroupAtags = document.querySelectorAll(".lnbGroup a");
-
+const lnbGroupAtags = document.querySelectorAll(".lnbGroup a");
 lnbGroupAtags.forEach((lnbGroupAtag) => {
     lnbGroupAtag.addEventListener("click", () => {
-        if (lnbGroupAtag.classList.contains("on")) {
-            lnbGroupAtag.style.color = "#7BA882";
-        } else {
-            lnbGroupAtag.style.color = "#000";
-        }
+        unsubscribeLayout.updateLnbColor(lnbGroupAtag);
     });
 });
 
 const inputAgreeCheckbox = document.querySelector("#chkLeaveAgree");
 const inputAgreeCheckboxLabel = inputAgreeCheckbox.nextElementSibling;
 inputAgreeCheckbox.addEventListener("click", () => {
-    inputAgreeCheckboxLabel.classList.toggle("chk");
+    unsubscribeLayout.toggleCheckbox(inputAgreeCheckboxLabel);
 });
 
 const leaveNameInput = document.getElementById("memberName");
 const leaveNameSpan = leaveNameInput.previousElementSibling;
 leaveNameInput.addEventListener("focus", () => {
-    leaveNameSpan.style.display = "none";
+    unsubscribeLayout.hidePlaceholder(leaveNameSpan);
 });
 leaveNameInput.addEventListener("blur", () => {
-    leaveNameSpan.style.display = leaveNameInput.value ? "none" : "block";
+    unsubscribeLayout.showPlaceholder(leaveNameSpan, leaveNameInput.value);
 });
 
 const leaveForm = document.getElementById("form");
@@ -44,7 +39,5 @@ leaveSubmitButton.addEventListener("click", (e) => {
         return;
     }
 
-    leaveForm.action = "/mypage/unsubscribe";
-    leaveForm.method = "post";
-    leaveForm.submit();
+    unsubscribeService.submitForm(leaveForm);
 });

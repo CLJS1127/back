@@ -1,8 +1,9 @@
 package com.app.trycatch.repository.mypage;
 
+import com.app.trycatch.domain.member.IndividualMemberVO;
+import com.app.trycatch.domain.member.MemberVO;
 import com.app.trycatch.dto.mypage.MyPageNotificationDTO;
 import com.app.trycatch.dto.mypage.MyPageProfileDTO;
-import com.app.trycatch.dto.mypage.MyPageUpdateDTO;
 import com.app.trycatch.mapper.mypage.MyPageMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -19,12 +20,12 @@ public class MyPageDAO {
         return myPageMapper.selectProfileByMemberId(memberId);
     }
 
-    public void updateMember(MyPageUpdateDTO myPageUpdateDTO) {
-        myPageMapper.updateMember(myPageUpdateDTO);
+    public void updateMember(MemberVO memberVO) {
+        myPageMapper.updateMember(memberVO);
     }
 
-    public void updateIndividualMember(MyPageUpdateDTO myPageUpdateDTO) {
-        myPageMapper.updateIndividualMember(myPageUpdateDTO);
+    public void updateIndividualMember(IndividualMemberVO individualMemberVO) {
+        myPageMapper.updateIndividualMember(individualMemberVO);
     }
 
     public List<MyPageNotificationDTO> findNotificationsByMemberId(Long memberId) {
