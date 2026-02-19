@@ -10,14 +10,13 @@ import com.app.trycatch.domain.skilllog.TagVO;
 import com.app.trycatch.dto.experience.ExperienceProgramDTO;
 import com.app.trycatch.dto.experience.ExperienceProgramFileDTO;
 import com.app.trycatch.dto.file.FileDTO;
+import com.app.trycatch.dto.report.ReportDTO;
 import com.app.trycatch.dto.skilllog.*;
 import com.app.trycatch.repository.experience.ExperienceProgramDAO;
 import com.app.trycatch.repository.experience.ExperienceProgramFileDAO;
 import com.app.trycatch.repository.file.FileDAO;
-import com.app.trycatch.repository.skilllog.SkillLogDAO;
-import com.app.trycatch.repository.skilllog.SkillLogFileDAO;
-import com.app.trycatch.repository.skilllog.SkillLogLikeDAO;
-import com.app.trycatch.repository.skilllog.TagDAO;
+import com.app.trycatch.repository.report.ReportDAO;
+import com.app.trycatch.repository.skilllog.*;
 import com.app.trycatch.util.DateUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -44,9 +43,10 @@ public class SkillLogService {
     private final SkillLogFileDAO skillLogFileDAO;
     private final FileDAO fileDAO;
     private final SkillLogLikeDAO skillLogLikeDAO;
-
     private final ExperienceProgramDAO experienceProgramDAO;
     private final ExperienceProgramFileDAO experienceProgramFileDAO;
+    private final ReportDAO reportDAO;
+    private final SkillLogReportDAO skillLogReportDAO;
 
 //    작성
     public void write(SkillLogDTO skillLogDTO, List<MultipartFile> multipartFiles) {
@@ -201,6 +201,10 @@ public class SkillLogService {
         return skillLogLikeDAO.findCountBySkillLogId(skillLogLikeDTO.getSkillLogId());
     }
 
+//    skillLog 신고
+    public void report(SkillLogReportDTO skillLogReportDTO) {
+        ReportDTO reportDTO = new ReportDTO();
+    }
 
     public TagDTO toTagDTO(TagVO tagVO) {
         TagDTO tagDTO = new TagDTO();
