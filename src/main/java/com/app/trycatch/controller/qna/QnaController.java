@@ -37,7 +37,6 @@ public class QnaController {
     @GetMapping("/search-company")
     @ResponseBody
     public List<CorpNameKeywordDTO> searchCompany(@RequestParam String keyword) {
-        log.info("{}", keyword);
         if (keyword == null || keyword.trim().isEmpty()) {
             return List.of();
         }
@@ -45,10 +44,12 @@ public class QnaController {
     }
 
     @GetMapping("/list")
-    public String list(@RequestParam(defaultValue = "1") int page, Model model) {
-        model.addAttribute("qnaWithPaging", qnaService.list(page));
-        // TODO: 세션 연동 후 session.getAttribute("member") 값이 채워지면 자동으로 로그인 UI 전환
+    public String list(@RequestParam(defaultValue = "1") int page,
+                       @RequestParam(defaultValue = "1") int sort,
+                       Model model) {
+        model.addAttribute("qnaWithPaging", qnaService.list(page, sort));
         model.addAttribute("loginMember", session.getAttribute("member"));
+        model.addAttribute("currentSort", sort);
         return "qna/QnA";
     }
 
@@ -61,7 +62,11 @@ public class QnaController {
 
     @GetMapping("/write")
     public String goToWriteForm(Model model) {
-        model.addAttribute("loginMember", session.getAttribute("member"));
+        Object member = session.getAttribute("member");
+        if (member == null) {
+            return "redirect:/main/log-in";
+        }
+        model.addAttribute("loginMember", member);
         return "qna/write";
     }
 

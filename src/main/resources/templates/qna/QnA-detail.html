@@ -240,12 +240,21 @@
                                         class="labelSwiper swiper-container swiper-container-horizontal"
                                     >
                                         <div class="labelBx swiper-wrapper">
-                                            <a
-                                                href=""
-                                                class="label swiper-slide swiper-slide-active"
-                                                target="_blank"
-                                                >심사</a
-                                            >
+                                            <!-- 직무선배 -->
+                                            <a th:if="${qna.jobCategoryName != null and qna.jobCategoryName != ''}"
+                                               href=""
+                                               class="label swiper-slide swiper-slide-active"
+                                               th:text="${qna.jobCategoryName}"></a>
+                                            <!-- 기업선배 -->
+                                            <a th:if="${qna.companyName != null and qna.companyName != ''}"
+                                               href=""
+                                               class="label swiper-slide swiper-slide-active"
+                                               th:text="${qna.companyName}"></a>
+                                            <!-- 동문선배 -->
+                                            <a th:if="${qna.collegeFriend != null and qna.collegeFriend != ''}"
+                                               href=""
+                                               class="label swiper-slide swiper-slide-active"
+                                               th:text="${qna.collegeFriend}"></a>
                                         </div>
                                     </div>
                                     <span class="point qnaSpB">5</span>
@@ -262,7 +271,7 @@
                                             >
                                             <span th:text="${qna.qnaViewCount}"></span>
                                         </span>
-                                        <span class="cell" th:text="${qna.createdDatetime}">작성일</span>
+                                        <span class="cell devQnaCreatedTime" th:data-created="${qna.createdDatetime}"></span>
                                     </div>
                                     <div class="post-util">
                                         <div class="post-util-item">

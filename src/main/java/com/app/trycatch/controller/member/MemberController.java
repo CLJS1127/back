@@ -56,7 +56,6 @@ public class MemberController {
 
     @GetMapping("kakao-join")
     public String kakaoCallback(@RequestParam("code") String code, Model model) {
-        log.info("========== kakaoCallback() GET 호출됨, code={} ==========", code);
         IndividualMemberDTO kakaoInfo = kakaoService.kakaoLogin(code);
 
         if (kakaoInfo.getId() != null) {
@@ -73,7 +72,6 @@ public class MemberController {
 
     @PostMapping("kakao-join")
     public RedirectView kakaoJoin(IndividualMemberDTO individualMemberDTO) {
-        log.info("========== kakaoJoin() 호출됨 ==========");
         log.info("받은 데이터: email={}, name={}, birth={}",
             individualMemberDTO.getMemberEmail(),
             individualMemberDTO.getMemberName(),

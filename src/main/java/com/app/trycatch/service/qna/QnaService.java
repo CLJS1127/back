@@ -63,11 +63,11 @@ public class QnaService {
         }
     }
 
-    public QnaWithPagingDTO list(int page) {
+    public QnaWithPagingDTO list(int page, int sort) {
         QnaWithPagingDTO result = new QnaWithPagingDTO();
         int total = qnaDAO.findTotal();
         Criteria criteria = new Criteria(page, total);
-        List<QnaDTO> qnas = qnaDAO.findAll(criteria);
+        List<QnaDTO> qnas = qnaDAO.findAll(criteria, sort);
         criteria.setHasMore(qnas.size() > criteria.getRowCount());
         if (criteria.isHasMore()) {
             qnas.remove(qnas.size() - 1);

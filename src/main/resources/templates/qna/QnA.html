@@ -653,7 +653,8 @@
                         <li class="sort-list-item">
                             <button
                                     type="button"
-                                    class="sort-list-btn qnaSpB devBtnOrderType on"
+                                    th:classappend="${currentSort == 1} ? 'on'"
+                                    class="sort-list-btn qnaSpB devBtnOrderType"
                                     data-ordertype="1"
                             >
                                 최신순
@@ -662,6 +663,7 @@
                         <li class="sort-list-item">
                             <button
                                     type="button"
+                                    th:classappend="${currentSort == 3} ? 'on'"
                                     class="sort-list-btn qnaSpB devBtnOrderType"
                                     data-ordertype="3"
                             >
@@ -671,6 +673,7 @@
                         <li class="sort-list-item">
                             <button
                                     type="button"
+                                    th:classappend="${currentSort == 2} ? 'on'"
                                     class="sort-list-btn qnaSpB devBtnOrderType"
                                     data-ordertype="2"
                             >
@@ -680,6 +683,7 @@
                         <li class="sort-list-item">
                             <button
                                     type="button"
+                                    th:classappend="${currentSort == 4} ? 'on'"
                                     class="sort-list-btn qnaSpB devBtnOrderType"
                                     data-ordertype="4"
                             >
@@ -691,13 +695,27 @@
                 <div class="listWrap">
                     <ul style="display: block">
                         <li th:each="qna : ${qnaWithPaging.qnas}">
-                            <div class="topArea" th:if="${qna.jobCategoryName != null and qna.jobCategoryName != ''}">
+                            <div class="topArea"
+                                 th:if="${(qna.jobCategoryName != null and qna.jobCategoryName != '')
+                                      or (qna.companyName != null and qna.companyName != '')
+                                      or (qna.collegeFriend != null and qna.collegeFriend != '')}">
                                 <div class="labelSwiper swiper-container swiper-container-horizontal">
                                     <div class="labelBx swiper-wrapper">
-                                        <a th:href="@{/qna/detail(id=${qna.id})}"
+                                        <!-- 직무선배 -->
+                                        <a th:if="${qna.jobCategoryName != null and qna.jobCategoryName != ''}"
+                                           th:href="@{/qna/detail(id=${qna.id})}"
                                            class="label swiper-slide swiper-slide-active"
-                                           th:text="${qna.jobCategoryName}">
-                                        </a>
+                                           th:text="${qna.jobCategoryName}"></a>
+                                        <!-- 기업선배 -->
+                                        <a th:if="${qna.companyName != null and qna.companyName != ''}"
+                                           th:href="@{/qna/detail(id=${qna.id})}"
+                                           class="label swiper-slide swiper-slide-active"
+                                           th:text="${qna.companyName}"></a>
+                                        <!-- 동문선배 -->
+                                        <a th:if="${qna.collegeFriend != null and qna.collegeFriend != ''}"
+                                           th:href="@{/qna/detail(id=${qna.id})}"
+                                           class="label swiper-slide swiper-slide-active"
+                                           th:text="${qna.collegeFriend}"></a>
                                     </div>
                                 </div>
                             </div>
@@ -725,7 +743,7 @@
                                         <i class="qnaSpB icon-answer-bubble">답변</i>
                                         <span class="num">0</span>
                                     </span>
-                                    <span class="cell" th:text="${qna.createdDatetime}"></span>
+                                    <span class="cell devQnaCreatedTime" th:data-created="${qna.createdDatetime}"></span>
                                 </div>
                                 <div class="post-util has-tooltip">
                                     <div class="post-util-item">
@@ -743,7 +761,24 @@
                                                 class="icon-more-button qnaSpB devQnaListPopupMenuButton">
                                             더보기
                                         </button>
-                                        <div class="view-more-layer devQnaListPopupMenu">
+                                        <!-- 내 글: 수정/삭제 -->
+                                        <div class="view-more-layer devQnaListPopupMenu"
+                                             th:if="${loginMember != null and loginMember.id == qna.individualMemberId}">
+                                            <ul>
+                                                <li>
+                                                    <a th:href="@{/qna/update(id=${qna.id})}"
+                                                       class="view-more-item">수정하기</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:;"
+                                                       class="view-more-item devDelete"
+                                                       th:data-qstn-no="${qna.id}">삭제하기</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!-- 남의 글 또는 비로그인: 신고 -->
+                                        <div class="view-more-layer devQnaListPopupMenu"
+                                             th:unless="${loginMember != null and loginMember.id == qna.individualMemberId}">
                                             <ul>
                                                 <li>
                                                     <a href="javascript:;"
@@ -760,19 +795,19 @@
                     </ul>
                     <div class="tplPagination newVer" role="navigation">
                         <p th:if="${qnaWithPaging.criteria.startPage > 1}">
-                            <a th:href="@{/qna/list(page=${qnaWithPaging.criteria.startPage - 1})}"
+                            <a th:href="@{/qna/list(page=${qnaWithPaging.criteria.startPage - 1}, sort=${currentSort})}"
                                class="tplBtn btnPgnPrev"><i class="ico"> </i>이전</a>
                         </p>
                         <ul>
                             <li th:each="i : ${#numbers.sequence(qnaWithPaging.criteria.startPage, qnaWithPaging.criteria.endPage)}">
                                 <span th:if="${i == qnaWithPaging.criteria.page}" class="now" th:text="${i}"></span>
                                 <a th:unless="${i == qnaWithPaging.criteria.page}"
-                                   th:href="@{/qna/list(page=${i})}"
+                                   th:href="@{/qna/list(page=${i}, sort=${currentSort})}"
                                    th:text="${i}"></a>
                             </li>
                         </ul>
                         <p th:if="${qnaWithPaging.criteria.endPage < qnaWithPaging.criteria.realEnd}">
-                            <a th:href="@{/qna/list(page=${qnaWithPaging.criteria.endPage + 1})}"
+                            <a th:href="@{/qna/list(page=${qnaWithPaging.criteria.endPage + 1}, sort=${currentSort})}"
                                class="tplBtn btnPgnNext">다음<i class="ico"> </i></a>
                         </p>
                     </div>
