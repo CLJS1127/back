@@ -20,8 +20,8 @@ public class QnaDAO {
     }
 
 //    목록 (페이징)
-    public List<QnaDTO> findAll(Criteria criteria) {
-        return qnaMapper.selectAll(criteria);
+    public List<QnaDTO> findAll(Criteria criteria, int sort) {
+        return qnaMapper.selectAll(criteria, sort);
     }
 
 //    전체 개수

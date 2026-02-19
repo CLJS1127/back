@@ -14,7 +14,7 @@ import java.util.List;
 public interface QnaMapper {
     void insert(QnaVO qnaVO);
     QnaDTO selectById(Long id);
-    List<QnaDTO> selectAll(Criteria criteria);
+    List<QnaDTO> selectAll(@Param("criteria") Criteria criteria, @Param("sort") int sort);
     int selectTotal();
     void increaseViewCount(Long id);
     void delete(Long id);

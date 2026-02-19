@@ -704,3 +704,24 @@ comtModifySubmitButtons.forEach((comtModifySubmitButton) => {
         location.href = "/QnA-detail.html";
     });
 });
+
+// 게시 시간 상대 표시
+function formatRelativeTime(datetimeStr) {
+    if (!datetimeStr) return "";
+    const created = new Date(datetimeStr.replace(" ", "T"));
+    const now = new Date();
+    const diffSec = Math.floor((now - created) / 1000);
+
+    if (diffSec < 60) return diffSec + "초 전";
+    const diffMin = Math.floor(diffSec / 60);
+    if (diffMin < 60) return diffMin + "분 전";
+    const diffHour = Math.floor(diffMin / 60);
+    if (diffHour < 24) return diffHour + "시간 전";
+    const diffDay = Math.floor(diffHour / 24);
+    if (diffDay < 7) return diffDay + "일 전";
+    return datetimeStr;
+}
+
+document.querySelectorAll(".devQnaCreatedTime").forEach(el => {
+    el.textContent = formatRelativeTime(el.dataset.created);
+});
