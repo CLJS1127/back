@@ -15,7 +15,7 @@ create table tbl_skill_log
 );
 
 
-select * from tbl_skill_log;
+select * from tbl_skill_log where id = 30;
 set foreign_key_checks = 1;
 drop table tbl_skill_log;
 delete from tbl_skill_log;
@@ -26,3 +26,5 @@ from tbl_member m join tbl_skill_log s
 on m.id = s.member_id
 where m.id;
 
+select * from tbl_tag  where skill_log_id = 30;
+select * from view_skill_log_file  where skill_log_id = 30;
