@@ -25,14 +25,15 @@ public class QnaServiceTests {
 
     @Test
     public void testList_최신순() {
-        QnaWithPagingDTO result = qnaService.list(1, 1);
+        QnaWithPagingDTO result = qnaService.list(1, 1, "테스트");
+
         log.info("최신순 total={}, qna 수={}", result.getTotal(), result.getQnas().size());
         result.getQnas().forEach(q -> log.info("  최신순: id={}, title={}", q.getId(), q.getQnaTitle()));
     }
 
     @Test
     public void testList_인기순() {
-        QnaWithPagingDTO result = qnaService.list(1, 3);
+        QnaWithPagingDTO result = qnaService.list(1, 3, "테스트");
         log.info("조회수순 total={}, qna 수={}", result.getTotal(), result.getQnas().size());
         result.getQnas().forEach(q -> log.info("  조회수순: id={}, title={}, view={}", q.getId(), q.getQnaTitle(), q.getQnaViewCount()));
     }

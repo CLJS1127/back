@@ -25,33 +25,33 @@ public class QnaMapperTests {
 
     @Test
     public void testSelectAll_최신순() {
-        int total = qnaMapper.selectTotal();
+        int total = qnaMapper.selectTotal(null);
         Criteria criteria = new Criteria(1, total);
-        List<QnaDTO> qnas = qnaMapper.selectAll(criteria, 1);
+        List<QnaDTO> qnas = qnaMapper.selectAll(criteria, 1, null);
         qnas.forEach(q -> log.info("최신순: {}", q));
     }
 
     @Test
     public void testSelectAll_좋아요순() {
-        int total = qnaMapper.selectTotal();
+        int total = qnaMapper.selectTotal(null);
         Criteria criteria = new Criteria(1, total);
-        List<QnaDTO> qnas = qnaMapper.selectAll(criteria, 2);
+        List<QnaDTO> qnas = qnaMapper.selectAll(criteria, 2, null);
         qnas.forEach(q -> log.info("좋아요순: {}", q));
     }
 
     @Test
     public void testSelectAll_인기순() {
-        int total = qnaMapper.selectTotal();
+        int total = qnaMapper.selectTotal(null);
         Criteria criteria = new Criteria(1, total);
-        List<QnaDTO> qnas = qnaMapper.selectAll(criteria, 3);
+        List<QnaDTO> qnas = qnaMapper.selectAll(criteria, 3, null);
         qnas.forEach(q -> log.info("조회수순: {}", q));
     }
 
     @Test
     public void testSelectAll_댓글순() {
-        int total = qnaMapper.selectTotal();
+        int total = qnaMapper.selectTotal(null);
         Criteria criteria = new Criteria(1, total);
-        List<QnaDTO> qnas = qnaMapper.selectAll(criteria, 4);
+        List<QnaDTO> qnas = qnaMapper.selectAll(criteria, 4, null);
         qnas.forEach(q -> log.info("댓글순: {}", q));
     }
 

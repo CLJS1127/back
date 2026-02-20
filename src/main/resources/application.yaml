@@ -6,15 +6,32 @@ server:
       timeout: 30m
 
 spring:
-  servlet:
-    multipart:
-      max-file-size: 10MB
-      max-request-size: 30MB
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/try_catch?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
-    username: TRY-CATCH
+    url: jdbc:mysql://localhost:3306/spring?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    username: spring
     password: 1234
+
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 10MB
+      max-file-size: 5MB
+      max-request-size: 15MB
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username:
+    password:
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+#            auth, 사용자 인증(username, password 확인)
+#            start tls(Transport Layer Security), 메일 내용이 네트워크상에서 암호화되어 전송
 
 mybatis:
   configuration:
