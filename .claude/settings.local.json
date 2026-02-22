@@ -9,7 +9,8 @@
       "Bash(cmd /c:*)",
       "Bash(python:*)",
       "Bash(powershell.exe -Command \"Get-Content ''C:\\\\gb_0900_ljs\\\\spring\\\\workspace\\\\trycatch\\\\src\\\\main\\\\resources\\\\templates\\\\qna\\\\QnA-detail.html'' -Encoding UTF8 | Measure-Object -Line | Select-Object -ExpandProperty Lines\")",
-      "Bash(powershell.exe -Command:*)"
+      "Bash(powershell.exe -Command:*)",
+      "Bash(find:*)"
     ]
   }
 }
