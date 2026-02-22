@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>기업정보관리 | TRY-CATCH</title>
-    <link rel="stylesheet" href="/static/css/corporate/profile.css">
+    <link rel="stylesheet" href="/css/corporate/header.css">
+    <link rel="stylesheet" href="/css/corporate/footer.css">
+    <link rel="stylesheet" href="/css/corporate/profile.css">
 </head>
 <body class="mtcSubInfo mtcSubCompany">
     <div id="wrap">
+        <header th:replace="~{/corporate/header.html::header}"></header>
         <div class="sideTrue devUseTopBtn" id="container">
             <!-- 어사이드 -->
             <div id="sideNav" class="devCorpLogin">
@@ -32,14 +35,14 @@
                 <div class="adLeftBx">
                     <div class="ad-container">
                         <a href="javascript:;" class="imgAdBnnr">
-                            <img src="/static/images/corporate/54af1f5a-b9e0-45bb-8f00-cb06f2d01441.png">
+                            <img src="/images/corporate/54af1f5a-b9e0-45bb-8f00-cb06f2d01441.png">
                             <!-- onerror -->
                         </a>
                     </div>
                 </div>
                 <div class="adLeftBx">
                     <a href="">
-                        <img src="/static/images/corporate/lnb_certify_banner.png">
+                        <img src="/images/corporate/lnb_certify_banner.png">
                     </a>
                 </div>
 
@@ -1073,8 +1076,9 @@
                 <a id="btnMtcTop" href="javascript:;" class="mtcBtn btnMtcTop"></a>
             </div>
         </div>
+        <footer th:replace="~{/corporate/footer.html::footer}"></footer>
     </div>
 </body>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="/static/js/corporate/profile/event.js"></script>
+<script src="/js/corporate/profile/event.js"></script>
 </html>

@@ -21,6 +21,8 @@ public class CorporateController {
     private final HttpSession session;
     private final CorporateService corporateService;
 
+    private static final String LOGIN_REDIRECT = "redirect:/main/log-in";
+
     /** 세션에서 기업회원 id 추출 */
     private Long getCorpId() {
         Object member = session.getAttribute("member");
@@ -28,15 +30,23 @@ public class CorporateController {
         throw new IllegalStateException("기업회원 로그인이 필요합니다.");
     }
 
+    /** 로그인 여부 확인 — 비로그인이면 true */
+    private boolean notLoggedIn() {
+        return !(session.getAttribute("member") instanceof MemberDTO);
+    }
+
     // ── 홈 대시보드 ────────────────────────────────────────────────────
 
     @GetMapping("/home")
     public String home(Model model) {
-        Long corpId = getCorpId();
-        model.addAttribute("corpInfo", corporateService.getCorpInfo(corpId));
-        model.addAttribute("programStats", corporateService.getProgramStats(corpId));
-        model.addAttribute("recentPrograms", corporateService.getRecentPrograms(corpId, 5));
-        model.addAttribute("loginMember", session.getAttribute("member"));
+        Object member = session.getAttribute("member");
+        if (member instanceof MemberDTO dto) {
+            Long corpId = dto.getId();
+            model.addAttribute("corpInfo", corporateService.getCorpInfo(corpId));
+            model.addAttribute("programStats", corporateService.getProgramStats(corpId));
+            model.addAttribute("recentPrograms", corporateService.getRecentPrograms(corpId, 5));
+        }
+        model.addAttribute("loginMember", member);
         return "corporate/home";
     }
 
@@ -44,6 +54,7 @@ public class CorporateController {
 
     @GetMapping("/profile")
     public String profileForm(Model model) {
+        if (notLoggedIn()) return LOGIN_REDIRECT;
         model.addAttribute("corpInfo", corporateService.getCorpInfo(getCorpId()));
         model.addAttribute("loginMember", session.getAttribute("member"));
         return "corporate/profile";
@@ -64,6 +75,7 @@ public class CorporateController {
 
     @GetMapping("/member-info")
     public String memberInfoForm(Model model) {
+        if (notLoggedIn()) return LOGIN_REDIRECT;
         model.addAttribute("corpInfo", corporateService.getCorpInfo(getCorpId()));
         model.addAttribute("loginMember", session.getAttribute("member"));
         return "corporate/member-info";
@@ -80,6 +92,7 @@ public class CorporateController {
 
     @GetMapping("/team-member")
     public String teamMember(@RequestParam(defaultValue = "1") int page, Model model) {
+        if (notLoggedIn()) return LOGIN_REDIRECT;
         model.addAttribute("teamWithPaging", corporateService.getTeamMembers(getCorpId(), page));
         model.addAttribute("loginMember", session.getAttribute("member"));
         return "corporate/team-member";
@@ -106,6 +119,7 @@ public class CorporateController {
             @RequestParam(defaultValue = "") String SrchKeyword,
             @RequestParam(defaultValue = "10") int TopCount,
             Model model) {
+        if (notLoggedIn()) return LOGIN_REDIRECT;
         Long corpId = getCorpId();
         model.addAttribute("programWithPaging",
                 corporateService.getPrograms(corpId, page, TopCount, status, SrchKeyword));
@@ -125,6 +139,7 @@ public class CorporateController {
             @RequestParam(defaultValue = "") String status,
             @RequestParam(defaultValue = "1") int page,
             Model model) {
+        if (notLoggedIn()) return LOGIN_REDIRECT;
         model.addAttribute("participantWithPaging",
                 corporateService.getParticipants(programId, getCorpId(), status, page));
         model.addAttribute("programId", programId);

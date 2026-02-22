@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TRY-CATCH 체험 서비스 - 새로운 인재 채용 전략 | TRY-CATCH</title>
-    <link rel="stylesheet" href="/static/css/corporate/header.css">
-    <link rel="stylesheet" href="/static/css/corporate/footer.css">
-    <link rel="stylesheet" href="/static/css/corporate/home.css">
-    <link rel="shortcut icon" href="https://www.jobkorea.co.kr/favicon.ico?202601061400" type="image/x-icon">
+    <link rel="stylesheet" href="/css/corporate/header.css">
+    <link rel="stylesheet" href="/css/corporate/footer.css">
+    <link rel="stylesheet" href="/css/corporate/home.css">
 </head>
 <body>
     <div id="wrap">
-        <!-- 헤더 -->
+        <header th:replace="~{/corporate/header.html::header}"></header>
         <!-- 알림 (공고, 공지사항) -->
 
-        <!-- server: 비로그인 시에만 나타나도록 -->
-        <!-- <div class="start-section">
+        <!-- 비로그인 시에만 나타남 -->
+        <div class="start-section" th:if="${loginMember == null}">
             <div class="inner">
                 <div class="border-round-section devCorpLogin">
                     <div class="title-box">
@@ -25,31 +24,29 @@
                     </div>
                     <div class="button-box clearfix">
                         <span class="">
-                            <a href="" class="blue">로그인</a>
+                            <a th:href="@{/main/log-in}" class="blue">로그인</a>
                         </span>
-                        <a href="">회원가입</a>
+                        <a th:href="@{/main/company-join}">회원가입</a>
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
 
-        <!-- 배너 -->
-        <!-- server: 로그인 시에만 나타나도록 -->
-        <div class="row-article">
+        <!-- 배너 (로그인 시에만) -->
+        <div class="row-article" th:if="${loginMember != null}">
             <div class="inner">
                 <div class="col-3-section">
                     <div class="banner-smartfit-notice">
                         <a href="" target="_blank" class="smartfit-banner-link">
-                            <img src="/static/images/corporate/banner-smartfit-home.png">
+                            <img src="/images/corporate/banner-smartfit-home.png">
                         </a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 알림 (현황, 상품), 기업 이름/로고 -->
-        <!-- server: 로그인 시에만 나타나도록 -->
-        <div class="row-article">
+        <!-- 알림 (현황, 상품), 기업 이름/로고 (로그인 시에만) -->
+        <div class="row-article" th:if="${loginMember != null}">
             <div class="inner">
                 <div class="col-3-section">
                     <div class="info-section">
@@ -57,7 +54,7 @@
                             <div class="contents-box notService">
                                 <a th:href="@{/corporate/profile}">
                                     <div class="logo">
-                                        <img src="/static/images/corporate/logo_default.png">
+                                        <img src="/images/corporate/logo_default.png">
                                     </div>
                                 </a>
                                 <div class="company">
@@ -72,9 +69,8 @@
             </div>
         </div>
         
-        <!-- 공고·지원자 관리 -->
-        <!-- server: 로그인 시에만 나타나도록 -->
-        <div class="row-article">
+        <!-- 공고·지원자 관리 (로그인 시에만) -->
+        <div class="row-article" th:if="${loginMember != null}">
             <div class="inner clearfix">
                 <div class="col-1-large-section">
                     <!-- 공고·지원자 관리 -->
@@ -214,13 +210,13 @@
                             <div class="onepick-account-review">
                                 <h3>
                                     <span class="title-ico">
-                                        <img src="/static/images/corporate/review_company_ico01.png">
+                                        <img src="/images/corporate/review_company_ico01.png">
                                     </span>
                                     <span class="title-ico">
-                                        <img src="/static/images/corporate/review_company_ico02.png">
+                                        <img src="/images/corporate/review_company_ico02.png">
                                     </span>
                                     <span class="title-ico">
-                                        <img src="/static/images/corporate/review_company_ico03.png">
+                                        <img src="/images/corporate/review_company_ico03.png">
                                     </span>
                                     원픽으로 채용 성공한 기업들의 후기
                                 </h3>
@@ -412,7 +408,7 @@
                         <div class="border-round-section clearfix">
                             <div class="ad-container divAdBnnr_16_0">
                                 <a href="">
-                                    <img src="/static/images/corporate/banner.png">
+                                    <img src="/images/corporate/banner.png">
                                 </a>
                                 <!-- javascript -->
                             </div>
@@ -818,9 +814,8 @@
         </div>
         <!-- javascript: 클릭 시, active 클래스 추가 -->
 
-        <!-- footer -->
-        
+        <footer th:replace="~{/corporate/footer.html::footer}"></footer>
     </div>
 </body>
-<script src="/static/js/corporate/home/event.js"></script>
+<script src="/js/corporate/home/event.js"></script>
 </html>
