@@ -6,12 +6,17 @@ import com.app.trycatch.dto.experience.ExperienceProgramDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.app.trycatch.domain.experience.ExperienceProgramVO;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 @Mapper
 public interface ExperienceProgramMapper {
+//    프로그램 등록
+    public void insert(ExperienceProgramVO experienceProgramVO);
+
 //    skill-log 최근 공고
 //    목록
     public List<ExperienceProgramDTO> selectAllByMemberIdOfChallenger(@Param("criteria") Criteria criteria,

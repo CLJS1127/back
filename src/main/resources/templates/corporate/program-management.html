@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>전체 채용공고 | TRY-CATCH</title>
+    <link rel="stylesheet" href="/css/corporate/header.css">
+    <link rel="stylesheet" href="/css/corporate/footer.css">
     <link rel="stylesheet" href="/css/corporate/program-management.css">
 </head>
 <body class="mtcSubNotice">
     <div id="wrap">
+        <div th:replace="~{corporate/header :: header}"></div>
         <div class="devUseTopBtn" id="container">
             <!-- 배너 -->
             <div class="banner-smartfit-notice">
@@ -330,6 +333,7 @@
                 <a id="btnMtcTop" href="#skipNavigation" class="mtcBtn btnMtcTop"></a>
             </div>
         </div>
+        <div th:replace="~{corporate/footer :: footer}"></div>
     </div>
 </body>
 <script src="/js/corporate/program-management/event.js"></script>

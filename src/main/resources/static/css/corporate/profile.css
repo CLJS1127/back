@@ -138,10 +138,10 @@ address, caption, em {
     padding: 12px 0;
     line-height: 1.4;
 }
-#sideNav .nav li.on > a {
+#sideNav .nav li.on > span {
     font-weight: bold;
 }
-#sideNav .nav li > a:hover, #sideNav .nav li.on > a {
+#sideNav .nav li > a:hover, #sideNav .nav li.on > span {
     color: #006e3f;
 }
 #sideNav .nav li > a {

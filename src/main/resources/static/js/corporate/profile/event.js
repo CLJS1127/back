@@ -534,15 +534,13 @@ const executeDaumPostcode = () => {
                 if (extraAddr !== "") {
                     extraAddr = " (" + extraAddr + ")";
                 }
-                document.getElementById("extraAddress").value = extraAddr;
             } else {
                 addr = data.jibunAddress;
-                document.getElementById("extraAddress").value = "";
             }
 
             // 우편번호와 주소 정보 입력
             document.getElementById("postcode").value = data.zonecode;
-            document.getElementById("address").value = addr;
+            document.getElementById("address").value = addr + extraAddr;
             document.getElementById("detailAddress").focus();
         },
     }).open();
@@ -945,6 +943,7 @@ submitButton.addEventListener("click", (e) => {
         "txtHomepage",
         "devFax",
         "devAddrForeign",
+        "detailAddress",
     ];
     const domesticNoSettings = ["devNation"];
     const foreignNoSettings = [

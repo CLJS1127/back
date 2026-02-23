@@ -7,15 +7,14 @@
     <link rel="stylesheet" href="/css/corporate/header.css">
     <link rel="stylesheet" href="/css/corporate/footer.css">
     <link rel="stylesheet" href="/css/corporate/home.css">
-    <link rel="shortcut icon" href="https://www.jobkorea.co.kr/favicon.ico?202601061400" type="image/x-icon">
 </head>
 <body>
     <div id="wrap">
         <!-- 헤더 -->
-        <!-- 알림 (공고, 공지사항) -->
+        <div th:replace="~{corporate/header :: header}"></div>
 
-        <!-- server: 비로그인 시에만 나타나도록 -->
-        <!-- <div class="start-section">
+        <!-- 비로그인 시에만 나타나도록 -->
+        <div class="start-section" th:if="${loginMember == null}">
             <div class="inner">
                 <div class="border-round-section devCorpLogin">
                     <div class="title-box">
@@ -25,17 +24,17 @@
                     </div>
                     <div class="button-box clearfix">
                         <span class="">
-                            <a href="" class="blue">로그인</a>
+                            <a th:href="@{/main/log-in}" class="blue">로그인</a>
                         </span>
-                        <a href="">회원가입</a>
+                        <a th:href="@{/main/company-join}">회원가입</a>
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
 
         <!-- 배너 -->
-        <!-- server: 로그인 시에만 나타나도록 -->
-        <div class="row-article">
+        <!-- 로그인 시에만 나타나도록 -->
+        <div class="row-article" th:if="${loginMember != null}">
             <div class="inner">
                 <div class="col-3-section">
                     <div class="banner-smartfit-notice">
@@ -48,8 +47,8 @@
         </div>
 
         <!-- 알림 (현황, 상품), 기업 이름/로고 -->
-        <!-- server: 로그인 시에만 나타나도록 -->
-        <div class="row-article">
+        <!-- 로그인 시에만 나타나도록 -->
+        <div class="row-article" th:if="${loginMember != null}">
             <div class="inner">
                 <div class="col-3-section">
                     <div class="info-section">
@@ -65,10 +64,10 @@
                                     </div>
                                 </a>
                                 <div class="company">
-                                    <span class="text">기업 이름</span>
+                                    <span class="text" th:text="${corpInfo.corpCompanyName}">기업 이름</span>
                                 </div>
-                                <!-- server: 버튼 클릭 시, 기업 프로필 페이지로 이동 -->
-                                <a href="" class="setting-button"></a>
+                                <!-- 버튼 클릭 시, 기업 프로필 페이지로 이동 -->
+                                <a th:href="@{/corporate/profile}" class="setting-button"></a>
                                 <!-- onclick -->
                             </div>
                         </div>
@@ -78,8 +77,8 @@
         </div>
         
         <!-- 공고·지원자 관리 -->
-        <!-- server: 로그인 시에만 나타나도록 -->
-        <div class="row-article">
+        <!-- 로그인 시에만 나타나도록 -->
+        <div class="row-article" th:if="${loginMember != null}">
             <div class="inner clearfix">
                 <div class="col-1-large-section">
                     <!-- 공고·지원자 관리 -->
@@ -133,7 +132,7 @@
                                     <div class="text">인재를 채용할 계획이 있으신가요?</div>
                                     <ul class="button-list clearfix">
                                         <li>
-                                            <a href="" class="btn-blue">프로그램 등록</a>
+                                            <a th:href="@{/corporate/program-apply}" class="btn-blue">프로그램 등록</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -176,7 +175,7 @@
                                 <!-- onclick -->
                                 <h2>좋은 프로그램, 지금 등록하세요!</h2>
                                 <p>프로그램 등록부터 참여자 관리까지, 한 번에 해결합니다.</p>
-                                <a href="" class="button-regist">프로그램 등록</a>
+                                <a th:href="@{/corporate/program-apply}" class="button-regist">프로그램 등록</a>
                             </div>
 
                             <!-- service -->
@@ -814,7 +813,7 @@
         <!-- javascript: 클릭 시, active 클래스 추가 -->
 
         <!-- footer -->
-        
+        <div th:replace="~{corporate/footer :: footer}"></div>
     </div>
 </body>
 <script src="/js/corporate/home/event.js"></script>

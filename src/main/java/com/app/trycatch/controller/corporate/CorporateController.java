@@ -1,5 +1,7 @@
 package com.app.trycatch.controller.corporate;
 
+import com.app.trycatch.common.enumeration.experience.ExperienceProgramStatus;
+import com.app.trycatch.dto.experience.ExperienceProgramDTO;
 import com.app.trycatch.dto.member.CorpMemberDTO;
 import com.app.trycatch.dto.member.IndividualMemberDTO;
 import com.app.trycatch.dto.member.MemberDTO;
@@ -119,6 +121,7 @@ public class CorporateController {
         if (notCorpMember()) return MAIN_REDIRECT;
         Long corpId = getMemberId();
         model.addAttribute("teamWithPaging", corporateService.getTeamMembers(corpId, page));
+        model.addAttribute("corpInfo", corporateService.getCorpInfo(corpId));
         model.addAttribute("loginMember", session.getAttribute("member"));
         return "corporate/team-member";
     }
@@ -135,6 +138,29 @@ public class CorporateController {
         if (notCorpMember()) return MAIN_REDIRECT;
         corporateService.removeTeamMember(memberId, getMemberId());
         return "redirect:/corporate/team-member";
+    }
+
+    // ── 프로그램 등록 ──────────────────────────────────────────────────
+
+    @GetMapping("/program-apply")
+    public String programApplyForm(Model model) {
+        if (notLoggedIn()) return LOGIN_REDIRECT;
+        if (notCorpMember()) return MAIN_REDIRECT;
+        Long corpId = getMemberId();
+        model.addAttribute("corpInfo", corporateService.getCorpInfo(corpId));
+        model.addAttribute("loginMember", session.getAttribute("member"));
+        return "corporate/program-apply";
+    }
+
+    @PostMapping("/program-apply")
+    public String programApplySave(ExperienceProgramDTO dto) {
+        if (notCorpMember()) return MAIN_REDIRECT;
+        Long corpId = getMemberId();
+        dto.setCorpId(corpId);
+        dto.setExperienceProgramStatus(ExperienceProgramStatus.RECRUITING);
+        dto.setExperienceProgramDeadline(dto.getExperienceProgramEndDate());
+        corporateService.createProgram(dto);
+        return "redirect:/corporate/program-management";
     }
 
     // ── 프로그램관리 ───────────────────────────────────────────────────
@@ -155,6 +181,7 @@ public class CorporateController {
         model.addAttribute("currentStatus", status);
         model.addAttribute("currentKeyword", SrchKeyword);
         model.addAttribute("currentTopCount", TopCount);
+        model.addAttribute("corpInfo", corporateService.getCorpInfo(corpId));
         model.addAttribute("loginMember", session.getAttribute("member"));
         return "corporate/program-management";
     }
@@ -174,6 +201,7 @@ public class CorporateController {
                 corporateService.getParticipants(programId, corpId, status, page));
         model.addAttribute("programId", programId);
         model.addAttribute("currentStatus", status);
+        model.addAttribute("corpInfo", corporateService.getCorpInfo(corpId));
         model.addAttribute("loginMember", session.getAttribute("member"));
         return "corporate/participant-list";
     }

@@ -104,6 +104,25 @@
         LIMIT #{criteria.count} OFFSET #{criteria.offset}
     </select>
 
+    <!-- 프로그램 등록 -->
+    <insert id="insert">
+        INSERT INTO tbl_experience_program (
+            corp_id, experience_program_title, experience_program_description,
+            experience_program_level, experience_program_recruitment_count,
+            experience_program_work_days, experience_program_work_hours,
+            experience_program_start_date, experience_program_end_date,
+            experience_program_deadline, experience_program_status,
+            experience_program_view_count, experience_program_job
+        ) VALUES (
+            #{corpId}, #{experienceProgramTitle}, #{experienceProgramDescription},
+            #{experienceProgramLevel}, #{experienceProgramRecruitmentCount},
+            #{experienceProgramWorkDays}, #{experienceProgramWorkHours},
+            #{experienceProgramStartDate}, #{experienceProgramEndDate},
+            #{experienceProgramDeadline}, #{experienceProgramStatus},
+            0, #{experienceProgramJob}
+        )
+    </insert>
+
     <select id="selectById">
         select
             ep.id,

@@ -24,9 +24,6 @@
                             <a th:href="@{/main/company-join}">회원가입</a>
                         </li>
 
-                        <li>
-                            <a href="">고객센터</a>
-                        </li>
 
                         <!-- 로그인 시에만 표시 -->
                         <li th:if="${session.member != null}">
@@ -59,7 +56,7 @@
                             </li>
     
                             <li>
-                                <a href=""  onclick="checkLogin()">프로그램 등록</a>
+                                <a th:href="@{/corporate/program-apply}" onclick="checkLogin()">프로그램 등록</a>
                             </li>
 
                             <li>
@@ -163,7 +160,7 @@
                                 <!-- javascript: click 시, active 추가(모달) -->
                             </li>
                             <li>
-                                <a href="javascript:;" class="top-menu-modal-button">기업 이름</a>
+                                <a href="javascript:;" class="top-menu-modal-button" th:text="${corpInfo?.corpCompanyName}"></a>
                                 <div class="top-menu-modal">
                                     <ul>
                                         <!-- 담당자 로그인 시 -->
@@ -273,7 +270,7 @@
                             </li>
                         </ul>
                     </div>
-                    <a href="" class="write-button" onclick="checkLogin()">프로그램 등록</a>
+                    <a th:href="@{/corporate/program-apply}" class="write-button" onclick="checkLogin()">프로그램 등록</a>
                 </div>
             </div>
         </div>

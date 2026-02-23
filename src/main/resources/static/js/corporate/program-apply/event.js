@@ -72,42 +72,38 @@ endInputClick.addEventListener("click", (e) => {
     e.target.showPicker?.();
 });
 
-// 버튼 클릭 시 드롭다운 열리기
+// 이메일 드롭다운 (요소가 있을 때만)
 const emailBtn = document.querySelector(".btnSelType");
 const emailDropDown = document.querySelector(".lySelOption");
 
-emailBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    emailDropDown.style.display = "block";
-});
+if (emailBtn && emailDropDown) {
+    emailBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        emailDropDown.style.display = "block";
+    });
 
-// 드롭다운 내부 클릭 시 닫히지 않게
-emailDropDown.addEventListener("click", (e) => {
-    e.stopPropagation();
-});
+    emailDropDown.addEventListener("click", (e) => {
+        e.stopPropagation();
+    });
 
-// 바깥 클릭 시 닫기
-document.addEventListener("click", () => {
-    emailDropDown.style.display = "none";
-});
-
-// 스크롤 시 닫기
-window.addEventListener("scroll", () => {
-    emailDropDown.style.display = "none";
-});
-
-// 이메일 클릭 시 input에 value 들어가게
-const insertEmailBtn = document.querySelectorAll(".selTypeList li button");
-const emailValue = document.querySelector(".devEmailDomain");
-
-insertEmailBtn.forEach((Btn, i) => {
-    Btn.addEventListener("click", (e) => {
-        emailValue.value = Btn.textContent;
+    document.addEventListener("click", () => {
         emailDropDown.style.display = "none";
     });
-});
 
-console.log(insertEmailBtn);
+    window.addEventListener("scroll", () => {
+        emailDropDown.style.display = "none";
+    });
+
+    const insertEmailBtn = document.querySelectorAll(".selTypeList li button");
+    const emailValue = document.querySelector(".devEmailDomain");
+
+    insertEmailBtn.forEach((Btn, i) => {
+        Btn.addEventListener("click", (e) => {
+            emailValue.value = Btn.textContent;
+            emailDropDown.style.display = "none";
+        });
+    });
+}
 
 // 버튼 클릭 시 border 바뀌는 코드
 
@@ -119,3 +115,4 @@ changeMonthBtn.forEach((btn) => {
         btn.classList.add("button--active");
     });
 });
+

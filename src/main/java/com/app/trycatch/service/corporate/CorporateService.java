@@ -105,6 +105,13 @@ public class CorporateService {
         corpTeamMemberDAO.delete(memberId, corpId);
     }
 
+    // ── 프로그램 등록 ──────────────────────────────────────────────────
+
+    /** 새 프로그램 등록 */
+    public void createProgram(ExperienceProgramDTO dto) {
+        experienceProgramDAO.save(dto.toVO());
+    }
+
     // ── 프로그램 관리 ──────────────────────────────────────────────────
 
     /** 프로그램 목록 (페이징 + 상태 필터 + 키워드 검색) */
