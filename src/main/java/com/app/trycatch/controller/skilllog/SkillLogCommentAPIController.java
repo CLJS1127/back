@@ -20,25 +20,23 @@ public class SkillLogCommentAPIController {
 
 //    추가
     @PostMapping("write")
-    public void write(@RequestPart("comment") SkillLogCommentDTO skillLogCommentDTO,
-                      @RequestPart(value = "file", required = false) MultipartFile multipartFile){
+    public void write(SkillLogCommentDTO skillLogCommentDTO, @RequestParam("file") MultipartFile multipartFile){
         skillLogCommentService.write(skillLogCommentDTO, multipartFile);
     }
 
 //    목록
-    @GetMapping("comment-list/{page}")
-    public SkillLogCommentWithPagingDTO commentList(@PathVariable int page, Long id) {
-        return skillLogCommentService.getListInSkillLog(page, id);
-    }
-    @GetMapping("nested-comment-list/{page}")
-    public SkillLogNestedCommentWithPagingDTO commentList(@PathVariable int page, Long skillLogId, Long commentId) {
-        return skillLogCommentService.getListInSkillLogAndParentComment(page, skillLogId, commentId);
-    }
+//    @GetMapping("comment-list/{page}")
+//    public SkillLogCommentWithPagingDTO commentList(@PathVariable int page, Long id) {
+//        return skillLogCommentService.getListInSkillLog(page, id);
+//    }
+//    @GetMapping("nested-comment-list/{page}")
+//    public SkillLogNestedCommentWithPagingDTO commentList(@PathVariable int page, Long skillLogId, Long commentId) {
+//        return skillLogCommentService.getListInSkillLogAndParentComment(page, skillLogId, commentId);
+//    }
 
 //    수정
     @PutMapping("{id}")
-    public void update(@RequestPart("comment") SkillLogCommentDTO skillLogCommentDTO,
-                       @RequestPart(value = "file", required = false) MultipartFile multipartFile){
+    public void update(SkillLogCommentDTO skillLogCommentDTO, @RequestParam("file") MultipartFile multipartFile){
         skillLogCommentService.update(skillLogCommentDTO, multipartFile);
     }
 
