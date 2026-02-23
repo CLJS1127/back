@@ -106,6 +106,12 @@ public class MemberController {
         return "main/log-in";
     }
 
+    @PostMapping("corp-log-in")
+    public RedirectView corpLogin(MemberDTO memberDTO, @RequestParam(value = "re_url", defaultValue = "/corporate/home") String reUrl) {
+        session.setAttribute("member", corpService.login(memberDTO));
+        return new RedirectView(reUrl);
+    }
+
     @PostMapping("log-in")
     public RedirectView login(MemberDTO memberDTO, @RequestParam(value = "re_url", defaultValue = "/main/main") String reUrl, HttpServletResponse response) {
         session.setAttribute("member", individualMemberService.login(memberDTO));
