@@ -297,7 +297,7 @@
                                                 <div class="lyItems devlyIngItems" style="display: none">
                                                     <ul>
                                                         <li><a href="javascript:void(0);" data-val="">전체</a></li>
-                                                        <li><a href="javascript:void(0);" data-val="recruiting">진행중</a></li>
+                                                        <li><a href="javascript:void(0);" data-val="recruiting">모집 중</a></li>
                                                         <li><a href="javascript:void(0);" data-val="closed">마감</a></li>
                                                     </ul>
                                                 </div>
@@ -330,7 +330,7 @@
                                                         <li><a href="javascript:void(0);" data-val="applied">심사중</a></li>
                                                         <li><a href="javascript:void(0);" data-val="document_pass">참여중</a></li>
                                                         <li><a href="javascript:void(0);" data-val="document_fail">심사완료</a></li>
-                                                        <li><a href="javascript:void(0);" data-val="activity_done">수료</a></li>
+                                                        <li><a href="javascript:void(0);" data-val="activity_done">참여완료</a></li>
                                                         <li><a href="javascript:void(0);" data-val="cancelled">취소</a></li>
                                                     </ul>
                                                 </div>
@@ -443,8 +443,8 @@
                                         </td>
                                         <td>
                                             <span th:if="${apply.applyStatus == 'cancelled'}">지원취소됨</span>
-                                            <span th:if="${apply.applyStatus == 'document_pass'}">참여중</span>
-                                            <span th:if="${apply.applyStatus == 'activity_done'}">수료</span>
+                                            <span th:if="${apply.applyStatus == 'document_pass'}">마감</span>
+                                            <span th:if="${apply.applyStatus == 'activity_done'}">마감</span>
                                             <button th:if="${apply.applyStatus == 'applied' or apply.applyStatus == 'document_fail'}"
                                                     class="btn btnGyBd devBtnCancel devBtnOddInfo"
                                                     type="button"

@@ -26,23 +26,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
-    // 1. 지원취소 팝업 - 개별 리스너 등록 함수
-    const setupCancelListeners = () => {
-        document.querySelectorAll(".devBtnCancel").forEach(btn => {
-            if (btn.dataset.listenerAttached === "true") return;
-            btn.dataset.listenerAttached = "true";
-            btn.addEventListener("click", () => {
-                currentApplyId = btn.dataset.idx;
-                currentCancelBtn = btn;
-                currentApplyStatus = btn.dataset.status;
-                experienceLayout.openCancelPopup(dimmedDiv, popupApplyCancel);
-            });
-        });
-    };
-
+    // 1. 지원취소 팝업 - document 위임 방식 (렌더링 시점 무관)
     if (popupApplyCancel) {
-        setupCancelListeners();
-        document.addEventListener("appliesRendered", setupCancelListeners);
+        document.addEventListener("click", (e) => {
+            const cancelBtn = e.target.closest(".devBtnCancel");
+            if (!cancelBtn) return;
+            currentApplyId = cancelBtn.dataset.idx;
+            currentCancelBtn = cancelBtn;
+            currentApplyStatus = cancelBtn.dataset.status;
+            experienceLayout.openCancelPopup(dimmedDiv, popupApplyCancel);
+        });
 
         const close = () => experienceLayout.closeCancelPopup(dimmedDiv, popupApplyCancel);
         if (buttonClose) buttonClose.addEventListener("click", close);
@@ -100,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
         btn.addEventListener("click", () => {
             experienceLayout.updatePeriodActive(btn, selectDueButtons);
 
-            const toStr = d => d.toISOString().split("T")[0];
+            const toStr = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
             const today = new Date();
             const period = btn.dataset.period;
             let fromDt;
@@ -115,12 +108,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 fromDt = toStr(d);
             }
             const toDt = toStr(today);
-
-            // 날짜 입력 필드도 동기화
-            const fromInput = document.getElementById("txtFromDt");
-            const toInput = document.getElementById("txtToDt");
-            if (fromInput) fromInput.value = fromDt;
-            if (toInput) toInput.value = toDt;
 
             const params = { ...getFilterParams(), fromDt, toDt };
             experienceService.filterApplyList(params, (applies) => {
@@ -145,6 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 e.stopPropagation();
                 experienceLayout.selectCommonDropItem(btn, dropDownDiv, item.textContent.trim());
                 btn.dataset.selectedVal = item.dataset.val || "";
+                doFilter();
             });
         });
     });
@@ -161,7 +149,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const txtSearchText = document.getElementById("txtSearchText");
     if (txtSearchText) {
         txtSearchText.addEventListener("keydown", (e) => {
-            if (e.key === "Enter") doFilter();
+            if (e.key === "Enter") {
+                e.preventDefault();
+                doFilter();
+            }
         });
     }
 

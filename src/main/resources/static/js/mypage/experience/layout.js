@@ -127,8 +127,8 @@ const experienceLayout = (() => {
         tbody.innerHTML = applies.map(apply => {
             const cancelCellMap = {
                 cancelled: `<span>지원취소됨</span>`,
-                document_pass: `<span>참여중</span>`,
-                activity_done: `<span>수료</span>`
+                document_pass: `<span>마감</span>`,
+                activity_done: `<span>마감</span>`
             };
             const cancelCell = cancelCellMap[apply.applyStatus] ||
                 `<button class="btn btnGyBd devBtnCancel devBtnOddInfo" type="button"
@@ -186,7 +186,6 @@ const experienceLayout = (() => {
         }).join("");
 
         updateStatusCounts(applies);
-        document.dispatchEvent(new CustomEvent("appliesRendered"));
     };
 
     return {
