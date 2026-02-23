@@ -71,19 +71,16 @@
                                             </div>
 
                                             <div class="tbCell tbLogo">
-                                                <!-- 파일 업로드 전 -->
-                                                <button type="button" class="infoBtnB infoBtnUp" id="devLogoUp"><span>로고업로드</span></button>
-                                                <!-- javascript: 파일 업로드 후 버튼 삭제하고 새로운 버튼 추가(innerHTML) -->
-
-                                                <!-- // -->
-                                                <!-- <p class="logo">
-                                                    <img src="">
+                                                <!-- 로고가 없을 때 -->
+                                                <button type="button" class="infoBtnB infoBtnUp" id="devLogoUp" th:if="${corpInfo.logoFilePath == null}"><span>로고업로드</span></button>
+                                                <!-- 로고가 있을 때 -->
+                                                <p class="logo" th:if="${corpInfo.logoFilePath != null}">
+                                                    <img th:src="@{/api/files/display(filePath=${corpInfo.logoFilePath}, fileName=${corpInfo.logoFileName})}">
                                                 </p>
-                                                <p class="btn">
+                                                <p class="btn" th:if="${corpInfo.logoFilePath != null}">
                                                     <button type="button" class="infoBtn infoBtnDel" id="devLogoDel"></button>
                                                     <button type="button" class="infoBtn infoBtnMod" id="devLogoModify"></button>
-                                                </p> -->
-                                                <!-- //javascript: 동적으로 생성 -->
+                                                </p>
 
                                                 <div class="logoUploadWrap">
                                                     <div id="frmLogo">
@@ -201,20 +198,11 @@
                                                                 <li data-type="5" class="devCoTypeItem">
                                                                     <button type="button">벤처기업</button>
                                                                 </li>
-                                                                <li data-type="6" class="devCoTypeItem">
-                                                                    <button type="button">외국계(외국 투자기업)</button>
-                                                                </li>
                                                                 <li data-type="7" class="devCoTypeItem">
                                                                     <button type="button">국내 공공기관·공기업</button>
                                                                 </li>
-                                                                <li data-type="8" class="devCoTypeItem">
-                                                                    <button type="button">외국계(외국 법인기업)</button>
-                                                                </li>
                                                                 <li data-type="9" class="devCoTypeItem">
                                                                     <button type="button">비영리단체·교육재단</button>
-                                                                </li>
-                                                                <li data-type="10" class="devCoTypeItem">
-                                                                    <button type="button">외국 기관·비영리기구</button>
                                                                 </li>
                                                                 <!-- javascript: 버튼 선택 시, 선택한 버튼에 on 추가 -->
                                                             </ul>
@@ -270,6 +258,7 @@
                                                             <span id="Industry_Name" class="txResult devTxResult"></span>
                                                         </button>
                                                         <input type="hidden" id="Industry_Code" name="corpKindId" th:value="${corpInfo.corpKindId}">
+                                                        <input type="hidden" id="Industry_Small_Code" name="corpKindSmallId" th:value="${corpInfo.corpKindSmallId}">
                                                         <!-- 레이어 영역 -->
                                                         <div class="lyElBx devLyElBx">
                                                             <div class="selTypeList">
@@ -604,7 +593,7 @@
                                                             <div class="popCont">
                                                                 <input type="text" class="address" id="postcode" name="addressZipcode" placeholder="우편번호 *" maxlength="5" th:value="${corpInfo.addressZipcode}">
                                                                 <input type="button" class="address" id="searchPostCodeBtn" value="우편번호 찾기">
-                                                                <input type="text" class="address" id="address" name="addressProvince" placeholder="주소 *" th:value="${(corpInfo.addressProvince != null ? corpInfo.addressProvince : '') + (corpInfo.addressCity != null ? ' ' + corpInfo.addressCity : '') + (corpInfo.addressDistrict != null ? ' ' + corpInfo.addressDistrict : '')}">
+                                                                <input type="text" class="address" id="address" name="addressAddress" placeholder="주소 *" th:value="${corpInfo.addressAddress}">
                                                                 <input type="text" class="address" id="detailAddress" name="addressDetail" placeholder="상세주소" th:value="${corpInfo.addressDetail}">
                                                             </div>
                                                             <p class="popFunc">
@@ -632,7 +621,7 @@
                                                         주요사업내용
                                                         <span class="point">*</span>
                                                     </label>
-                                                    <input type="text" id="devMainItem" class="inpDefault devAnimPh" name="corpPerformance" th:value="${corpInfo.corpPerformance}" maxlength="50">
+                                                    <input type="text" id="devMainItem" class="inpDefault devAnimPh" name="corpMainBusiness" th:value="${corpInfo.corpMainBusiness}" maxlength="50">
                                                     <span class="byte">
                                                         <em id="devMainItemTextCnt">0</em>/50
                                                     </span>
@@ -656,12 +645,13 @@
                                                 <div class="elWrap devElWrap">
                                                     <div class="schInpType">
                                                         <label for="lb_basic_7" class="ph">자본금</label>
+                                                        <input type="hidden" id="corpCapitalHidden" name="corpCapital" th:value="${corpInfo.corpCapital}">
                                                         <span class="inpTxItem">
-                                                            <input type="text" id="devCapital_A" class="inpDefault devAnimPh devCapitalText" name="Capital_A" title="억단위 입력" maxlength="8">
+                                                            <input type="text" id="devCapital_A" class="inpDefault devAnimPh devCapitalText" title="억단위 입력" maxlength="8">
                                                             <span class="tx" id="devCapitalUnitA"></span>
                                                         </span>
                                                         <span class="inpTxItem">
-                                                            <input type="text" id="devCapital_B" class="inpDefault devAnimPh devCapitalText" name="Capital_B" title="천단위 입력" maxlength="4">
+                                                            <input type="text" id="devCapital_B" class="inpDefault devAnimPh devCapitalText" title="천단위 입력" maxlength="4">
                                                             <span class="tx" id="devCapitalUnitB"></span>
                                                         </span>
                                                     </div>

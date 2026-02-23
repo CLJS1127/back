@@ -265,6 +265,7 @@ address, caption, em {
 }
 .corporate-header .top-menu-modal .id {
     font-weight: 700;
+    font-size: 16px;
 }
 .corporate-header .top-menu-modal li a, .corporate-header .top-menu-modal li div {
     line-height: 40px;

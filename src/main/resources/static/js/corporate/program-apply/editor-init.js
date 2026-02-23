@@ -21,21 +21,6 @@ ClassicEditor
 
         const templateHTML = `
 <div id="dev-template-v2-root" class="tempate-detailed-summary-root pc dev-case-type case1" templateno="11">
-    <div class="detailed-summary-header">
-        <div class="header-wrap dev-case-type case1">
-            <div class="header">
-                <div class="corp-name dev-corp-name" style="display: none;">
-                    <p>㈜미라클시티건설사업단</p>
-                </div>
-                <div class="subtitle">
-                    <p><b>채용제목을 입력해주세요</b></p>
-                </div>
-            </div>
-        </div>
-        <div class="description-wrap">
-            <div class="description"></div>
-        </div>
-    </div>
 
     <div class="detailed-summary-contents">
         <div class="detailed-summary-content" id="dev-template-v2-part">
@@ -70,7 +55,8 @@ ClassicEditor
                                                 <p><br></p>
 
                                                 <p><b>자격요건</b></p>
-                                                <p>ㆍ학력 : 학력무관</p>
+                                                <p>ㆍ학력 : 무관</p>
+                                                <p>ㆍ나이 : 무관</p>
                                                 <p><br></p>
 
                                                 <p><b>우대사항</b></p>
@@ -98,8 +84,7 @@ ClassicEditor
                                 <i class="icon-header dev-case-type case1"></i>
                                 전형절차
                             </p>
-                            <p>ㆍ서류전형 &gt; 1차면접 &gt; 2차면접 &gt; 임원면접 &gt; 최종합격</p>
-                            <p>ㆍ면접일정은 추후 통보됩니다.</p>
+                            <p>ㆍ선착순 모집 후 체험.</p>
                         </td>
                     </tr>
                 </tbody>
@@ -117,7 +102,7 @@ ClassicEditor
                                 <i class="icon-header dev-case-type case1"></i>
                                 유의사항
                             </p>
-                            <p>ㆍ허위사실이 발견될 경우 채용이 취소될 수 있습니다.</p>
+                            <p>ㆍ허위사실이 발견될 경우 공고등록이 취소될 수 있습니다.</p>
                         </td>
                     </tr>
                 </tbody>
@@ -129,9 +114,13 @@ ClassicEditor
 
         editor.setData(templateHTML);
 
-        // 폼 제출 시 에디터 데이터와 근무시간을 동기화
+        // 폼 제출 시 에디터 데이터, 근무요일, 근무시간을 동기화
         document.getElementById('recruitForm').addEventListener('submit', function () {
             document.querySelector('textarea[name="experienceProgramDescription"]').value = editor.getData();
+
+            var wds = document.getElementById('workday-start').value;
+            var wde = document.getElementById('workday-end').value;
+            document.getElementById('workDaysHidden').value = wds + '~' + wde;
 
             var sh = document.getElementById('workStartHour').value;
             var sm = document.getElementById('workStartMin').value;

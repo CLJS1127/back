@@ -12,7 +12,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -63,10 +67,31 @@ public class CorporateController {
             }
             model.addAttribute("corpInfo", corporateService.getCorpInfo(memberId));
             model.addAttribute("programStats", corporateService.getProgramStats(memberId));
-            model.addAttribute("recentPrograms", corporateService.getRecentPrograms(memberId, 5));
+            model.addAttribute("recentPrograms", corporateService.getRecentPrograms(memberId, 6));
         }
+        model.addAttribute("recentQnas", corporateService.getRecentQnas(5));
         model.addAttribute("loginMember", session.getAttribute("member"));
         return "corporate/home";
+    }
+
+    // ── 로고 업로드 ───────────────────────────────────────────────────
+
+    @PostMapping("/logo")
+    @ResponseBody
+    public Map<String, Object> uploadLogo(@RequestParam("file") MultipartFile file) throws IOException {
+        if (notCorpMember()) return Map.of("success", false, "message", "기업회원만 접근할 수 있습니다.");
+        Long corpId = getMemberId();
+        String logoUrl = corporateService.uploadCorpLogo(corpId, file);
+        return Map.of("success", true, "logoUrl", logoUrl);
+    }
+
+    @DeleteMapping("/logo")
+    @ResponseBody
+    public Map<String, Object> deleteLogo() {
+        if (notCorpMember()) return Map.of("success", false, "message", "기업회원만 접근할 수 있습니다.");
+        Long corpId = getMemberId();
+        corporateService.deleteCorpLogo(corpId);
+        return Map.of("success", true);
     }
 
     // ── 기업정보관리 ───────────────────────────────────────────────────
@@ -153,13 +178,16 @@ public class CorporateController {
     }
 
     @PostMapping("/program-apply")
-    public String programApplySave(ExperienceProgramDTO dto) {
+    public String programApplySave(ExperienceProgramDTO dto,
+                                   @RequestParam(value = "programFiles", required = false) List<MultipartFile> files) {
         if (notCorpMember()) return MAIN_REDIRECT;
         Long corpId = getMemberId();
         dto.setCorpId(corpId);
         dto.setExperienceProgramStatus(ExperienceProgramStatus.RECRUITING);
-        dto.setExperienceProgramDeadline(dto.getExperienceProgramEndDate());
-        corporateService.createProgram(dto);
+        dto.setExperienceProgramDeadline(dto.getExperienceProgramStartDate());
+        dto.setExperienceProgramEndDate(dto.getExperienceProgramStartDate());
+        log.info("프로그램 등록 DTO: {}", dto);
+        corporateService.createProgram(dto, files != null ? files : new ArrayList<>());
         return "redirect:/corporate/program-management";
     }
 

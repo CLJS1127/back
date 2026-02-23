@@ -58,19 +58,28 @@ function execDaumPostcode() {
     }).open({ popupKey: "popup1" });
 }
 
-//
+// 접수기간 날짜 picker
 const startInputClick = document.getElementById("start-date");
+if (startInputClick) {
+    startInputClick.addEventListener("click", (e) => {
+        e.target.showPicker?.();
+    });
+}
 
-startInputClick.addEventListener("click", (e) => {
-    e.target.showPicker?.();
-});
+// 근무요일 날짜 picker
+const workdayStart = document.getElementById("workday-start");
+if (workdayStart) {
+    workdayStart.addEventListener("click", (e) => {
+        e.target.showPicker?.();
+    });
+}
 
-//
-const endInputClick = document.getElementById("end-date");
-
-endInputClick.addEventListener("click", (e) => {
-    e.target.showPicker?.();
-});
+const workdayEnd = document.getElementById("workday-end");
+if (workdayEnd) {
+    workdayEnd.addEventListener("click", (e) => {
+        e.target.showPicker?.();
+    });
+}
 
 // 이메일 드롭다운 (요소가 있을 때만)
 const emailBtn = document.querySelector(".btnSelType");
@@ -105,14 +114,4 @@ if (emailBtn && emailDropDown) {
     });
 }
 
-// 버튼 클릭 시 border 바뀌는 코드
-
-const changeMonthBtn = document.querySelectorAll(".button--period");
-
-changeMonthBtn.forEach((btn) => {
-    btn.addEventListener("click", () => {
-        changeMonthBtn.forEach((b) => b.classList.remove("button--active"));
-        btn.classList.add("button--active");
-    });
-});
 

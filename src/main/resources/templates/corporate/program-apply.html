@@ -139,56 +139,16 @@
                                     <label class="radio-title">근무요일</label>
                                 </div>
                                 <div class="form-row__content">
-                                    <div class="select-wrapper">
-                                        <select class="select-field" name="experienceProgramWorkDays" style="width: 150px;">
-                                            <option value="">선택</option>
-                                            <option value="주5일">주5일</option>
-                                            <option value="주6일">주6일</option>
-                                            <option value="격주휴무">격주 휴무</option>
-                                            <option value="격일근무">격일 근무</option>
-                                            <option value="협의가능">협의가능</option>
-                                        </select>
-                                    </div>
-                                    <span class="inpChk_ui size_small devWorkDwCheck devErrorElWrap" style="margin-left: 10px;">
-                                        <input type="checkbox" id="lb_wDayMiscCheck" checked="">
-                                        <label for="lb_wDayMiscCheck">상세요일 선택</label>
-                                    </span>
-                                    <!-- 상세요일 선택 영역 -->
-                                    <div class="sub-form-area" style="display:block;">
-                                        <div class="checkbox-group">
-                                            <h5 class="checkbox-group-tit">상세요일선택</h5>
-                                            <div class="subBx">
-                                                <span class="inpChk_ui size_small devErrorElWrap chk">
-                                                    <input checked="checked" id="lb_weekday_stat_0" type="checkbox" value="월">
-                                                    <label for="lb_weekday_stat_0">월</label>
-                                                </span>
-                                                <span class="inpChk_ui size_small devErrorElWrap chk">
-                                                    <input checked="checked" id="lb_weekday_stat_1" type="checkbox" value="화">
-                                                    <label for="lb_weekday_stat_1">화</label>
-                                                </span>
-                                                <span class="inpChk_ui size_small devErrorElWrap chk">
-                                                    <input checked="checked" id="lb_weekday_stat_2" type="checkbox" value="수">
-                                                    <label for="lb_weekday_stat_2">수</label>
-                                                </span>
-                                                <span class="inpChk_ui size_small devErrorElWrap chk">
-                                                    <input checked="checked" id="lb_weekday_stat_3" type="checkbox" value="목">
-                                                    <label for="lb_weekday_stat_3">목</label>
-                                                </span>
-                                                <span class="inpChk_ui size_small devErrorElWrap chk">
-                                                    <input checked="checked" id="lb_weekday_stat_4" type="checkbox" value="금">
-                                                    <label for="lb_weekday_stat_4">금</label>
-                                                </span>
-                                                <span class="inpChk_ui size_small devErrorElWrap">
-                                                    <input id="lb_weekday_stat_5" type="checkbox" value="토">
-                                                    <label for="lb_weekday_stat_5">토</label>
-                                                </span>
-                                                <span class="inpChk_ui size_small devErrorElWrap">
-                                                    <input id="lb_weekday_stat_6" type="checkbox" value="일">
-                                                    <label for="lb_weekday_stat_6">일</label>
-                                                </span>
-                                            </div>
+                                    <div class="date-range-input">
+                                        <div class="input-field-wrap">
+                                            <input type="date" class="input-field input-field--date" id="workday-start">
+                                        </div>
+                                        <span class="date-separator">~</span>
+                                        <div class="input-field-wrap">
+                                            <input type="date" class="input-field input-field--date" id="workday-end">
                                         </div>
                                     </div>
+                                    <input type="hidden" name="experienceProgramWorkDays" id="workDaysHidden">
                                 </div>
                             </div>
 
@@ -256,23 +216,8 @@
                                     </label>
                                 </div>
                                 <div class="form-row__content">
-                                    <div class="period-buttons">
-                                        <button type="button" class="button button--period button--active">1개월</button>
-                                        <button type="button" class="button button--period">2개월</button>
-                                        <button type="button" class="button button--period">상시채용</button>
-                                    </div>
-                                    <div class="date-range-input">
-                                        <div class="input-field-wrap">
-                                            <input type="date" class="input-field input-field--date" id="start-date" name="experienceProgramStartDate" value="">
-                                        </div>
-                                        <span class="date-separator">~</span>
-                                        <div class="input-field-wrap">
-                                            <input type="date" class="input-field input-field--date" id="end-date" name="experienceProgramEndDate" value="">
-                                        </div>
-                                        <span class="inpChk_ui size_small">
-                                            <input class="devTimeStat" id="lb_timeChk01" type="checkbox" value="true">
-                                            <label for="lb_timeChk01">채용 시 마감</label>
-                                        </span>
+                                    <div class="input-field-wrap">
+                                        <input type="date" class="input-field input-field--date" id="start-date" name="experienceProgramStartDate" value="">
                                     </div>
                                 </div>
                             </div>
@@ -286,16 +231,8 @@
                                 <div class="form-row__content">
                                     <div class="checkbox-group" style="display: flex;">
                                         <span class="inpChk_ui">
-                                            <input type="checkbox" id="lb_doc_01" value="자기소개서">
+                                            <input type="checkbox" id="lb_doc_01" value="자기소개서" checked disabled>
                                             <label for="lb_doc_01">자기소개서</label>
-                                        </span>
-                                        <span class="inpChk_ui">
-                                            <input id="lb_doc_02" type="checkbox" value="포트폴리오">
-                                            <label for="lb_doc_02">포트폴리오</label>
-                                        </span>
-                                        <span class="inpChk_ui">
-                                            <input type="checkbox" id="lb_doc_03" value="영문이력서">
-                                            <label for="lb_doc_03">영문이력서</label>
                                         </span>
                                     </div>
                                 </div>
@@ -312,13 +249,10 @@
                                     <div class="managerModified" id="devGuinManager">
                                         <div class="managerFormArea">
                                             <div class="mngFormRow">
-                                                <strong class="titMngField point">담당자정보<span class="label-inner-span labae-icon">필수</span></strong>
+                                                <strong class="titMngField point">이름<span class="label-inner-span labae-icon">필수</span></strong>
                                                 <div class="mngInpBx">
                                                     <span class="inpTxItem devErrorElWrap">
-                                                        <input class="inpMngInfo_1" id="lb_Ofc_Man_Name" maxlength="25" placeholder="이름" style="width:116px;" title="담당자 이름 입력" type="text" th:value="${corpInfo?.memberName}">
-                                                    </span>
-                                                    <span class="inpTxItem">
-                                                        <input class="inpMngInfo_1" id="lb_dept_name" maxlength="50" placeholder="부서명" style="width:192px;" title="부서명 입력" type="text">
+                                                        <input class="inpMngInfo_1" style="width:200px;" title="담당자 이름" type="text" th:value="${corpInfo?.memberName}" readonly>
                                                     </span>
                                                 </div>
                                             </div>
@@ -327,24 +261,16 @@
                                                 <strong class="titMngField point">전화번호<span class="label-inner-span labae-icon">필수</span></strong>
                                                 <div class="mngInpBx">
                                                     <span class="inpTxItem devErrorElWrap">
-                                                        <input class="devNumberOnly devTrim" maxlength="4" style="width:89px;" title="전화번호 국번" type="text">
-                                                    </span>
-                                                    <span class="sDash">-</span>
-                                                    <span class="inpTxItem devErrorElWrap">
-                                                        <input class="devNumberOnly devTrim" maxlength="4" style="width:98px;" title="전화번호 앞자리" type="text">
-                                                    </span>
-                                                    <span class="sDash">-</span>
-                                                    <span class="inpTxItem devErrorElWrap">
-                                                        <input class="devNumberOnly devTrim" maxlength="4" style="width:98px;" title="전화번호 뒷자리" type="text">
+                                                        <input class="inpMngInfo_1" style="width:200px;" title="전화번호" type="text" th:value="${corpInfo?.memberPhone}" readonly>
                                                     </span>
                                                 </div>
                                             </div>
 
                                             <div class="mngFormRow">
-                                                <label><strong class="titMngField point">이메일<span class="label-inner-span labae-icon">필수</span></strong></label>
+                                                <strong class="titMngField point">이메일<span class="label-inner-span labae-icon">필수</span></strong>
                                                 <div class="mngInpBx">
                                                     <span class="inpTxItem devErrorElWrap">
-                                                        <input class="inpMngInfo_3" style="width:200px;" title="이메일" type="text" th:value="${corpInfo?.memberEmail}">
+                                                        <input class="inpMngInfo_3" style="width:200px;" title="이메일" type="text" th:value="${corpInfo?.memberEmail}" readonly>
                                                     </span>
                                                 </div>
                                             </div>
