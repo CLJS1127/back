@@ -159,5 +159,6 @@ public class MemberController {
     public boolean checkBusinessNumber(String corpBusinessNumber) {
         return corpService.checkBusinessNumber(corpBusinessNumber);
     }
-//    로그인 로그아웃 완료
+
+//    기업 로그인에서 개인 회원 로그인 되는 것, 개인 로그인에서 기업 회원 로그인 되는 것 디버깅 완료.
 }
