@@ -31,6 +31,7 @@ public class SkillLogCommentAPIController {
     }
     @GetMapping("nested-comment-list/{page}")
     public SkillLogNestedCommentWithPagingDTO commentList(@PathVariable int page, Long skillLogId, Long commentId) {
+        log.info("{}", skillLogCommentService.getListInSkillLogAndParentComment(page, skillLogId, commentId));
         return skillLogCommentService.getListInSkillLogAndParentComment(page, skillLogId, commentId);
     }
 

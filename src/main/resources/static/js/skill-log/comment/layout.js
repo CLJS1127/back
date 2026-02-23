@@ -14,10 +14,12 @@ const commentLayout = (() => {
         Object.values(skillLogComments).forEach((comment) => {
             const li = document.createElement("li");
             const condition = memberId === comment.memberId;
+            li.id = `li${comment.id}`;
+
             text = `
                 <!-- 댓글 -->
                 <!-- [Dev] 내 답변일 경우 contSec에 클래스 myCmt 추가, cellBx 버튼: 수정/삭제만 노출 -->
-                <div class="contSec devContSection ${condition && "myCmt"}" style="display: block">
+                <div class="${comment.id} contSec devContSection ${condition && "myCmt"}" style="display: block">
 <!--                    프로필 -->
                     <div class="infoBx">
                         <a href="/User/Qstn/MainProfile?Target=29448138" class="my-profile" target="_blank">
@@ -225,15 +227,22 @@ const commentLayout = (() => {
         }
     }
 
-    const showNestedCommentList = ({comments, criteria}, memberId) => {
+    const showNestedCommentList = ({skillLogNestedComments, criteria}, memberId, commentId) => {
+        const div = document.createElement("div");
+        const li = document.getElementById(`li${commentId}}`);
+
+        console.log(skillLogNestedComments);
+
+        div.classList.add("commentSec");
+        div.style.display = "none";
+
         let text = `
-        <div class="commentSec" style="display: block;">
             <div class="cmtArea">
                 <ul class="cmtList replyWrap">`;
 
-        comments.forEach((comment) => {
+        skillLogNestedComments.forEach((comment) => {
             // 대댓글 내용
-            text = `
+            text += `
                 <li class="devCmtWrap ${comment.memberId === memberId && 'myCmt'}" id="parentCommentId${comment.id}">
                     <div class="devComtSection">
                         <div class="infoBx">
@@ -302,11 +311,11 @@ const commentLayout = (() => {
                                 닫기
                             </button>
                         </div>
-                    </div>
                     `;
             }
         });
-
+        div.innerHTML = text;
+        if(li) li.appendChild(div);
     }
 
 

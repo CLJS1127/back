@@ -231,107 +231,6 @@ const commentReplyCloseButtons = document.querySelectorAll(
 //     });
 // });
 
-// 댓글 이벤트
-commentContainer.addEventListener("click", (e) => {
-    if(e.target.classList.contains("devBtnComtList")){
-        console.log(e.target);
-    //     댓글 버튼
-        // 내가 누른 버튼이 속한 li 찾기
-        const li = e.target.closest("li");
-        const commentSec = li.querySelector(".commentSec");
-        e.target.classList.toggle("active");
-        if (e.target.classList.contains("active")) {
-            commentSec.style.display = "block";
-        } else {
-            commentSec.style.display = "none";
-        }
-
-    } else if (e.target.classList.contains("devBtnAnswerLike")) {
-        // 좋아요
-        // chatLike.addEventListener("click", (e) => {
-        //     chatLike.classList.toggle("active");
-        // });
-
-    } else if (e.target.classList.contains("qnaBtnClose")) {
-        // 댓글 접기
-        const li = e.target.closest("li");
-        const commentSec = li.querySelector(".commentSec");
-        const btn = li.querySelector(".btnCmt.devBtnComtList");
-
-        commentSec.style.display = "none";
-        btn.classList.remove("active");
-
-    } else if (e.target.classList.contains(("cmtWrite"))) {
-        const textarea = e.target.querySelector("textarea");
-
-        // ✅ wrapper 안에서 직접 찾기
-        const ph1 = e.target.querySelector(".ph_1");
-        const ph2 = e.target.querySelector(".ph_2");
-        const uiPlaceholder = e.target.querySelector(".uiPlaceholder");
-        const textCount = e.target.querySelector("span.byte b");
-
-        console.log(ph1)
-        console.log(ph2)
-        console.log(uiPlaceholder);
-
-        if (!textarea) return;
-
-        // 클릭 시(로그인)
-        e.target.addEventListener("click", (e) => {
-            e.target.classList.remove("case");
-            if (uiPlaceholder) uiPlaceholder.classList.add("focus");
-            if (ph1) ph1.style.display = "none";
-            if (!textarea.value && ph2) {
-                ph2.style.display = "block";
-            }
-        });
-
-        // 글자 수 카운트(로그인)
-        textarea.addEventListener("input", (e) => {
-            const totalTextCount = textarea.value.length;
-            if (textCount) textCount.innerHTML = `${totalTextCount}`;
-
-            if (totalTextCount > 1000) {
-                alert("최대 1000자까지 입력 가능합니다.");
-                textarea.value = textarea.value.substring(0, 1001);
-                textarea.focus();
-            }
-
-            // ph2 표시/숨김
-            if (ph2) {
-                ph2.style.display = textarea.value ? "none" : "block";
-            }
-        });
-
-        // 외부 클릭(로그인)
-        document.addEventListener("click", (e) => {
-            // 1. 클릭 대상이 mainTextarea 아닐 경우
-            // 2. 작성된 내용이 없을 경우
-            // 3. 클릭 대상이 이모티콘 버튼이 아닐 경우
-            // 4. 클릭 대상이 이모티콘이 아닐 경우
-            const hasAttachment = e.target.querySelector(".attach-wrap");
-
-            if (
-                e.target.tagName !== "TEXTAREA" &&
-                !hasAttachment &&
-                !textarea.value
-                // !e.target.classList.contains("icon-emoticon") &&
-                // !e.target.closest(".emotion-area")
-            ) {
-                const emotionLayer = document.querySelector(".emotion-layer");
-                if (!emotionLayer || !emotionLayer.classList.contains("open")) {
-                    e.target.classList.add("case");
-                    if (uiPlaceholder) uiPlaceholder.classList.remove("focus");
-                    if (ph1) ph1.style.display = "block";
-                    if (ph2) ph2.style.display = "none";
-                }
-            }
-        });
-    }
-
-    console.log(e.target);
-})
-
 // 북마크 등록(로그인)
 const buttonBookMark = document.querySelector(
     ".btnBookmark.qnaSpB.devQnaDetailBookmark",
@@ -623,12 +522,7 @@ const replyOfReplySubmitButtons = document.querySelectorAll(
     ".btnSbm.devBtnComtWrite",
 );
 
-// 대댓글 달기(로그인)
-replyOfReplySubmitButtons.forEach((replyOfReplySubmitButton) => {
-    replyOfReplySubmitButton.addEventListener("click", (e) => {
-        location.href = "../qna/QnA-detail.html";
-    });
-});
+
 
 // 댓글 달기(로그인)
 replySubmitButton.addEventListener("click", async(e) => {
@@ -644,8 +538,7 @@ replySubmitButton.addEventListener("click", async(e) => {
 
     await commentService.write(formData);
     await commentService.getList(page, skillLogId, memberId, commentLayout.showCommentList);
-    // location.href = "../qna/QnA-detail.html";
-
+    await commentService.getNestedList(page, skillLogId, skillLogCommentParentId, memberId, commentLayout.showNestedCommentList);
 });
 
 // 댓글 삭제(로그인)
@@ -809,3 +702,123 @@ comtModifySubmitButtons.forEach((comtModifySubmitButton) => {
         location.href = "";
     });
 });
+
+
+
+// 댓글 이벤트
+commentContainer.addEventListener("click", (e) => {
+    if(e.target.classList.contains("devBtnComtList")){
+        //     댓글 버튼
+        // 내가 누른 버튼이 속한 li 찾기
+        const li = e.target.closest("li");
+        const commentSec = li.querySelector(".commentSec");
+        const skillLogCommentParentId = Number(li.querySelector(".devContSection").classList[0]);
+
+        e.target.classList.toggle("active");
+        if (e.target.classList.contains("active")) {
+            commentSec.style.display = "block";
+        } else {
+            commentSec.style.display = "none";
+        }
+
+        commentService.getNestedList(page, skillLogId, skillLogCommentParentId, memberId, commentLayout.showNestedCommentList);
+
+    } else if (e.target.classList.contains("devBtnAnswerLike")) {
+        // 좋아요
+        // chatLike.addEventListener("click", (e) => {
+        //     chatLike.classList.toggle("active");
+        // });
+
+    } else if (e.target.classList.contains("qnaBtnClose")) {
+        // 댓글 접기
+        const li = e.target.closest("li");
+        const commentSec = li.querySelector(".commentSec");
+        const btn = li.querySelector(".btnCmt.devBtnComtList");
+
+        commentSec.style.display = "none";
+        btn.classList.remove("active");
+
+    } else if (e.target.classList.contains("cmtWrite")) {
+        const textarea = e.target.querySelector("textarea");
+
+        // ✅ wrapper 안에서 직접 찾기
+        const ph1 = e.target.querySelector(".ph_1");
+        const ph2 = e.target.querySelector(".ph_2");
+        const uiPlaceholder = e.target.querySelector(".uiPlaceholder");
+        const textCount = e.target.querySelector("span.byte b");
+
+        if (!textarea) return;
+
+        // 클릭 시(로그인)
+        e.target.addEventListener("click", (e) => {
+            e.target.classList.remove("case");
+            if (uiPlaceholder) uiPlaceholder.classList.add("focus");
+            if (ph1) ph1.style.display = "none";
+            if (!textarea.value && ph2) {
+                ph2.style.display = "block";
+            }
+        });
+
+        // 글자 수 카운트(로그인)
+        textarea.addEventListener("input", (e) => {
+            const totalTextCount = textarea.value.length;
+            if (textCount) textCount.innerHTML = `${totalTextCount}`;
+
+            if (totalTextCount > 1000) {
+                alert("최대 1000자까지 입력 가능합니다.");
+                textarea.value = textarea.value.substring(0, 1001);
+                textarea.focus();
+            }
+
+            // ph2 표시/숨김
+            if (ph2) {
+                ph2.style.display = textarea.value ? "none" : "block";
+            }
+        });
+
+        // 외부 클릭(로그인)
+        document.addEventListener("click", (e) => {
+            // 1. 클릭 대상이 mainTextarea 아닐 경우
+            // 2. 작성된 내용이 없을 경우
+            // 3. 클릭 대상이 이모티콘 버튼이 아닐 경우
+            // 4. 클릭 대상이 이모티콘이 아닐 경우
+            const hasAttachment = e.target.querySelector(".attach-wrap");
+
+            if (
+                e.target.tagName !== "TEXTAREA" &&
+                !hasAttachment &&
+                !textarea.value
+                // !e.target.classList.contains("icon-emoticon") &&
+                // !e.target.closest(".emotion-area")
+            ) {
+                const emotionLayer = document.querySelector(".emotion-layer");
+                if (!emotionLayer || !emotionLayer.classList.contains("open")) {
+                    e.target.classList.add("case");
+                    if (uiPlaceholder) uiPlaceholder.classList.remove("focus");
+                    if (ph1) ph1.style.display = "block";
+                    if (ph2) ph2.style.display = "none";
+                }
+            }
+        });
+    } else if (e.target.classList.contains("devBtnComtWrite")) {
+        // 대댓글 달기(로그인)
+        e.target.addEventListener("click",  async (e) => {
+            alert("댓글이 등록되었습니다.");
+            const formData = new FormData();
+            const fileInput = e.target.closest(".btnWrap").querySelector(".reply-file");
+            const text = document.querySelector(".devComtWrite").value;
+            const skillLogCommentParentId = e.target.closest(".contSec.devContSection").classList[0];
+
+            formData.append("skillLogId", Number(skillLogId));
+            formData.append("memberId", Number(memberId));
+            formData.append("skillLogCommentParentId", Number(skillLogCommentParentId));
+            formData.append("skillLogCommentContent", text);
+            formData.append("file", fileInput.files[0]);
+
+            await commentService.write(formData);
+            await commentService.getList(page, skillLogId, memberId, commentLayout.showCommentList);
+            await commentService.getNestedList(page, skillLogId, skillLogCommentParentId, memberId, commentLayout.showNestedCommentList);
+        });
+    }
+
+})

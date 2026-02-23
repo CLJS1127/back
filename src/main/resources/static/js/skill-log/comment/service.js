@@ -21,8 +21,9 @@ const commentService = (() => {
     const getNestedList = async (page, skillLogId, commentId, memberId, callback) => {
         const response = await fetch(`/api/skill-log/comments/nested-comment-list/${page}?skillLogId=${skillLogId}&commentId=${commentId}`);
         const comments = await response.json();
+
         if(callback){
-            callback(comments, memberId);
+            callback(comments, memberId, commentId);
         }
     }
 
