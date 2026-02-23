@@ -186,8 +186,6 @@ public class CorporateController {
         Long corpId = getMemberId();
         dto.setCorpId(corpId);
         dto.setExperienceProgramStatus(ExperienceProgramStatus.RECRUITING);
-        dto.setExperienceProgramDeadline(dto.getExperienceProgramStartDate());
-        dto.setExperienceProgramEndDate(dto.getExperienceProgramStartDate());
         log.info("프로그램 등록 DTO: {}", dto);
         corporateService.createProgram(dto, files != null ? files : new ArrayList<>());
         return "redirect:/corporate/program-management";
