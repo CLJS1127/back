@@ -300,6 +300,15 @@ address, caption, em {
 .corporate-header .navigation .right-menu.logged-in .notification .bell:before {
     animation: wobble 1.15s ease-in;
 }
+.corporate-header .navigation .right-menu.logged-in .notification .bell .alarm-dot {
+    position: absolute;
+    top: 12px;
+    right: 2px;
+    width: 8px;
+    height: 8px;
+    background-color: #ff3b3b;
+    border-radius: 50%;
+}
 .notification .notification-menu {
     display: none;
     position: absolute;
@@ -342,33 +351,32 @@ address, caption, em {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 15px;
-    border: 1px solid #d9dfea;
+    gap: 12px;
+    border: 1px dashed #d9dfea;
+    border-radius: 12px;
     text-align: center;
     height: 100%;
+    background: #f9fafb;
 }
-.notification .notification-menu .no-notification .notification-setting-button {
-    display: block;
-    width: 148px;
-    height: 34px;
-    margin: 0 auto;
-    padding-top: 9px;
-    border: 1px solid #7BA882;
-    border-radius: 17px;
-    font-weight: 700;
-    color: #7BA882 !important;
-    text-decoration: none;
-    font-size: 13px;
+.no-notification-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #eef1f6;
 }
 .no-notification-header {
-    /* margin-bottom: 8px; */
     font-weight: 700;
-    line-height: 20px;
+    line-height: 22px;
     color: #333;
     font-size: 16px;
 }
 .no-notification-description {
-    line-height: 18px;
+    line-height: 20px;
+    color: #999;
+    font-size: 13px;
 }
             /* 알림 있을 때 */
  .notification .list-notification-container {
