@@ -73,8 +73,8 @@ const commentLayout = (() => {
                         <button type="button" class="btnCmt devBtnComtList">
                             댓글 <em>${comment.skillLogCommentChildCount}</em>
                         </button>
-                        <button type="button" class="btnHeart qnaSpB devBtnAnswerLike">
-                            0
+                        <button type="button" class="btnHeart qnaSpB devBtnAnswerLike ${comment.liked && 'active'}">
+                            ${comment.likeCount}
                         </button>
                     </div>
                 </div>`;
@@ -282,7 +282,7 @@ const commentLayout = (() => {
             if(condition) {
                 text += `
                         <span class="cell">
-                            <button type="button" class="btnEdit devAnswerEditButton ${comment.id}">수정</button>
+                            <button type="button" class="btnEdit devComtEditButton ${comment.id}">수정</button>
                         </span>
                         <span class="cell">
                             <button type="button" class="btnDelete devAnswerDeleteButton ${comment.id}">삭제</button>
@@ -339,10 +339,16 @@ const commentLayout = (() => {
         });
     }
 
+    const showLikeCount = (likeCount) => {
+        const likeCountButton = document.querySelector(".btnHeart.qnaSpB.devBtnAnswerLike");
+        likeCountButton.textContent = likeCount;
+    }
+
 
     return {
         showCommentList: showCommentList,
-        showNestedCommentList: showNestedCommentList
+        showNestedCommentList: showNestedCommentList,
+        showLikeCount: showLikeCount
     }
 })();
 

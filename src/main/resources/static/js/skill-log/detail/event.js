@@ -202,11 +202,8 @@ function loginHref() {
 function handleFileClick(e) {
     const target = e.target;
 
-    console.log(target);
 
-    // 사진 버튼 (label 안의 button)
     if (target.closest(".button.icon-photo.qnaSpB")) {
-        e.preventDefault(); // label 기본 동작 차단 → 더블 트리거 방지
         const btn = target.closest(".button.icon-photo.qnaSpB");
         const label = btn.closest("label") || btn.closest(".answer-util-item");
         const fileInput = label?.querySelector(".reply-file");
@@ -267,9 +264,6 @@ function handleFileChange(e) {
         `;
         if (uiPlaceholder) uiPlaceholder.appendChild(div);
     });
-
-    // ❌ e.target.value = "" 제거
-    // 여기서 지우면 submit 시 fileInput.files[0]이 undefined됨
 }
 
 // input - 글자 수 카운트
@@ -431,8 +425,17 @@ answerArea.addEventListener("click", (e) => {
             return;
         }
         const btn = target.closest(".btnHeart.qnaSpB.devBtnAnswerLike");
+        const li = btn.closest("li[id^='li']");
+        const skillLogCommentId = li.id.slice(2);
+
+        console.log(skillLogCommentId);
+
+        commentService.getLikeCount(
+            {skillLogCommentId: skillLogCommentId, memberId: memberId},
+            commentLayout.showLikeCount
+        );
         btn.classList.toggle("active");
-        // TODO: 댓글 좋아요 API 호출
+
         return;
     }
 
@@ -503,33 +506,16 @@ answerArea.addEventListener("click", (e) => {
     // ----------------------------------------------------------
     if (target.closest(".btnDelete.devAnswerDeleteButton")) {
         if (confirm("정말로 댓글을 삭제 하시겠습니까?")) {
-            const btn = target.closest(".btnDelete.devAnswerDeleteButton");
-            const li = btn.closest("li[id^='li']");
-            const commentId = li.id.slice(2);
+            const commentId = target.classList[2];
 
-            commentService.remove(commentId).then(() => {
-                alert("삭제되었습니다.");
-                commentService.getList(page, skillLogId, memberId, commentLayout.showCommentList);
-            });
-        }
-        return;
-    }
-
-    // ----------------------------------------------------------
-    // 7. 대댓글 삭제 버튼
-    // ----------------------------------------------------------
-    if (target.closest(".btnDelete.devBtnComtDelete")) {
-        if (confirm("정말로 댓글을 삭제 하시겠습니까?")) {
-            const btn = target.closest(".btnDelete.devBtnComtDelete");
-            const li = btn.closest("li");
+            const li = target.closest("li");
             const parentLi = li.closest("li[id^='li']");
-            const commentId = li.classList[0];
             const parentCommentId = parentLi.id.slice(2);
 
             commentService.remove(commentId).then(() => {
                 alert("삭제되었습니다.");
-                commentService.getNestedList(nestedPage, skillLogId, parentCommentId, memberId, commentLayout.showNestedCommentList);
                 commentService.getList(page, skillLogId, memberId, commentLayout.showCommentList);
+                parentCommentId && commentService.getNestedList(nestedPage, skillLogId, parentCommentId, memberId, commentLayout.showNestedCommentList);
             });
         }
         return;
@@ -543,7 +529,6 @@ answerArea.addEventListener("click", (e) => {
         const li = btn.closest("li");
         const contSec = li.querySelector(".contSec.devContSection");
         const modifyContSec = li.querySelector(".contSec.modify-answer");
-
         const modifyText = contSec.querySelector("p.cont")?.textContent || "";
         const modifyTextarea = modifyContSec.querySelector("textarea");
 

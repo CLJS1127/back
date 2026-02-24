@@ -1,5 +1,6 @@
 package com.app.trycatch.dto.skilllog;
 
+import com.app.trycatch.domain.skilllog.SkillLogCommentLikesVO;
 import com.app.trycatch.domain.skilllog.SkillLogLikesVO;
 import lombok.*;
 
@@ -11,15 +12,15 @@ import lombok.*;
 public class SkillLogCommentLikesDTO {
     private Long id;
     private Long memberId;
-    private Long skillLogId;
+    private Long skillLogCommentId;
     private String createdDatetime;
     private String updatedDatetime;
 
-    public SkillLogLikesVO toVO() {
-        return SkillLogLikesVO.builder()
+    public SkillLogCommentLikesVO toVO() {
+        return SkillLogCommentLikesVO.builder()
                 .id(id)
                 .memberId(memberId)
-                .skillLogId(skillLogId)
+                .skillLogCommentId(skillLogCommentId)
                 .createdDatetime(createdDatetime)
                 .updatedDatetime(updatedDatetime)
                 .build();
