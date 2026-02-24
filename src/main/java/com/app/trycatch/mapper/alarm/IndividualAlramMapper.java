@@ -9,4 +9,5 @@ import java.util.List;
 public interface IndividualAlramMapper {
     List<AlramDTO> selectQnaAlramsByMemberId(Long memberId);
     List<AlramDTO> selectApplyAlramsByMemberId(Long memberId);
+    List<AlramDTO> selectSkillLogAlramsByMemberId(Long memberId);
 }

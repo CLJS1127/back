@@ -18,6 +18,7 @@ create table tbl_qna_comment
     unique key uk_qna_member_comment (qna_id, individual_member_id, qna_comment_parent)
 ) comment 'QnA 댓글';
 
+select * from tbl_qna_comment;
 
 set FOREIGN_KEY_CHECKS = 1;
 
