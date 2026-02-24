@@ -28,4 +28,8 @@ public class IndividualAlramService {
     public List<AlramDTO> findSkillLogAlrams(Long memberId) {
         return individualAlramDAO.findSkillLogAlramsByMemberId(memberId);
     }
+
+    public void readAll(Long memberId) {
+        individualAlramDAO.setReadByMemberId(memberId);
+    }
 }

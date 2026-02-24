@@ -364,14 +364,13 @@
                                             href="javascript:void(0)"
                                             class="bell notify"
                                             id="js-bell"
-                                            onclick="
-                                                
-                                            "
                                         >
                                             알림
                                             <span id="js-alarmCnt" class="" th:text="${(qnaAlrams != null ? #lists.size(qnaAlrams) : 0) + (applyAlrams != null ? #lists.size(applyAlrams) : 0) + (skillLogAlrams != null ? #lists.size(skillLogAlrams) : 0)}">
                                                 0
                                             </span>
+                                            <span class="alarm-dot" id="js-alarmDot"
+                                                  th:if="${(qnaAlrams != null and !#lists.isEmpty(qnaAlrams)) or (applyAlrams != null and !#lists.isEmpty(applyAlrams)) or (skillLogAlrams != null and !#lists.isEmpty(skillLogAlrams))}"></span>
                                         </a>
                                         <div
                                             class="popup-notification"

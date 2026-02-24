@@ -38,4 +38,12 @@
         order by created_datetime desc
     </select>
 
+    <update id="updateReadByMemberId">
+        update tbl_main_notification
+        set notification_is_read = true,
+            updated_datetime = current_timestamp
+        where member_id = #{memberId}
+          and notification_is_read = false
+    </update>
+
 </mapper>

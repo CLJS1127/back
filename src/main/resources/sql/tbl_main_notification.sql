@@ -25,5 +25,4 @@ select * from tbl_experience_program;
 select id, skill_log_title from tbl_skill_log;
 select id, qna_title from tbl_qna;
 
-
-
+select id, notification_title, notification_is_read from tbl_main_notification where member_id = 7;
