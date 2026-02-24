@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.alarm.IndividualAlramMapper">
+
+    <select id="selectQnaAlramsByMemberId" resultType="AlramDTO">
+        select '취업톡톡'                                                  as alram_category,
+               q.qna_title                                                as alram_title,
+               q.id                                                       as alram_id,
+               date_format(c.created_datetime, '%y.%m.%d %H:%i')         as alram_received_at
+        from tbl_qna_comment c
+        join tbl_qna q on c.qna_id = q.id
+        where q.individual_member_id = #{memberId}
+          and q.qna_status = 'published'
+        order by alram_received_at desc
+    </select>
+
+    <select id="selectApplyAlramsByMemberId" resultType="AlramDTO">
+        select '체험지원현황'                                              as alram_category,
+               ep.experience_program_title                                as alram_title,
+               ep.id                                                      as alram_id,
+               date_format(a.updated_datetime, '%y.%m.%d %H:%i')         as alram_received_at
+        from tbl_apply a
+        join tbl_experience_program ep on a.experience_program_id = ep.id
+        where a.member_id = #{memberId}
+          and a.apply_status in ('document_pass', 'document_fail', 'activity_done')
+        order by alram_received_at desc
+    </select>
+
+</mapper>

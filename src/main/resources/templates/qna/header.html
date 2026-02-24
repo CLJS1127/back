@@ -370,7 +370,7 @@
                                             "
                                         >
                                             알림
-                                            <span id="js-alarmCnt" class="">
+                                            <span id="js-alarmCnt" class="" th:text="${(qnaAlrams != null ? #lists.size(qnaAlrams) : 0) + (applyAlrams != null ? #lists.size(applyAlrams) : 0)}">
                                                 0
                                             </span>
                                         </a>
@@ -409,80 +409,42 @@
                                                     class="list list-notification-container"
                                                     id="js-LayerFrame"
                                                 >
-                                                    <div
-                                                        class="header-date alarmList"
-                                                        data-date=" 26.01.20"
-                                                    >
-                                                        <div
-                                                            class="header-date-item header-date-item-full"
-                                                        >
-                                                            26.01.20
-                                                        </div>
-                                                        <div
-                                                            class="header-date-item header-date-item-day"
-                                                        >
-                                                            (화)
-                                                        </div>
-                                                        <div
-                                                            class="header-date-item"
-                                                        >
-                                                            · 어제
-                                                        </div>
-                                                    </div>
-                                                    <ul
-                                                        class="list-notification"
-                                                    >
-                                                        <li
-                                                            class="notification-item"
-                                                        >
-                                                            <div
-                                                                class="notification-header"
-                                                            >
-                                                                <div
-                                                                    class="notification-header-item category"
-                                                                >
-                                                                    취업톡톡
-                                                                </div>
-                                                                <div
-                                                                    class="notification-header-item date"
-                                                                >
-                                                                    12:07
+                                                    <ul class="list-notification">
+                                                        <li class="notification-item" th:each="alram : ${qnaAlrams}">
+                                                            <div class="notification-header">
+                                                                <div class="notification-header-item category" th:text="${alram.alramCategory}"></div>
+                                                                <div class="notification-header-item date" th:text="${alram.alramReceivedAt}"></div>
+                                                            </div>
+                                                            <div class="notification-body">
+                                                                <div class="notification-title">
+                                                                    <a th:href="@{/qna/detail(id=${alram.alramId})}" th:text="|${#strings.abbreviate(alram.alramTitle, 15)}... 질문에 댓글이 달렸습니다|"></a>
                                                                 </div>
                                                             </div>
-                                                            <div
-                                                                class="notification-body"
-                                                            >
-                                                                <div
-                                                                    class="notification-title"
-                                                                >
-                                                                    북마크한
-                                                                    <a
-                                                                        href=""
-                                                                        target="_blank"
-                                                                        onclick=""
-                                                                    >
-                                                                        "자바와
-                                                                        파이썬
-                                                                        중 ..."
-                                                                        질문에
-                                                                        답변</a
-                                                                    >이
-                                                                    등록되었습니다.
+                                                            <div class="notificaiton-footer">
+                                                                <div class="buttons">
+                                                                    <a th:href="@{/qna/detail(id=${alram.alramId})}" class="button">자세히보기</a>
                                                                 </div>
                                                             </div>
-                                                            <div
-                                                                class="notificaiton-footer"
-                                                            >
-                                                                <div
-                                                                    class="buttons"
-                                                                >
-                                                                    <a
-                                                                        href=""
-                                                                        class="button"
-                                                                        onclick=""
-                                                                        >자세히보기</a
-                                                                    >
+                                                        </li>
+                                                        <li class="notification-item" th:each="alram : ${applyAlrams}">
+                                                            <div class="notification-header">
+                                                                <div class="notification-header-item category" th:text="${alram.alramCategory}"></div>
+                                                                <div class="notification-header-item date" th:text="${alram.alramReceivedAt}"></div>
+                                                            </div>
+                                                            <div class="notification-body">
+                                                                <div class="notification-title">
+                                                                    <a th:href="@{/mypage/experience}" th:text="|${#strings.abbreviate(alram.alramTitle, 15)}... 지원 결과가 변경되었습니다|"></a>
                                                                 </div>
+                                                            </div>
+                                                            <div class="notificaiton-footer">
+                                                                <div class="buttons">
+                                                                    <a th:href="@{/mypage/experience}" class="button">자세히보기</a>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="notification-item" th:if="${(qnaAlrams == null or #lists.isEmpty(qnaAlrams)) and (applyAlrams == null or #lists.isEmpty(applyAlrams))}">
+                                                            <div class="notification-body">
+                                                                <div class="notification-title">새로운 알림이 없습니다.</div>
                                                             </div>
                                                         </li>
                                                     </ul>
