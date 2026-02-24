@@ -12,7 +12,7 @@ create table tbl_corp
     corp_website_url                 varchar(255) comment '홈페이지 URL',
     corp_fax                         varchar(255) comment 'fax 번호',
     corp_capital                     bigint comment '자본금 (원 단위)',
-    corp_total_sales                 bigint comment '매출액 (원 단위)',
+    corp_total_sales                 varchar(50) comment '매출액',
     corp_main_business               varchar(100) comment '주요사업내용',
     corp_performance                 text comment '연혁 및 실적',
     corp_vision                      text comment '개요 및 비전',
