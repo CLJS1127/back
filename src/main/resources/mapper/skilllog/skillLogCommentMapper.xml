@@ -50,7 +50,7 @@
         left join tbl_file f
         on f.id = cf.id
         where c.skill_log_id = #{skillLogId} and skill_log_comment_parent_id = #{commentParentId}
-        order by c.created_datetime desc
+        order by c.id desc
         limit #{criteria.count} offset #{criteria.offset}
     </select>
     <select id="selectCountAllByCommentParentIdAndSkillLogId">

@@ -458,7 +458,9 @@ answerArea.addEventListener("click", (e) => {
 
         if (btn.classList.contains("active")) {
             commentSec.style.display = "block";
-            commentService.getNestedList(nestedPage, skillLogId, commentId, memberId, commentLayout.showNestedCommentList);
+            commentService.getNestedList(1, skillLogId, commentId, memberId, (data, mId, cId) => {
+                commentLayout.showNestedCommentList(data, mId, cId, false);
+            });
         } else {
             commentSec.style.display = "none";
         }
@@ -471,9 +473,9 @@ answerArea.addEventListener("click", (e) => {
     if (target.closest(".devBtnNestedMore")) {
         const btn = target.closest(".devBtnNestedMore");
         const commentId = btn.dataset.commentId;
-        const page = Number(btn.dataset.page);
+        const nextPage = Number(btn.dataset.page);
 
-        commentService.getNestedList(page, skillLogId, commentId, memberId, (data, mId, cId) => {
+        commentService.getNestedList(nextPage, skillLogId, commentId, memberId, (data, mId, cId) => {
             commentLayout.showNestedCommentList(data, mId, cId, true);
         });
         return;

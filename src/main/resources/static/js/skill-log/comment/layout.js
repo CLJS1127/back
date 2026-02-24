@@ -134,7 +134,8 @@ const commentLayout = (() => {
                     <div class="cmtArea">
                         <ul class="cmtList replyWrap">
                             <!-- [Dev] 내 댓글일 경우 contSec에 클래스 myCmt 추가, cellBx 버튼: 삭제만 노출 -->
-                        </ul>`;
+                        </ul>
+                        <div class="nested-more-wrap"></div>`;
 
             if(memberId) {
                 text += `
@@ -239,11 +240,15 @@ const commentLayout = (() => {
         }
     }
 
-    const showNestedCommentList = ({skillLogNestedComments, criteria}, memberId, commentId) => {
+    const showNestedCommentList = ({skillLogNestedComments, criteria}, memberId, commentId, isLoadMore = false) => {
         const ul = document.querySelector(`#li${commentId} .cmtList.replyWrap`);
+        const moreWrap = document.querySelector(`#li${commentId} .nested-more-wrap`);
         let text = "";
 
-        ul.innerHTML = "";
+        // 더보기가 아닐 때는 목록 초기화
+        if (!isLoadMore) {
+            ul.innerHTML = "";
+        }
         skillLogNestedComments.forEach((comment) => {
             const li = document.createElement("li");
             const condition = Number(memberId) === comment.memberId;
@@ -344,6 +349,20 @@ const commentLayout = (() => {
             li.innerHTML = text;
             if(ul) ul.appendChild(li);
         });
+
+        // 더보기 버튼 처리
+        if (moreWrap) {
+            if (criteria.hasMore) {
+                const remaining = criteria.total - (criteria.page * criteria.rowCount);
+                moreWrap.innerHTML = `
+                    <button type="button" class="btn-nested-more devBtnNestedMore" data-comment-id="${commentId}" data-page="${criteria.page + 1}">
+                        댓글 ${remaining}개 더보기 ∨
+                    </button>
+                `;
+            } else {
+                moreWrap.innerHTML = "";
+            }
+        }
     }
 
     const showLikeCount = (likeCount, skillLogCommentId) => {
@@ -358,19 +377,3 @@ const commentLayout = (() => {
         showLikeCount: showLikeCount
     }
 })();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
