@@ -65,6 +65,13 @@ if (bell) {
         (notificationCheck ? notificationContainer : noNotification).classList.add(
             "active",
         );
+
+        // 빨간 점 숨김 + 읽음 처리 API 호출
+        const alarmDot = document.getElementById("js-corpAlarmDot");
+        if (alarmDot) {
+            alarmDot.style.display = "none";
+            fetch("/api/corp-alarm/read", { method: "PUT" });
+        }
     });
 }
 

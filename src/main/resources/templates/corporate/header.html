@@ -78,59 +78,54 @@
                     <div class="right-menu logged-in" th:if="${session.member != null}">
                         <ul class="right-menu-list clearfix">
                             <li class="notification">
-                                <a href="javascript:;" class="bell"></a>
+                                <a href="javascript:;" class="bell">
+                                    <span class="alarm-dot" id="js-corpAlarmDot"
+                                          th:if="${corpAlrams != null and !#lists.isEmpty(corpAlrams)}"></span>
+                                </a>
 
                                 <div class="notification-menu">
                                     <div class="notification-menu-body">
 
-                                        <div class="no-notification active">
+                                        <div class="no-notification" th:classappend="${corpAlrams == null or #lists.isEmpty(corpAlrams)} ? 'active'">
                                             <div class="no-notification-content">
-                                                <div class="no-notification-header">아직 신규 알림이 없네요!</div>
-                                                <div class="no-notification-description">
-                                                    계정에서 알림 설정을 하고,
-                                                    <br>
-                                                    TRY CATCH 의 새로운 소식을 받아보세요!
+                                                <div class="no-notification-icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#b0b8c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                                                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                                                    </svg>
                                                 </div>
-                                                <a href="javascript:;" class="notification-setting-button">알림 설정</a>
+                                                <div class="no-notification-header">새로운 알람이 없습니다.</div>
+                                                <div class="no-notification-description">
+                                                    알람은 받고난 뒤 5일 뒤에 삭제됩니다.
+                                                </div>
                                             </div>
                                         </div>
-                                        <!-- server, javascript: 알림이 없다면, active 추가 -->
 
-                                        <div class="list list-notification-container">
-                                            <div class="header-date">
-                                                <div class="header-date-item header-date-itme-full">26.01.19</div>
-                                                <div class="header-date-item header-date-itme-day">(월)</div>
-                                                <div class="header-date-item">· 오늘</div>
-                                            </div>
+                                        <div class="list list-notification-container" th:classappend="${corpAlrams != null and !#lists.isEmpty(corpAlrams)} ? 'active'">
                                             <ul>
-                                                <li class="notification-item">
+                                                <li class="notification-item" th:each="alram : ${corpAlrams}">
                                                     <div class="notification-header">
-                                                        <div class="notification-header-item category">Admin</div>
-                                                        <div class="notification-header-item date">00:00</div>
+                                                        <div class="notification-header-item category"
+                                                             th:text="${alram.notificationType == 'apply_received' ? '지원자 등록' : (alram.notificationType == 'experience_apply_received' ? '체험공고 등록마감' : '커뮤니티')}"></div>
+                                                        <div class="notification-header-item date" th:text="${alram.createdDatetime}"></div>
                                                     </div>
                                                     <div class="notification-body">
-                                                        <div class="notification-title">
-                                                            행운의 편지가 도착했습니다.
-                                                        </div>
-                                                        <div class="notification-content">
-                                                            이 편지는 영국에서 최초로 시작되어 일년에 한 바퀴 돌면서 받는 사람에게 행운을 주었고 지금은 당신에게로 옮겨진 이 편지는 4일 안에 당신 곁을 떠나야 합니다. 이 편지를 포함해서 7통을 행운이 필요한 사람에게 보내 주셔야 합니다. 복사를 해도 좋습니다. 혹 미신이라 하실지 모르지만 사실입니다. 영국에서 HGXWCH이라는 사람은 1930년에 이 편지를 받았습니다. 그는 비서에게 복사해서 보내라고 했습니다. 며칠 뒤에 복권이 당첨되어 20억을 받았습니다. 어떤 이는 이 편지를 받았으나 96시간 이내 자신의 손에서 떠나야 한다는 사실을 잊었습니다. 그는 곧 사직되었습니다. 나중에야 이 사실을 알고 7통의 편지를 보냈는데 다시 좋은 직장을 얻었습니다. 미국의 케네디 대통령은 이 편지를 받았지만 그냥 버렸습니다. 결국 9일 후 그는 암살 당했습니다. 기억해 주세요. 이 편지를 보내면 7년의 행운이 있을 것이고 그렇지 않으면 3년의 불행이 있을 것입니다. 그리고 이 편지를 버리거나 낙서를 해서는 절대로 안됩니다. 7통입니다. 이 편지를 받은 사람은 행운이 깃들 것입니다. 힘들겠지만 좋은게 좋다고 생각하세요. 7년의 행운을 빌면서
-                                                        </div>
+                                                        <div class="notification-title" th:text="${alram.notificationTitle}"></div>
+                                                        <div class="notification-content" th:text="${alram.notificationContent}"></div>
                                                     </div>
-                                                    <!-- javascript: 자세히보기 버튼 클릭 시, details 클래스 추가 -->
                                                     <div class="notification-footer">
                                                         <div class="buttons">
-                                                            <a href="javascript:;" class="button">자세히보기</a>
+                                                            <a th:if="${alram.notificationType == 'apply_received'}" th:href="@{/corporate/applicant-list}" class="button">자세히보기</a>
+                                                            <a th:if="${alram.notificationType == 'experience_apply_received'}" th:href="@{/corporate/program-management}" class="button">자세히보기</a>
+                                                            <a th:if="${alram.notificationType == 'qna'}" th:href="@{/qna/detail(id=${alram.notificationRelatedId})}" class="button">자세히보기</a>
                                                         </div>
                                                     </div>
                                                 </li>
-                                                <!-- javascript: hover시, active 클래스 추가 -->
                                             </ul>
                                         </div>
-                                        <!-- server, javascript: 알림이 있다면, active 추가 -->
 
                                     </div>
                                 </div>
-                                <!-- javascript: click 시, active 추가(모달) -->
                             </li>
                             <li>
                                 <a href="javascript:;" class="top-menu-modal-button" th:text="${corpInfo?.corpCompanyName}"></a>

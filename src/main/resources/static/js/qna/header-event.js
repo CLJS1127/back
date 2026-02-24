@@ -116,6 +116,20 @@ if (notifyButton) {
     });
 }
 
+// 기업회원 알림 벨 클릭 이벤트
+const corpNotifyButton = document.getElementById("js-corpBell");
+const corpNotifyLayer = document.getElementById("js-corpNotiLayer");
+if (corpNotifyButton) {
+    corpNotifyButton.addEventListener("click", (e) => {
+        if (corpNotifyLayer) corpNotifyLayer.classList.toggle("attached");
+        const corpAlarmDot = document.getElementById("js-corpAlarmDotQna");
+        if (corpAlarmDot) {
+            corpAlarmDot.style.display = "none";
+            fetch("/api/corp-alarm/read", { method: "PUT" });
+        }
+    });
+}
+
 // 검색창 자동완성 관련 (로그인)
 const searchToolDiv = document.querySelector(".autoSearch");
 const searchInput = document.getElementById("stext");
