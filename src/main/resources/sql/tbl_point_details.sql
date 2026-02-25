@@ -10,8 +10,4 @@ create table tbl_point_details
     updated_datetime     datetime default current_timestamp,
     constraint fk_point_details_member foreign key (member_id) references tbl_individual_member (id)
 );
-
-drop table tbl_point_details;
-set FOREIGN_KEY_CHECKS =1;
-
 select * from tbl_point_details;
