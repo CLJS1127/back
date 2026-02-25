@@ -10,6 +10,8 @@ import java.util.List;
 public interface PointDetailsMapper {
 //    목록
     List<PointDetailsDTO> selectAllByMemberId(Long memberId);
+//    총 포인트
+    int selectTotalPointByMemberId(Long memberId);
 //    추가
     void insert(PointDetailsVO pointDetailsVO);
 }

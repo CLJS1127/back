@@ -17,6 +17,10 @@ public class PointDetailsDAO {
         return pointDetailsMapper.selectAllByMemberId(memberId);
     }
 
+    public int findTotalPointByMemberId(Long memberId) {
+        return pointDetailsMapper.selectTotalPointByMemberId(memberId);
+    }
+
     public void save(PointDetailsVO pointDetailsVO) {
         pointDetailsMapper.insert(pointDetailsVO);
     }

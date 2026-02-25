@@ -19,4 +19,6 @@ public class PointDetailsVO extends Period {
     private Long memberId;
     private PointType pointType;
     private int pointAmount;
+    private Integer paymentAmount;
+    private String expireDatetime;
 }

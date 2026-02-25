@@ -4,15 +4,27 @@
 
     <select id="selectAllByMemberId" resultType="PointDetailsDTO">
         select
-            id, member_id, point_type, point_amount, created_datetime, updated_datetime
+            id, member_id, point_type, point_amount,
+            payment_amount, expire_datetime,
+            created_datetime, updated_datetime
         from tbl_point_details
         where member_id = #{memberId}
         order by created_datetime desc
     </select>
 
+    <select id="selectTotalPointByMemberId" resultType="int">
+        select coalesce(sum(case
+            when point_type = 'earn' then point_amount
+            when point_type in ('use', 'expire', 'purchase_cancel') then -point_amount
+            else 0
+        end), 0)
+        from tbl_point_details
+        where member_id = #{memberId}
+    </select>
+
     <insert id="insert">
-        insert into tbl_point_details (member_id, point_type, point_amount)
-        values (#{memberId}, #{pointType}, #{pointAmount})
+        insert into tbl_point_details (member_id, point_type, point_amount, payment_amount, expire_datetime)
+        values (#{memberId}, #{pointType}, #{pointAmount}, #{paymentAmount}, #{expireDatetime})
     </insert>
 
 </mapper>

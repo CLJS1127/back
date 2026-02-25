@@ -4,7 +4,6 @@ import com.app.trycatch.common.exception.InputAllDataException;
 import com.app.trycatch.common.exception.MemberNotFoundException;
 import com.app.trycatch.common.exception.UnauthorizedMemberAccessException;
 import com.app.trycatch.domain.mypage.LatestWatchPostingVO;
-import com.app.trycatch.domain.point.PointDetailsVO;
 import com.app.trycatch.domain.mypage.ScrapPostingVO;
 import com.app.trycatch.common.pagination.Criteria;
 import com.app.trycatch.dto.mypage.ApplyListWithPagingDTO;
@@ -12,7 +11,6 @@ import com.app.trycatch.dto.mypage.LatestWatchPostingDTO;
 import com.app.trycatch.dto.mypage.MyPageNotificationDTO;
 import com.app.trycatch.dto.mypage.MyPageProfileDTO;
 import com.app.trycatch.dto.mypage.MyPageUpdateDTO;
-import com.app.trycatch.dto.point.PointDetailsDTO;
 import com.app.trycatch.dto.mypage.ScrapPostingDTO;
 import com.app.trycatch.dto.mypage.ApplyListDTO;
 import com.app.trycatch.dto.mypage.ExperienceProgramRankDTO;
@@ -23,7 +21,6 @@ import com.app.trycatch.repository.mypage.ApplyListDAO;
 import com.app.trycatch.repository.mypage.ExperienceProgramRankDAO;
 import com.app.trycatch.repository.mypage.LatestWatchPostingDAO;
 import com.app.trycatch.repository.mypage.MyPageDAO;
-import com.app.trycatch.repository.point.PointDetailsDAO;
 import com.app.trycatch.repository.mypage.ScrapPostingDAO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -48,7 +45,6 @@ public class MyPageService {
     private final FileDAO fileDAO;
     private final ScrapPostingDAO scrapPostingDAO;
     private final LatestWatchPostingDAO latestWatchPostingDAO;
-    private final PointDetailsDAO pointDetailsDAO;
     private final ExperienceProgramRankDAO experienceProgramRankDAO;
     private final ApplyListDAO applyListDAO;
 
@@ -162,11 +158,6 @@ public class MyPageService {
                 .experienceProgramId(experienceProgramId)
                 .build();
         latestWatchPostingDAO.save(latestWatchPostingVO);
-    }
-
-    @Transactional(readOnly = true)
-    public List<PointDetailsDTO> getPointDetails(Long memberId) {
-        return pointDetailsDAO.findAllByMemberId(memberId);
     }
 
     public boolean cancelApply(Long memberId, Long applyId) {
