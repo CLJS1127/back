@@ -24,7 +24,7 @@ invitationModalCloseButton.addEventListener("click", (e) => {
 });
 
 // 팀원 초대 - 폼 제출
-invitationTeamMemberButton.addEventListener("click", (e) => {
+invitationTeamMemberButton.addEventListener("click", async (e) => {
     if (!invitationInput.value) {
         alert("초대할 팀원의 이메일을 입력해주세요.");
         return;
@@ -35,7 +35,25 @@ invitationTeamMemberButton.addEventListener("click", (e) => {
         alert("올바른 이메일 주소를 입력해주세요.");
         return;
     }
-    form.submit();
+    // 이메일 확인
+    if (!confirm(invitationInput.value + " 으로 초대하시겠습니까?")) {
+        return;
+    }
+
+    const response = await fetch("/corporate/team-member/invite", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "invitation_mail=" + encodeURIComponent(invitationInput.value),
+    });
+    const result = await response.json();
+
+    if (result.success) {
+        alert(result.message);
+        location.reload();
+    } else {
+        alert(result.message);
+        invitationInput.value = "";
+    }
 });
 
 // 팀원 내보내기

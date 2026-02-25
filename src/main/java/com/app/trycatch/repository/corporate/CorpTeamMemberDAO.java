@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -28,5 +29,13 @@ public class CorpTeamMemberDAO {
 
     public void delete(Long id, Long corpId) {
         corpTeamMemberMapper.delete(id, corpId);
+    }
+
+    public Optional<CorpTeamMemberDTO> findByInviteCode(String inviteCode) {
+        return corpTeamMemberMapper.selectByInviteCode(inviteCode);
+    }
+
+    public void updateStatusByInviteCode(String inviteCode, String status) {
+        corpTeamMemberMapper.updateStatusByInviteCode(inviteCode, status);
     }
 }

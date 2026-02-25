@@ -10,6 +10,7 @@ import com.app.trycatch.service.corporate.CorporateService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -156,10 +157,15 @@ public class CorporateController {
     }
 
     @PostMapping("/team-member/invite")
-    public String inviteMember(@RequestParam String invitation_mail) {
-        if (notCorpMember()) return MAIN_REDIRECT;
-        corporateService.inviteTeamMember(getMemberId(), invitation_mail);
-        return "redirect:/corporate/team-member";
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> inviteMember(@RequestParam String invitation_mail) {
+        if (notCorpMember()) return ResponseEntity.status(403).body(Map.of("success", false, "message", "권한이 없습니다."));
+        try {
+            corporateService.inviteTeamMember(getMemberId(), invitation_mail);
+            return ResponseEntity.ok(Map.of("success", true, "message", "팀원 초대가 완료되었습니다."));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(Map.of("success", false, "message", e.getMessage()));
+        }
     }
 
     @PostMapping("/team-member/remove")

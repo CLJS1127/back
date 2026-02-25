@@ -77,12 +77,6 @@
                                                 <li>
                                                     <button type="button" data-sort="created_asc" th:classappend="${currentSort == 'created_asc' ? 'active' : ''}">과거 등록일</button>
                                                 </li>
-                                                <li>
-                                                    <button type="button" data-sort="updated_desc" th:classappend="${currentSort == 'updated_desc' ? 'active' : ''}">수정일</button>
-                                                </li>
-                                                <li>
-                                                    <button type="button" data-sort="deadline_asc" th:classappend="${currentSort == 'deadline_asc' ? 'active' : ''}">마감일</button>
-                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -206,7 +200,7 @@
                                     <th:block th:each="pageNum : ${#numbers.sequence(programWithPaging.criteria.startPage, programWithPaging.criteria.endPage)}">
                                         <a th:href="@{/corporate/program-management(page=${pageNum}, status=${currentStatus}, TopCount=${currentTopCount}, SrchKeyword=${currentKeyword}, sort=${currentSort})}"
                                            th:text="${pageNum}"
-                                           th:style="${pageNum == programWithPaging.criteria.page ? 'padding:6px 12px; border:1px solid #2563eb; border-radius:4px; text-decoration:none; color:#fff; background-color:#2563eb; font-weight:bold;' : 'padding:6px 12px; border:1px solid #ddd; border-radius:4px; text-decoration:none; color:#333;'}">1</a>
+                                           th:style="${pageNum == programWithPaging.criteria.page ? 'padding:6px 12px; border:1px solid #006e3f; border-radius:4px; text-decoration:none; color:#fff; background-color:#006e3f; font-weight:bold;' : 'padding:6px 12px; border:1px solid #ddd; border-radius:4px; text-decoration:none; color:#333;'}">1</a>
                                     </th:block>
                                     <a th:if="${programWithPaging.criteria.page < programWithPaging.criteria.realEnd}"
                                        th:href="@{/corporate/program-management(page=${programWithPaging.criteria.page + 1}, status=${currentStatus}, TopCount=${currentTopCount}, SrchKeyword=${currentKeyword}, sort=${currentSort})}"

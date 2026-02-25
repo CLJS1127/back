@@ -56,13 +56,15 @@
     <!-- 기업 프로그램 관리: 전체 개수 (필터) -->
     <select id="countByCorpId" resultType="int">
         SELECT COUNT(*)
-        FROM tbl_experience_program
-        WHERE corp_id = #{corpId}
+        FROM tbl_experience_program ep
+        JOIN tbl_member m ON ep.corp_id = m.id
+        WHERE ep.corp_id = #{corpId}
         <if test="status != null and status != ''">
-            AND experience_program_status = #{status}
+            AND ep.experience_program_status = #{status}
         </if>
         <if test="keyword != null and keyword != ''">
-            AND experience_program_title LIKE CONCAT('%', #{keyword}, '%')
+            AND (ep.experience_program_title LIKE CONCAT('%', #{keyword}, '%')
+                 OR m.member_name LIKE CONCAT('%', #{keyword}, '%'))
         </if>
     </select>
 
@@ -75,12 +77,14 @@
                ep.experience_program_view_count, ep.created_datetime, ep.updated_datetime,
                ep.corp_id
         FROM tbl_experience_program ep
+        JOIN tbl_member m ON ep.corp_id = m.id
         WHERE ep.corp_id = #{corpId}
         <if test="status != null and status != ''">
             AND ep.experience_program_status = #{status}
         </if>
         <if test="keyword != null and keyword != ''">
-            AND ep.experience_program_title LIKE CONCAT('%', #{keyword}, '%')
+            AND (ep.experience_program_title LIKE CONCAT('%', #{keyword}, '%')
+                 OR m.member_name LIKE CONCAT('%', #{keyword}, '%'))
         </if>
         <choose>
             <when test="sort == 'created_asc'">ORDER BY ep.created_datetime ASC</when>

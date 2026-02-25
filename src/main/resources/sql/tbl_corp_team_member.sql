@@ -11,3 +11,5 @@ create table tbl_corp_team_member
     constraint fk_member_id foreign key (id) references tbl_member (id)
 
 );
+
+ALTER TABLE tbl_corp_team_member ADD COLUMN invite_code VARCHAR(50);

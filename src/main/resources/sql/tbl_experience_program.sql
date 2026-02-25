@@ -26,4 +26,6 @@ drop table tbl_experience_program;
 ALTER TABLE tbl_experience_program DROP COLUMN experience_program_start_date;
 ALTER TABLE tbl_experience_program DROP COLUMN experience_program_end_date;
 
+insert into tbl_experience_program(corp_id, experience_program_title, experience_program_description, experience_program_level, experience_program_recruitment_count, experience_program_work_days, experience_program_work_hours, experience_program_deadline, experience_program_status, experience_program_view_count, experience_program_job)
+(select corp_id, experience_program_title, experience_program_description, experience_program_level, experience_program_recruitment_count, experience_program_work_days, experience_program_work_hours, experience_program_deadline, experience_program_status, experience_program_view_count, experience_program_job from tbl_experience_program);
 

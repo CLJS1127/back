@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface CorpTeamMemberMapper {
@@ -24,4 +25,10 @@ public interface CorpTeamMemberMapper {
 
     // 팀원 제거
     void delete(@Param("id") Long id, @Param("corpId") Long corpId);
+
+    // 초대 코드로 팀원 조회
+    Optional<CorpTeamMemberDTO> selectByInviteCode(@Param("inviteCode") String inviteCode);
+
+    // 초대 코드로 상태 변경 (수락 처리)
+    void updateStatusByInviteCode(@Param("inviteCode") String inviteCode, @Param("status") String status);
 }
