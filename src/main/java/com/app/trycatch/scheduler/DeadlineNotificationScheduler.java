@@ -9,6 +9,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import jakarta.annotation.PostConstruct;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -18,6 +20,13 @@ import java.util.List;
 public class DeadlineNotificationScheduler {
     private final ExperienceProgramMapper experienceProgramMapper;
     private final CorporateAlramService corporateAlramService;
+
+    /** 서버 시작 시 밀린 상태 전환 즉시 실행 */
+    @PostConstruct
+    public void onStartup() {
+        log.info("서버 시작: 공고 상태 일괄 전환 실행");
+        updateProgramStatuses();
+    }
 
     /** 매일 자정: 공고 상태 자동 전환 (모집마감 → 진행중 → 진행종료) */
     @Scheduled(cron = "0 0 0 * * *")

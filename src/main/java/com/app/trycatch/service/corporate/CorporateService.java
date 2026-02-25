@@ -36,6 +36,7 @@ import com.app.trycatch.repository.member.MemberDAO;
 import com.app.trycatch.repository.qna.QnaDAO;
 import com.app.trycatch.repository.skilllog.SkillLogDAO;
 import com.app.trycatch.dto.skilllog.SkillLogDTO;
+import com.app.trycatch.service.mail.MailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -75,6 +76,7 @@ public class CorporateService {
     private final ChallengerDAO challengerDAO;
     private final FeedbackDAO feedbackDAO;
     private final SkillLogDAO skillLogDAO;
+    private final MailService mailService;
 
     // ── 기업회원 여부 확인 ──────────────────────────────────────────────
 
@@ -209,16 +211,33 @@ public class CorporateService {
         return new CorpTeamMemberWithPagingDTO(list, criteria, hasMore);
     }
 
-    /** 팀원 초대 — 이메일로 회원 조회 후 tbl_corp_team_member에 추가 */
+    /** 팀원 초대 — 이메일로 회원 조회 → invite_code 생성 → DB 저장 → 이메일 발송 */
     public void inviteTeamMember(Long corpId, String email) {
         MemberVO member = memberDAO.findByMemberEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("해당 이메일의 회원을 찾을 수 없습니다."));
+
+        String inviteCode = mailService.createCode();
+
         CorpTeamMemberVO vo = CorpTeamMemberVO.builder()
                 .id(member.getId())
                 .corpId(corpId)
                 .corpTeamMemberStatus("wait")
+                .inviteCode(inviteCode)
                 .build();
         corpTeamMemberDAO.save(vo);
+
+        // 기업명 조회 후 이메일 발송
+        String corpName = corpMemberDAO.findById(corpId)
+                .map(CorpMemberDTO::getCorpCompanyName)
+                .orElse("TRY-CATCH 기업");
+        mailService.sendInviteMail(email, inviteCode, corpName);
+    }
+
+    /** 초대 수락 — inviteCode로 팀원 조회 → 상태 active로 변경 */
+    public void acceptInvite(String inviteCode) {
+        corpTeamMemberDAO.findByInviteCode(inviteCode)
+                .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 초대 코드입니다."));
+        corpTeamMemberDAO.updateStatusByInviteCode(inviteCode, "active");
     }
 
     /** 팀원 제거 */

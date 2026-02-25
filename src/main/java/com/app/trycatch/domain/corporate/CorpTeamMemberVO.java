@@ -14,4 +14,5 @@ public class CorpTeamMemberVO {
     private Long id;                       // tbl_member.id (팀원 회원 ID)
     private Long corpId;                   // 소속 기업 ID
     private String corpTeamMemberStatus;   // active / inactive / wait
+    private String inviteCode;             // 초대 인증 코드
 }
