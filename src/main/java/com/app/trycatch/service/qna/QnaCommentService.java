@@ -43,15 +43,17 @@ public class QnaCommentService {
                 .build();
         qnaCommentDAO.save(vo);
 
-        // 대댓글인 경우, 부모 댓글 작성자가 기업회원이면 알림 발송
+        // 대댓글인 경우, 부모 댓글 작성자가 기업회원이고 자기 자신이 아니면 알림 발송
         if (parentId != null) {
             Long parentMemberId = qnaCommentDAO.findMemberIdById(parentId);
-            if (parentMemberId != null && corporateAlramDAO.existsByCorpId(parentMemberId)) {
+            if (parentMemberId != null && !parentMemberId.equals(memberId)
+                    && corporateAlramDAO.existsByCorpId(parentMemberId)) {
                 corporateAlramService.notify(
                         parentMemberId,
-                        "qna_reply",
+                        "qna",
                         "QnA 대댓글 알림",
-                        "회원님의 댓글에 새로운 대댓글이 달렸습니다."
+                        "회원님의 댓글에 새로운 대댓글이 달렸습니다.",
+                        qnaId
                 );
             }
         }

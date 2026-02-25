@@ -27,11 +27,16 @@ public class CorporateAlramService {
     }
 
     public void notify(Long corpId, String type, String title, String content) {
+        notify(corpId, type, title, content, null);
+    }
+
+    public void notify(Long corpId, String type, String title, String content, Long relatedId) {
         CorpAlramDTO dto = new CorpAlramDTO();
         dto.setCorpId(corpId);
         dto.setNotificationType(type);
         dto.setNotificationTitle(title);
         dto.setNotificationContent(content);
+        dto.setNotificationRelatedId(relatedId);
         corporateAlramDAO.save(dto);
     }
 }
