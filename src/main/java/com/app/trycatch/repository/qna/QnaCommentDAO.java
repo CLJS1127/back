@@ -32,4 +32,8 @@ public class QnaCommentDAO {
     public boolean existsByQnaIdAndMemberId(Long qnaId, Long memberId) {
         return qnaCommentMapper.existsByQnaIdAndMemberId(qnaId, memberId);
     }
+
+    public Long findMemberIdById(Long id) {
+        return qnaCommentMapper.selectMemberIdById(id);
+    }
 }

@@ -1,6 +1,7 @@
 package com.app.trycatch.repository.experience;
 
 import com.app.trycatch.common.pagination.Criteria;
+import com.app.trycatch.domain.experience.ApplyVO;
 import com.app.trycatch.dto.experience.ApplyDTO;
 import com.app.trycatch.mapper.experience.ApplyMapper;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,10 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class ApplyDAO {
     private final ApplyMapper applyMapper;
+
+    public void save(ApplyVO applyVO) {
+        applyMapper.insert(applyVO);
+    }
 
 //    지원자 목록
     public List<ApplyDTO> findByProgramId(Long programId, String status, String keyword,

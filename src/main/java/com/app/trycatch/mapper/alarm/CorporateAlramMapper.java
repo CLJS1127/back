@@ -8,5 +8,8 @@ import java.util.List;
 @Mapper
 public interface CorporateAlramMapper {
     List<CorpAlramDTO> selectAllByCorpId(Long corpId);
+    int selectUnreadCountByCorpId(Long corpId);
     void updateReadByCorpId(Long corpId);
+    void insertCorpNotification(CorpAlramDTO corpAlramDTO);
+    boolean existsByCorpId(Long corpId);
 }

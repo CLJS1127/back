@@ -80,7 +80,7 @@
                             <li class="notification">
                                 <a href="javascript:;" class="bell">
                                     <span class="alarm-dot" id="js-corpAlarmDot"
-                                          th:if="${corpAlrams != null and !#lists.isEmpty(corpAlrams)}"></span>
+                                          th:if="${hasUnreadCorpAlrams}"></span>
                                 </a>
 
                                 <div class="notification-menu">

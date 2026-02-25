@@ -18,7 +18,20 @@ public class CorporateAlramService {
         return corporateAlramDAO.findAllByCorpId(corpId);
     }
 
+    public boolean hasUnread(Long corpId) {
+        return corporateAlramDAO.findUnreadCountByCorpId(corpId) > 0;
+    }
+
     public void readAll(Long corpId) {
         corporateAlramDAO.setReadByCorpId(corpId);
+    }
+
+    public void notify(Long corpId, String type, String title, String content) {
+        CorpAlramDTO dto = new CorpAlramDTO();
+        dto.setCorpId(corpId);
+        dto.setNotificationType(type);
+        dto.setNotificationTitle(title);
+        dto.setNotificationContent(content);
+        corporateAlramDAO.save(dto);
     }
 }

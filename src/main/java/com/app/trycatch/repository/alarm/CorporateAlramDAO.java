@@ -16,7 +16,19 @@ public class CorporateAlramDAO {
         return corporateAlramMapper.selectAllByCorpId(corpId);
     }
 
+    public int findUnreadCountByCorpId(Long corpId) {
+        return corporateAlramMapper.selectUnreadCountByCorpId(corpId);
+    }
+
     public void setReadByCorpId(Long corpId) {
         corporateAlramMapper.updateReadByCorpId(corpId);
+    }
+
+    public void save(CorpAlramDTO corpAlramDTO) {
+        corporateAlramMapper.insertCorpNotification(corpAlramDTO);
+    }
+
+    public boolean existsByCorpId(Long corpId) {
+        return corporateAlramMapper.existsByCorpId(corpId);
     }
 }

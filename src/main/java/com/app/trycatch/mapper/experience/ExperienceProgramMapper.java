@@ -38,4 +38,7 @@ public interface ExperienceProgramMapper {
     List<ExperienceProgramDTO> selectByCorpId(@Param("corpId") Long corpId, @Param("criteria") Criteria criteria,
                                               @Param("status") String status, @Param("keyword") String keyword,
                                               @Param("sort") String sort);
+
+//    마감일 조회 (스케줄러용)
+    List<ExperienceProgramDTO> selectByDeadline(@Param("deadline") String deadline);
 }

@@ -14,4 +14,5 @@ public interface QnaCommentMapper {
     void delete(@Param("id") Long id, @Param("memberId") Long memberId);
     void update(QnaCommentVO qnaCommentVO);
     boolean existsByQnaIdAndMemberId(@Param("qnaId") Long qnaId, @Param("memberId") Long memberId);
+    Long selectMemberIdById(Long id);
 }
