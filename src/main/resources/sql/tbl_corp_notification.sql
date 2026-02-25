@@ -18,6 +18,9 @@ create table tbl_corp_notification
     constraint fk_corp_notification_corp foreign key (corp_id) references tbl_corp (id)
 ) comment '기업 헤더 알림';
 
+drop table tbl_corp_notification;
+set FOREIGN_KEY_CHECKS =1;
+
 select * from tbl_corp_notification;
 
 -- 테스트 데이터 (corp_id는 본인 기업 ID로 변경)

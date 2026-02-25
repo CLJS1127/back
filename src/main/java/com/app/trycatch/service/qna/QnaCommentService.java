@@ -5,8 +5,10 @@ import com.app.trycatch.domain.qna.QnaCommentVO;
 import com.app.trycatch.dto.file.FileDTO;
 import com.app.trycatch.dto.qna.QnaCommentDTO;
 import com.app.trycatch.repository.file.FileDAO;
+import com.app.trycatch.repository.alarm.CorporateAlramDAO;
 import com.app.trycatch.repository.qna.QnaCommentDAO;
 import com.app.trycatch.repository.qna.QnaCommentFileDAO;
+import com.app.trycatch.service.Alarm.CorporateAlramService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,6 +27,8 @@ public class QnaCommentService {
     private final QnaCommentDAO qnaCommentDAO;
     private final FileDAO fileDAO;
     private final QnaCommentFileDAO qnaCommentFileDAO;
+    private final CorporateAlramService corporateAlramService;
+    private final CorporateAlramDAO corporateAlramDAO;
 
     public Map<String, Object> write(Long memberId, Long qnaId, String content, Long parentId, MultipartFile file) {
         // 댓글(부모 없음)은 qna당 1개 제한
@@ -38,6 +42,19 @@ public class QnaCommentService {
                 .qnaCommentContent(content)
                 .build();
         qnaCommentDAO.save(vo);
+
+        // 대댓글인 경우, 부모 댓글 작성자가 기업회원이면 알림 발송
+        if (parentId != null) {
+            Long parentMemberId = qnaCommentDAO.findMemberIdById(parentId);
+            if (parentMemberId != null && corporateAlramDAO.existsByCorpId(parentMemberId)) {
+                corporateAlramService.notify(
+                        parentMemberId,
+                        "qna_reply",
+                        "QnA 대댓글 알림",
+                        "회원님의 댓글에 새로운 대댓글이 달렸습니다."
+                );
+            }
+        }
 
         if (file != null && !file.isEmpty()) {
             String todayPath = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));

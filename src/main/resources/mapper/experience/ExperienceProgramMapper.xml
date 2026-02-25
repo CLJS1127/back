@@ -108,6 +108,14 @@
         )
     </insert>
 
+    <!-- 마감일 조회 (스케줄러용) -->
+    <select id="selectByDeadline" resultType="ExperienceProgramDTO">
+        select id, corp_id, experience_program_title, experience_program_deadline
+        from tbl_experience_program
+        where experience_program_deadline = #{deadline}
+          and experience_program_status = 'recruiting'
+    </select>
+
     <select id="selectById">
         select
             ep.id,

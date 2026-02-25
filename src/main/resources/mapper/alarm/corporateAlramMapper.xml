@@ -9,8 +9,14 @@
                notification_receive_at, created_datetime, updated_datetime
         from tbl_corp_notification
         where corp_id = #{corpId}
-          and notification_is_read = false
         order by created_datetime desc
+    </select>
+
+    <select id="selectUnreadCountByCorpId" resultType="int">
+        select count(*)
+        from tbl_corp_notification
+        where corp_id = #{corpId}
+          and notification_is_read = false
     </select>
 
     <update id="updateReadByCorpId">
@@ -20,5 +26,15 @@
         where corp_id = #{corpId}
           and notification_is_read = false
     </update>
+
+    <insert id="insertCorpNotification">
+        insert into tbl_corp_notification
+        (corp_id, notification_type, notification_title, notification_content)
+        values (#{corpId}, #{notificationType}, #{notificationTitle}, #{notificationContent})
+    </insert>
+
+    <select id="existsByCorpId" resultType="boolean">
+        select count(*) > 0 from tbl_corp where id = #{corpId}
+    </select>
 
 </mapper>

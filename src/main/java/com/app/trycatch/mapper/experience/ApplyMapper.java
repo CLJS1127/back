@@ -1,6 +1,7 @@
 package com.app.trycatch.mapper.experience;
 
 import com.app.trycatch.common.pagination.Criteria;
+import com.app.trycatch.domain.experience.ApplyVO;
 import com.app.trycatch.dto.experience.ApplyDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -10,6 +11,7 @@ import java.util.Map;
 
 @Mapper
 public interface ApplyMapper {
+    void insert(ApplyVO applyVO);
 //    지원자 목록 (뷰 사용)
     List<ApplyDTO> selectByProgramId(@Param("programId") Long programId,
                                      @Param("status") String status,
