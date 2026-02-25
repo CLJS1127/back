@@ -29,8 +29,8 @@
 
     <insert id="insertCorpNotification">
         insert into tbl_corp_notification
-        (corp_id, notification_type, notification_title, notification_content)
-        values (#{corpId}, #{notificationType}, #{notificationTitle}, #{notificationContent})
+        (corp_id, notification_type, notification_title, notification_content, notification_related_id)
+        values (#{corpId}, #{notificationType}, #{notificationTitle}, #{notificationContent}, #{notificationRelatedId})
     </insert>
 
     <select id="existsByCorpId" resultType="boolean">
