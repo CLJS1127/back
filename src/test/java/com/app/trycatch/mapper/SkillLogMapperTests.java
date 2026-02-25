@@ -97,9 +97,9 @@ public class SkillLogMapperTests {
         String[] tagNames = new String[1];
 
 //        search.setKeyword("1");
-//        tagNames[0] = "태그";
-//        search.setTagNames(tagNames);
-        search.setType("인기");
+        tagNames[0] = "테스트";
+        search.setTagNames(tagNames);
+//        search.setType("인기");
 
         criteria = new Criteria(1, skillLogMapper.selectTotal(search));
         skillLogs = skillLogMapper.selectAll(criteria, search);

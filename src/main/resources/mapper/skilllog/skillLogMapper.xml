@@ -21,6 +21,18 @@
             </trim>
         </if>
     </sql>
+    <sql id="searchByMemberId">
+        s.skill_log_status = 'published'
+        <if test="search.tagNames != null">
+            and
+            t.tag_name in
+            <trim prefix="(" suffix=")">
+                <foreach item="tagName" collection="search.tagNames" separator=",">
+                    #{tagName}
+                </foreach>
+            </trim>
+        </if>
+    </sql>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         insert into tbl_skill_log(member_id, experience_program_id, skill_log_title, skill_log_content)
@@ -98,7 +110,7 @@
         on s.id = t.skill_log_id
         <where>
             s.member_id = #{memberId} and
-            <include refid="search"></include>
+            <include refid="searchByMemberId"></include>
         </where>
         <if test="search.type != null">
             <choose>
@@ -119,7 +131,7 @@
         on s.id = t.skill_log_id
         <where>
             s.memberId = #{memberId} and
-            <include refid="search"></include>
+            <include refid="searchByMemberId"></include>
         </where>
     </select>
 
