@@ -30,7 +30,6 @@ public class MyPageNotificationDTO {
     private String createdDatetime;
     private String updatedDatetime;
 
-    // "26.02.24 (월)" 형식
     public String getCreatedDateLabel() {
         if (createdDatetime == null) return "-";
         LocalDateTime dt = LocalDateTime.parse(createdDatetime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
@@ -39,7 +38,6 @@ public class MyPageNotificationDTO {
         return date + " (" + day + ")";
     }
 
-    // "09:30" 형식
     public String getCreatedTimeLabel() {
         if (createdDatetime == null) return "-";
         LocalDateTime dt = LocalDateTime.parse(createdDatetime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));

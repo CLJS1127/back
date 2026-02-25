@@ -27,5 +27,24 @@ select id, qna_title from tbl_qna;
 
 select id, notification_title, notification_is_read from tbl_main_notification where member_id = 7;
 
--- "이미 읽었습니다" 테스트 데이터 삭제
-delete from tbl_main_notification where notification_content like '%이미 읽%';
+-- ============================================================
+-- 테스트 데이터 (member_id는 본인 개인회원 ID로 변경)
+-- ============================================================
+
+-- QnA 답변 알림 (취업톡톡)
+insert into tbl_main_notification (member_id, notification_type, notification_title, notification_content, qna_id)
+values (7, 'qna', '취업톡톡 답변이 달렸어요', '회원님의 질문에 새로운 답변이 등록되었습니다.', null);
+
+-- 체험 프로그램 지원 현황 알림 (심사중)
+insert into tbl_main_notification (member_id, notification_type, notification_title, notification_content, experience_program_id)
+values (7, 'experience_apply', '[백엔드 개발 체험] 지원 현황이 업데이트됐어요', 'applied', null);
+
+-- 체험 프로그램 지원 현황 알림 (참여중)
+insert into tbl_main_notification (member_id, notification_type, notification_title, notification_content, experience_program_id)
+values (7, 'experience_apply', '[프론트엔드 UI 체험] 지원 현황이 업데이트됐어요', 'document_pass', null);
+
+-- 기술블로그 알림 (스킬로그)
+insert into tbl_main_notification (member_id, notification_type, notification_title, notification_content, skill_log_id)
+values (7, 'skill_log', '새로운 기술 블로그가 등록됐어요', '회원님이 관심 등록한 기업의 기술블로그가 새로 작성되었습니다.', null);
+
+
