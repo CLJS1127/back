@@ -180,5 +180,4 @@ public class MyPageController {
         throw new com.app.trycatch.common.exception.UnauthorizedMemberAccessException();
     }
 
-//    마이페이지 최근 본 공고, 취업 톡톡, 스크랩 공고 데이터 테스트 완료.
 }
