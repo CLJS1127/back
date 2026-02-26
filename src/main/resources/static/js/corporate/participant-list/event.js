@@ -43,10 +43,7 @@ moreOptionButtons.forEach((button, index) => {
                     }
                 });
             }
-        } else if (e.target.closest(".challengerRejectBtn")) {
-            targetParticipantId = participantId;
-            rejectType = "reject";
-            feedbackModal.classList.add("active");
+
         } else if (e.target.closest(".challengerDelBtn")) {
             targetParticipantId = participantId;
             rejectType = "withdraw";

@@ -3,11 +3,11 @@ drop view if exists view_participant;
 
 create view view_participant as
 (
-select c.id,
-       c.apply_id,
-       c.challenger_status,
-       c.created_datetime,
-       c.updated_datetime,
+select a.id,
+       a.id as apply_id,
+       COALESCE(c.challenger_status, 'in_progress') as challenger_status,
+       a.created_datetime,
+       COALESCE(c.updated_datetime, a.updated_datetime) as updated_datetime,
        a.experience_program_id,
        a.member_id,
        m.member_name,
@@ -16,10 +16,11 @@ select c.id,
        m.member_profile_file_id,
        im.individual_member_birth,
        im.individual_member_gender
-from tbl_challenger c
-join tbl_apply a on c.apply_id = a.id
-join tbl_member m on a.member_id = m.id
-join tbl_individual_member im on m.id = im.id
+from tbl_apply a
+LEFT JOIN tbl_challenger c ON a.id = c.apply_id
+JOIN tbl_member m ON a.member_id = m.id
+JOIN tbl_individual_member im ON m.id = im.id
+WHERE a.apply_status NOT IN ('document_fail', 'cancelled')
 );
 
 select * from view_participant;

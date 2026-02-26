@@ -22,6 +22,12 @@ public interface ChallengerMapper {
 //    상태별 참여자 수
     Map<String, Long> selectStatusCountByProgramId(@Param("programId") Long programId);
 
-//    상태 변경
-    void updateStatus(@Param("id") Long id, @Param("challengerStatus") String challengerStatus);
+//    참여자 생성 (INSERT IGNORE)
+    void insert(@Param("applyId") Long applyId);
+
+//    apply_id로 challenger id 조회
+    Long selectIdByApplyId(@Param("applyId") Long applyId);
+
+//    상태 변경 (apply_id 기준)
+    void updateStatus(@Param("applyId") Long applyId, @Param("challengerStatus") String challengerStatus);
 }
