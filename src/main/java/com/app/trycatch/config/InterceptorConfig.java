@@ -18,7 +18,9 @@ public class InterceptorConfig implements WebMvcConfigurer {
         registry.addInterceptor(individualAlramInterceptor)
                 .addPathPatterns("/qna/**")
                 .addPathPatterns("/mypage/**")
-                .addPathPatterns("/skill-log/**");
+                .addPathPatterns("/skill-log/**")
+                .addPathPatterns("/point/**")
+                .addPathPatterns("/main/**");
 
         registry.addInterceptor(corporateAlarmInterceptor)
                 .addPathPatterns("/corporate/**")
