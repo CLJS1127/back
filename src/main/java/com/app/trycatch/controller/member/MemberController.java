@@ -96,7 +96,7 @@ public class MemberController {
     public RedirectView goMainPage() {
         return new RedirectView("/qna/list");
     }
-
+//  로그인완료
     @GetMapping("log-in")
     public String goLoginForm(
             @CookieValue(name = "remember", required = false) boolean remember,
