@@ -150,12 +150,12 @@
                                                                     <button type="button" class="updateBtn">공고 수정</button>
                                                                 </a>
                                                             </li>
-                                                            <li>
+                                                            <li th:if="${program.experienceProgramStatus.name() == 'RECRUITING' or program.experienceProgramStatus.name() == 'CLOSED'}">
                                                                 <a th:href="@{/corporate/applicant-list(programId=${program.id})}">
                                                                     <button type="button" class="applicantBtn">지원자 관리</button>
                                                                 </a>
                                                             </li>
-                                                            <li>
+                                                            <li th:if="${program.experienceProgramStatus.name() == 'DRAFT' or program.experienceProgramStatus.name() == 'CANCELLED'}">
                                                                 <a th:href="@{/corporate/participant-list(programId=${program.id})}">
                                                                     <button type="button" class="participantBtn">참여자 관리</button>
                                                                 </a>

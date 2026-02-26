@@ -453,17 +453,20 @@ public class CorporateService {
         return new ParticipantWithPagingDTO(list, criteria, hasMore, statusCounts);
     }
 
-    /** 참여자 상태 변경 (승급 = completed) */
-    public void updateParticipantStatus(Long participantId, Long corpId, String newStatus) {
-        challengerDAO.setStatus(participantId, newStatus);
+    /** 참여자 상태 변경 (승급 = completed, 중도탈락 = out_of_process) */
+    public void updateParticipantStatus(Long applyId, Long corpId, String newStatus) {
+        challengerDAO.save(applyId);
+        challengerDAO.setStatus(applyId, newStatus);
     }
 
     /** 참여자 탈락 처리 + 피드백 저장 */
-    public void rejectParticipant(Long participantId, Long corpId, String feedback) {
-        challengerDAO.setStatus(participantId, "step_failed");
+    public void rejectParticipant(Long applyId, Long corpId, String feedback) {
+        challengerDAO.save(applyId);
+        challengerDAO.setStatus(applyId, "step_failed");
 
+        Long challengerId = challengerDAO.findIdByApplyId(applyId);
         FeedbackDTO feedbackDTO = new FeedbackDTO();
-        feedbackDTO.setId(participantId);
+        feedbackDTO.setId(challengerId);
         feedbackDTO.setFeedbackContent(feedback);
         feedbackDAO.save(feedbackDTO);
     }

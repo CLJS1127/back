@@ -42,11 +42,20 @@
         where experience_program_id = #{programId}
     </select>
 
+    <insert id="insert">
+        INSERT IGNORE INTO tbl_challenger (apply_id, challenger_status)
+        VALUES (#{applyId}, 'in_progress')
+    </insert>
+
+    <select id="selectIdByApplyId" resultType="Long">
+        SELECT id FROM tbl_challenger WHERE apply_id = #{applyId}
+    </select>
+
     <update id="updateStatus">
         update tbl_challenger
         set challenger_status = #{challengerStatus},
             updated_datetime = now()
-        where id = #{id}
+        where apply_id = #{applyId}
     </update>
 
 </mapper>

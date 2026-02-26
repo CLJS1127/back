@@ -29,8 +29,18 @@ public class ChallengerDAO {
         return challengerMapper.selectStatusCountByProgramId(programId);
     }
 
-//    상태 변경
-    public void setStatus(Long id, String challengerStatus) {
-        challengerMapper.updateStatus(id, challengerStatus);
+//    참여자 생성 (INSERT IGNORE — 이미 있으면 무시)
+    public void save(Long applyId) {
+        challengerMapper.insert(applyId);
+    }
+
+//    apply_id로 challenger id 조회
+    public Long findIdByApplyId(Long applyId) {
+        return challengerMapper.selectIdByApplyId(applyId);
+    }
+
+//    상태 변경 (apply_id 기준)
+    public void setStatus(Long applyId, String challengerStatus) {
+        challengerMapper.updateStatus(applyId, challengerStatus);
     }
 }
