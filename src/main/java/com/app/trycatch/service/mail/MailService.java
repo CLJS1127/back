@@ -43,7 +43,7 @@ public class MailService {
             helper.setTo(receiverEmail);
             helper.setSubject("[TRY-CATCH] " + corpName + " 팀원 초대");
 
-            String joinLink = "http://localhost:10000/mail/invite/join?code=" + inviteCode;
+            String joinLink = "http://3.39.250.241/mail/invite/join?code=" + inviteCode;
 
             String body = "<div style='font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;'>"
                     + "<h2 style='color: #333;'>TRY-CATCH 팀원 초대</h2>"

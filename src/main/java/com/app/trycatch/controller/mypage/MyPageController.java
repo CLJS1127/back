@@ -161,7 +161,7 @@ public class MyPageController {
         Object member = session.getAttribute("member");
         if (member instanceof IndividualMemberDTO kakaoMember && kakaoMember.getProvider() == com.app.trycatch.common.enumeration.member.Provider.KAKAO) {
             session.invalidate();
-            return new RedirectView("https://kauth.kakao.com/oauth/logout?client_id=6c9664c00ac5573fa3d8f1caf80e67f3&logout_redirect_uri=http://localhost:10000/main/log-in");
+            return new RedirectView("https://kauth.kakao.com/oauth/logout?client_id=6c9664c00ac5573fa3d8f1caf80e67f3&logout_redirect_uri=http://3.39.250.241/main/log-in");
         }
         session.invalidate();
         return new RedirectView("/main/log-in");
